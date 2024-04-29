@@ -1,4 +1,4 @@
-import { themePreset } from '@intuition-ts/1ui';
+import { themePreset } from './src/styles';
 
 module.exports = {
   presets: [themePreset],
