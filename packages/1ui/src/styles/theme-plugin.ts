@@ -1,8 +1,8 @@
-import defaultTheme from 'tailwindcss/defaultTheme.js';
-import plugin from 'tailwindcss/plugin';
+import defaultTheme from 'tailwindcss/defaultTheme.js'
+import plugin from 'tailwindcss/plugin'
 
-import { themes } from './themes';
-import { hexToHSL } from './utils';
+import { themes } from './themes'
+import { hexToHSL } from './utils'
 
 export const themePlugin = plugin(
   // 1. Add css variable definitions to the base layer
@@ -42,7 +42,7 @@ export const themePlugin = plugin(
         '--primary-900': hexToHSL(themes.light.primary[900]),
         '--primary-950': hexToHSL(themes.light.primary[950]),
       },
-    });
+    })
     Object.entries(themes).forEach(([key, value]) => {
       addBase({
         [`[data-theme="${key}"]`]: {
@@ -79,8 +79,8 @@ export const themePlugin = plugin(
           '--primary-900': hexToHSL(value.primary[900]),
           '--primary-950': hexToHSL(value.primary[950]),
         },
-      });
-    });
+      })
+    })
     addBase({
       '*': {
         '@apply border-border': {},
@@ -89,7 +89,7 @@ export const themePlugin = plugin(
         '@apply bg-background text-foreground': {},
         'font-feature-settings': '"rlig" 1, "calt" 1',
       },
-    });
+    })
 
     const newUtilities = {
       '.border-border': {
@@ -98,9 +98,9 @@ export const themePlugin = plugin(
           backgroundColor: 'var(--background)',
         },
       },
-    };
+    }
 
-    addUtilities(newUtilities);
+    addUtilities(newUtilities)
   },
 
   // 2. Extend the tailwind theme with 'themable' utilities
@@ -202,5 +202,5 @@ export const themePlugin = plugin(
         },
       },
     },
-  }
-);
+  },
+)

@@ -1,4 +1,4 @@
-import type { StorybookConfig } from '@storybook/react-vite';
+import type { StorybookConfig } from '@storybook/react-vite'
 
 const config: StorybookConfig = {
   stories: ['../**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -21,13 +21,13 @@ const config: StorybookConfig = {
   },
   async viteFinal(config) {
     // Merge custom configuration into the default config
-    const { mergeConfig } = await import('vite');
+    const { mergeConfig } = await import('vite')
 
     return mergeConfig(config, {
       // Add dependencies to pre-optimization
       optimizeDeps: {},
-    });
+    })
   },
-};
+}
 
-export default config;
+export default config

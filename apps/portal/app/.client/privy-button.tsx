@@ -1,18 +1,18 @@
-import { Button } from '@intuition-ts/1ui';
-import { usePrivy } from '@privy-io/react-auth';
+import { Button } from '@intuition-ts/1ui'
+import { usePrivy } from '@privy-io/react-auth'
 
 export function PrivyButton() {
-  const { ready, authenticated, login, user: privyUser } = usePrivy();
+  const { ready, authenticated, login, user: privyUser } = usePrivy()
 
   // Disable login when Privy is not ready or the user is already authenticated
-  const disableLogin = !ready || (ready && authenticated);
+  const disableLogin = !ready || (ready && authenticated)
 
-  console.log('ready', ready);
-  console.log('authenticated', authenticated);
-  console.log('privyUser', privyUser);
+  console.log('ready', ready)
+  console.log('authenticated', authenticated)
+  console.log('privyUser', privyUser)
 
   if (!ready) {
-    return null;
+    return null
   }
 
   if (ready && !authenticated) {
@@ -20,7 +20,7 @@ export function PrivyButton() {
       <Button disabled={disableLogin} onClick={login} className="bg-cyan-50">
         Log in
       </Button>
-    );
+    )
   }
 
   if (ready && authenticated && privyUser !== null) {
@@ -28,6 +28,6 @@ export function PrivyButton() {
       <Button disabled={disableLogin} onClick={login}>
         User: {privyUser.id}
       </Button>
-    );
+    )
   }
 }

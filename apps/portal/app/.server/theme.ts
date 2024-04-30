@@ -1,4 +1,3 @@
-
 import { Theme, themesList } from '@intuition-ts/1ui'
 import * as cookie from 'cookie'
 

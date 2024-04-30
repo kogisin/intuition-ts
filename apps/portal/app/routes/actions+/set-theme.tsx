@@ -25,7 +25,7 @@ export const action: ActionFunction = async ({ request }) => {
       headers: {
         'Set-Cookie': setTheme(theme === 'system' ? undefined : theme),
       },
-    }
+    },
   )
 }
 
@@ -33,7 +33,10 @@ export function ThemeSwitch() {
   const fetcher = useFetcher()
 
   const handleSelect = (themeValue: Theme) => {
-    fetcher.submit({ theme: themeValue }, { method: 'post', action: '/actions/set-theme' })
+    fetcher.submit(
+      { theme: themeValue },
+      { method: 'post', action: '/actions/set-theme' },
+    )
   }
 
   return (

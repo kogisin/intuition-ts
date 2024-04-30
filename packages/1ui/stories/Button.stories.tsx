@@ -1,6 +1,6 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '..';
+import React from 'react'
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from '..'
 
 const meta = {
   title: 'Atom/Button',
@@ -17,17 +17,17 @@ const meta = {
     size: { control: 'select' },
     isLoading: { control: 'boolean' },
   },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof Button>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const BasicUsage: Story = {
   args: {
     children: 'Example Button',
   },
   render: (props) => <Button {...props} />,
-};
+}
 
 export const Variants: Story = {
   parameters: {
@@ -52,7 +52,7 @@ export const Variants: Story = {
       <Button variant="destructive" {...props} children="Destructive" />
     </div>
   ),
-};
+}
 
 export const Sizes: Story = {
   args: {
@@ -70,7 +70,7 @@ export const Sizes: Story = {
       <Button size="lg" {...props} />
     </div>
   ),
-};
+}
 
 export const States: Story = {
   parameters: {
@@ -88,4 +88,4 @@ export const States: Story = {
       </Button>
     </div>
   ),
-};
+}

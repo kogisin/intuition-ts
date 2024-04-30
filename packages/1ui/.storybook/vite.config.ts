@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite';
-import tailwindcss from 'tailwindcss';
-import autoprefixer from 'autoprefixer';
-import themePreset from '../src/styles/theme-preset';
+import { defineConfig } from 'vite'
+import tailwindcss from 'tailwindcss'
+import autoprefixer from 'autoprefixer'
+import themePreset from '../src/styles/theme-preset'
 
 export default defineConfig({
   css: {
@@ -9,4 +9,4 @@ export default defineConfig({
       plugins: [tailwindcss(themePreset), autoprefixer],
     },
   },
-});
+})

@@ -1,4 +1,3 @@
-
 export const themes = {
   light: {
     background: '0 0% 100%',

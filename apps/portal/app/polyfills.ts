@@ -6,4 +6,4 @@ if (typeof window !== 'undefined') {
   window.Buffer = window.Buffer ?? Buffer
 }
 
-export { }
+export {}
