@@ -51,14 +51,16 @@ export function getHints(request?: Request) {
     typeof document !== 'undefined'
       ? document.cookie
       : typeof request !== 'undefined'
-      ? request.headers.get('Cookie') ?? ''
-      : ''
+        ? request.headers.get('Cookie') ?? ''
+        : ''
 
   return Object.entries(clientHints).reduce(
     (acc, [name, hint]) => {
       const hintName = name as ClientHintNames
       if ('transform' in hint) {
-        acc[hintName] = hint.transform(getCookieValue(cookieString, hintName) ?? hint.fallback)
+        acc[hintName] = hint.transform(
+          getCookieValue(cookieString, hintName) ?? hint.fallback,
+        )
       } else {
         acc[hintName] = getCookieValue(cookieString, hintName) ?? hint.fallback
       }
@@ -70,7 +72,7 @@ export function getHints(request?: Request) {
       }
         ? ReturnValue
         : (typeof clientHints)[name]['fallback']
-    }
+    },
   )
 }
 

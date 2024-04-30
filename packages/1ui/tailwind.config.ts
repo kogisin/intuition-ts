@@ -1,4 +1,4 @@
-import { themePreset } from './src/styles';
+import { themePreset } from './src/styles'
 
 module.exports = {
   presets: [themePreset],
@@ -6,4 +6,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-};
+}

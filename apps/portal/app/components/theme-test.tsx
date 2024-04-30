@@ -4,103 +4,103 @@ export interface ThemeTestProps {}
 
 export function ThemeTest(props: ThemeTestProps) {
   return (
-    <div className="flex items-start flex-col gap-4 m-5">
+    <div className="m-5 flex flex-col items-start gap-4">
       <ThemeSwitch />
       <section className="mt-24">
         <div className="mt-2 flex flex-wrap items-center gap-6">
           <div className="flex overflow-hidden rounded-md" data-theme="dark">
-            <div className="grid h-16 w-16 place-items-end bg-primary-50 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-50 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               50
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-100 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-100 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               100
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-200 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-200 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               200
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-300 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-300 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               300
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-400 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-400 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               400
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-500 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-500 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               500
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-600 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-600 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               600
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-700 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-700 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               700
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-800 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-800 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               800
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-900 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-900 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               900
             </div>
           </div>
           <div className="flex overflow-hidden rounded-md" data-theme="warlock">
-            <div className="grid h-16 w-16 place-items-end bg-primary-50 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-50 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               50
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-100 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-100 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               100
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-200 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-200 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               200
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-300 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-300 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               300
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-400 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-400 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               400
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-500 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-500 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               500
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-600 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-600 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               600
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-700 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-700 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               700
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-800 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-800 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               800
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-900 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-900 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               900
             </div>
           </div>
           <div className="flex overflow-hidden rounded-md" data-theme="candy">
-            <div className="grid h-16 w-16 place-items-end bg-primary-50 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-50 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               50
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-100 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-100 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               100
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-200 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-200 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               200
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-300 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-300 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               300
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-400 p-1 font-semibold leading-none text-primary-900">
+            <div className="bg-primary-400 text-primary-900 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               400
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-500 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-500 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               500
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-600 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-600 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               600
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-700 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-700 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               700
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-800 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-800 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               800
             </div>
-            <div className="grid h-16 w-16 place-items-end bg-primary-900 p-1 font-semibold leading-none text-primary-50">
+            <div className="bg-primary-900 text-primary-50 grid h-16 w-16 place-items-end p-1 font-semibold leading-none">
               900
             </div>
           </div>

@@ -59,7 +59,7 @@ export function hexToHSL(hex: string) {
 export enum Theme {
   DARK = 'dark',
   LIGHT = 'light',
-  SYSTEM = 'system'
+  SYSTEM = 'system',
 }
 
 export const themesList: Array<Theme> = Object.values(Theme)

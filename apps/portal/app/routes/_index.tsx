@@ -1,8 +1,8 @@
-import { Button, Label, Input } from '@intuition-ts/1ui';
+import { Button, Label, Input } from '@intuition-ts/1ui'
 
 export default function Index() {
   return (
-    <div className="flex flex-col items-center gap-4 m-8">
+    <div className="m-8 flex flex-col items-center gap-4">
       <div className="flex flex-col">
         <Button>Default Button</Button>
         <Button variant="secondary">Secondary Button</Button>
@@ -13,5 +13,5 @@ export default function Index() {
         <Input type="text" id="fileTest" placeholder="Test text input" />
       </div>
     </div>
-  );
+  )
 }

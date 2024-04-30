@@ -10,7 +10,7 @@ const schema = z.object({
 
 declare global {
   namespace NodeJS {
-    interface ProcessEnv extends z.infer<typeof schema> { }
+    interface ProcessEnv extends z.infer<typeof schema> {}
   }
 }
 

@@ -1,6 +1,6 @@
-import type { Preview } from '@storybook/react';
-import { themeDecorator } from './decorators';
-import '../src/styles/globals.css';
+import type { Preview } from '@storybook/react'
+import { themeDecorator } from './decorators'
+import '../src/styles/globals.css'
 
 const preview: Preview = {
   parameters: {
@@ -21,7 +21,7 @@ const preview: Preview = {
       ],
     },
   },
-};
+}
 
 export const globalTypes = {
   theme: {
@@ -37,8 +37,8 @@ export const globalTypes = {
       showName: true,
     },
   },
-};
+}
 
-export const decorators = [themeDecorator];
+export const decorators = [themeDecorator]
 
-export default preview;
+export default preview
