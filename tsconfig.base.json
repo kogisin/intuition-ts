@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "target": "ESNext",
     "paths": {
-      "@*": ["src/*"],
+      "@/*": ["src/*"],
       "@intuition-ts/1ui": ["packages/1ui/src/index.ts"],
       "@intuition-ts/automation-tools": ["tools/src/index.ts"],
       "@intuition-ts/core": ["packages/core/src/index.ts"]
