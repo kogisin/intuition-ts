@@ -1,7 +1,7 @@
 {
-  "name": "@0xintuition/protocol",
+  "name": "@0xintuition/sdk",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/protocol/src",
+  "sourceRoot": "packages/sdk/src",
   "projectType": "library",
   "release": {
     "version": {
@@ -17,23 +17,23 @@
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/packages/protocol",
-        "tsConfig": "packages/protocol/tsconfig.lib.json",
-        "packageJson": "packages/protocol/package.json",
-        "main": "packages/protocol/src/index.ts",
-        "assets": ["packages/protocol/*.md"]
+        "outputPath": "dist/packages/sdk",
+        "tsConfig": "packages/sdk/tsconfig.lib.json",
+        "packageJson": "packages/sdk/package.json",
+        "main": "packages/sdk/src/index.ts",
+        "assets": ["packages/sdk/*.md"]
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
       "options": {
-        "lintFilePatterns": ["packages/protocol/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["packages/sdk/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nx/vite:test",
       "options": {
-        "config": "packages/protocol/vitest.config.ts"
+        "config": "packages/sdk/vitest.config.ts"
       }
     },
     "nx-release-publish": {
