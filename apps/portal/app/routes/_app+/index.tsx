@@ -35,7 +35,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const totalPages = calculateTotalPages(total, Number(limit))
 
   logger('identities', identities)
-
   return json({
     identities: identities ?? [],
     sortBy,

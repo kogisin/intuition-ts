@@ -3,7 +3,12 @@ import { getChainEnvConfig } from '@lib/utils/environment'
 // import { usePrivy, useWallets } from '@privy-io/react-auth'
 import Providers from '@client/providers'
 import { ClientHintCheck, getHints } from '@lib/utils/client-hints'
+import logger from '@lib/utils/logger'
 import { useNonce } from '@lib/utils/nonce-provider'
+import type {
+  ConnectedWallet as ConnectedPrivyWallet,
+  User as PrivyUser,
+} from '@privy-io/react-auth'
 import {
   ActionFunctionArgs,
   LoaderFunctionArgs,
@@ -21,22 +26,17 @@ import {
   useSubmit,
 } from '@remix-run/react'
 import { useTheme } from '@routes/actions+/set-theme'
-import { login } from '@server/auth'
+import { isAuthedUser, login } from '@server/auth'
 import { getEnv } from '@server/env'
 import { formAction } from '@server/form'
 import { getTheme } from '@server/theme'
 import { QueryClient } from '@tanstack/react-query'
+import type { PrivyModuleType, User } from '@types/privy'
 import { makeDomainFunction } from 'domain-functions'
 import { useEffect, useState } from 'react'
 import { ClientOnly } from 'remix-utils/client-only'
 import { z } from 'zod'
 import './styles/globals.css'
-import logger from '@lib/utils/logger'
-import type { PrivyModuleType, User } from '@types/privy'
-import type {
-  User as PrivyUser,
-  ConnectedWallet as ConnectedPrivyWallet,
-} from '@privy-io/react-auth'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -46,7 +46,10 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {
+  const user = await isAuthedUser(request)
+
   return json({
+    user,
     env: getEnv(),
     requestInfo: {
       hints: getHints(request),
@@ -137,7 +140,7 @@ interface FetcherData {
 }
 
 export function AppLayout() {
-  const { env } = useLoaderData<typeof loader>()
+  const { env, user } = useLoaderData<typeof loader>()
 
   const fetcher = useFetcher<FetcherData>()
   const submit = useSubmit()
@@ -201,10 +204,10 @@ export function AppLayout() {
       })
     }
 
-    if (privyWallet && privyUser?.id && accessToken) {
+    if (privyWallet && privyUser?.id && accessToken && !user) {
       handleLogin()
     }
-  }, [privyWallet, privyUser, accessToken, submit])
+  }, [privyWallet, privyUser, accessToken, user, submit])
 
   return (
     <main className="relative flex min-h-screen w-full flex-col justify-between antialiased">
