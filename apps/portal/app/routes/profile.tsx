@@ -45,7 +45,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   })
 }
 
-export default function Index() {
+export default function Profile() {
   return (
     <div className="m-8 flex flex-col items-center gap-4">
       <div className="flex flex-col">
