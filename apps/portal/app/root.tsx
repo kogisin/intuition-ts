@@ -18,7 +18,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useFetcher,
   useLoaderData,
   useSubmit,
 } from '@remix-run/react'
@@ -120,16 +119,8 @@ export default function App() {
   const theme = useTheme()
   const { env } = useLoaderData<typeof loader>()
 
-  // const ClientOnlyPrivy = () =>
-  //   clientOnly$(
-  //     <ClientOnlyPrivyProvider privyAppId={env.PRIVY_APP_ID}>
-  //       <AppLayout />
-  //     </ClientOnlyPrivyProvider>,
-  //   )
-
   return (
     <Document nonce={nonce} theme={theme}>
-      {/* <ClientOnlyPrivy /> */}
       <Toaster />
       <ClientOnly>
         {() => (
@@ -152,7 +143,6 @@ interface FetcherData {
 export function AppLayout() {
   const { env, user } = useLoaderData<typeof loader>()
 
-  const fetcher = useFetcher<FetcherData>()
   const submit = useSubmit()
 
   const [privyUser, setPrivyUser] = useState<PrivyUser | null>(null)
