@@ -1,8 +1,9 @@
 import React from 'react'
 
+import { Theme } from '@0xintuition/1ui'
+
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { Theme } from 'types/theme'
 import { formatUnits } from 'viem'
 
 export function cn(...inputs: ClassValue[]) {
