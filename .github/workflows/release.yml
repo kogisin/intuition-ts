@@ -1,13 +1,13 @@
 # ./.github/workflows/release.yml
-name: Publish
+name: Release
 
 on:
   # Run manually using the GitHub UI
   workflow_dispatch:
 
 jobs:
-  publish:
-    name: Publish
+  release:
+    name: Release
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -48,4 +48,13 @@ jobs:
         run: npx nx release --skip-publish
         shell: bash
         env:
+          CI: true
+
+      - name: Publish packages
+        # Dry run for now while we test it out
+        run: npx nx release publish --dry-run
+        shell: bash
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
           CI: true
