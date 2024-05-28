@@ -1,5 +1,5 @@
 # ./.github/workflows/publish-staging.yml
-name: Publish @next Version
+name: Staging workflow
 
 on:
   push:
@@ -7,15 +7,16 @@ on:
       - main
 
 jobs:
-  publish:
+  publish-staging:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -38,12 +39,8 @@ jobs:
         run: pnpm install --frozen-lockfile
         shell: bash
 
-      # Skip npm publish for now
-      - name: Publish affected projects
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > ~/.npmrc
-          npx nx affected --target=publish-package --dry-run --base=origin/main --verbose
-        shell: bash
+      - name: Publish affected projects with @next tag
+        run: npx nx release publish --tag next --dry-run
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
