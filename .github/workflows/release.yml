@@ -1,10 +1,9 @@
-# ./.github/workflows/publish.yml
+# ./.github/workflows/release.yml
 name: Publish
 
 on:
-  # When a GitHub release gets created
-  release:
-    types: [published]
+  # Run manually using the GitHub UI
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -45,11 +44,8 @@ jobs:
         run: pnpm install --frozen-lockfile
         shell: bash
 
-      - name: Publish packages
-        # Dry run for now while we test it out
-        run: npx nx release publish --dry-run
+      - name: Make releases
+        run: npx nx release --skip-publish
         shell: bash
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
           CI: true
