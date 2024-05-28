@@ -49,6 +49,7 @@ jobs:
         shell: bash
         env:
           CI: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish packages
         # Dry run for now while we test it out
