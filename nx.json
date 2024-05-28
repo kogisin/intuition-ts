@@ -23,6 +23,9 @@
     "typecheck": {
       "cache": true
     },
+    "publish-package": {
+      "dependsOn": ["build", "test"]
+    },
     "@nx/js:tsc": {
       "cache": true,
       "dependsOn": ["^build"],
@@ -36,7 +39,18 @@
   },
   "release": {
     "version": {
+      "projects": [
+        "*",
+        "!@0xintuition/portal",
+        "!@0xintuition/automation-tools"
+      ],
+      "conventionalCommits": true,
       "preVersionCommand": "pnpm dlx nx run-many -t build"
+    },
+    "changelog": {
+      "projectChangelogs": {
+        "createRelease": "github"
+      }
     }
   },
   "plugins": [
