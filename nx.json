@@ -22,7 +22,7 @@
     },
     "nx-release-publish": {
       "options": {
-        "packageRoot": "dist/packages/{projectName}"
+        "packageRoot": "{workspaceRoot}/dist/packages/{projectName}"
       }
     },
     "typecheck": {
