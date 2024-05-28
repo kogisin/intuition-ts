@@ -39,8 +39,8 @@ jobs:
         run: pnpm install --frozen-lockfile
         shell: bash
 
-      - name: Run Affected Builds
-        run: npx nx run-many -t build
+      # - name: Run Affected Builds
+      #   run: npx nx run-many -t build
 
       - name: Publish affected projects with @next tag
         run: npx nx release publish --tag next --dry-run

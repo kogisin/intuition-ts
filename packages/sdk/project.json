@@ -35,6 +35,12 @@
       "options": {
         "config": "packages/sdk/vitest.config.ts"
       }
+    },
+    "nx-release-publish": {
+      "dependsOn": ["build"],
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      }
     }
   }
 }

@@ -20,11 +20,6 @@
     "test": {
       "cache": true
     },
-    "nx-release-publish": {
-      "options": {
-        "packageRoot": "{workspaceRoot}/dist/packages/{projectName}"
-      }
-    },
     "typecheck": {
       "cache": true
     },
