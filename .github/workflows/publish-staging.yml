@@ -25,20 +25,22 @@ jobs:
         with:
           version: 9.0.6
 
-      # - name: Cache pnpm store
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: |
-      #       ~/.pnpm-store
-      #       **/node_modules/.pnpm
-      #     key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-pnpm-
+      - name: Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pnpm-store
+            **/node_modules/.pnpm
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
 
       - name: Install dependencies
-        run: rm -rf node_modules && pnpm install
-        # run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
         shell: bash
+
+      - name: Run Affected Builds
+        run: pnpm nx affected -t build --base=origin/main
 
       - name: Publish affected projects with @next tag
         run: npx nx release publish --tag next --dry-run
