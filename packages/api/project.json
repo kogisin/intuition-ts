@@ -29,11 +29,6 @@
       "options": {
         "lintFilePatterns": ["packages/api/**/*.{ts,tsx,js,jsx}"]
       }
-    },
-    "nx-release-publish": {
-      "options": {
-        "packageRoot": "dist/packages/{projectRoot}"
-      }
     }
   }
 }

@@ -60,11 +60,6 @@
           "quiet": true
         }
       }
-    },
-    "nx-release-publish": {
-      "options": {
-        "packageRoot": "dist/packages/{projectRoot}"
-      }
     }
   }
 }

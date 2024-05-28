@@ -20,11 +20,13 @@
     "test": {
       "cache": true
     },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/packages/{projectName}"
+      }
+    },
     "typecheck": {
       "cache": true
-    },
-    "publish-package": {
-      "dependsOn": ["build", "test"]
     },
     "@nx/js:tsc": {
       "cache": true,
