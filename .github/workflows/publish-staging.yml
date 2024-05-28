@@ -42,7 +42,7 @@ jobs:
       - name: Publish affected projects
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > ~/.npmrc
-          npx nx affected --target=publish-package --dry-run --base=origin/main --head=$GITHUB_SHA --parallel=3 --verbose
+          npx nx affected --target=publish-package --dry-run --base=origin/main --verbose
         shell: bash
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
