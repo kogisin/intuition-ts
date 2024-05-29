@@ -85,7 +85,8 @@
           }
         }
       }
-    }
+    },
+    "releaseTagPattern": "release/{projectName}/{version}"
   },
   "plugins": [
     {
