@@ -1,6 +1,7 @@
 {
   "name": "@0xintuition/api",
   "version": "0.1.0",
+  "private": true,
   "main": "dist/index.ts",
   "exports": {
     ".": "./src/index.ts"
