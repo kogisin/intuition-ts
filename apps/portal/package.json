@@ -2,6 +2,7 @@
   "name": "@0xintuition/portal",
   "version": "0.1.0",
   "private": true,
+  "description": "Portal",
   "sideEffects": false,
   "type": "module",
   "scripts": {

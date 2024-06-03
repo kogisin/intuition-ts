@@ -2,6 +2,7 @@
   "name": "@0xintuition/sdk",
   "version": "0.1.0",
   "private": true,
+  "description": "Backend SDK",
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js"
