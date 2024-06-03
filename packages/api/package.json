@@ -1,7 +1,6 @@
 {
   "name": "@0xintuition/api",
   "version": "0.1.0",
-  "private": true,
   "description": "API",
   "main": "dist/index.ts",
   "exports": {
@@ -18,8 +17,10 @@
     "README.md",
     "LICENSE"
   ],
-  "publishConfig": {
-    "access": "public"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0xIntuition/intuition-ts",
+    "directory": "packages/api"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
