@@ -5,7 +5,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix vite:build",
+    "build": "remix vite:build --emptyOutDir",
     "dev": "remix vite:dev",
     "start": "remix-serve ./build/server/index.js",
     "lint:fix": "pnpm lint --fix"
