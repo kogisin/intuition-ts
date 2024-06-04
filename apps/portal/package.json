@@ -1,6 +1,6 @@
 {
   "name": "@0xintuition/portal",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Portal",
   "sideEffects": false,
   "type": "module",
@@ -16,8 +16,8 @@
     "directory": "apps/portal"
   },
   "dependencies": {
-    "@0xintuition/1ui": "0.1.7",
-    "@0xintuition/api": "workspace:^",
+    "@0xintuition/1ui": "0.2.0",
+    "@0xintuition/api": "0.1.2",
     "@privy-io/react-auth": "^1.60.7",
     "@privy-io/server-auth": "^1.7.3",
     "@privy-io/wagmi": "^0.2.3",
