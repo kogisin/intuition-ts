@@ -1,4 +1,4 @@
-import { ResizablePanelGroup } from '..'
+import { ResizablePanelGroup } from '../../../'
 
 export const SidebarLayout = ({ ...props }) => {
   return (

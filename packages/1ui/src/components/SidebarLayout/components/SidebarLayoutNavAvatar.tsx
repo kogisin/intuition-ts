@@ -11,7 +11,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '..'
+} from '../../../'
 import { useSidebarLayoutContext } from './SidebarLayoutProvider'
 
 export interface SidebarLayoutNavAvatarProps
