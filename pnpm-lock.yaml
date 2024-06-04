@@ -196,11 +196,11 @@ importers:
   apps/portal:
     dependencies:
       '@0xintuition/1ui':
-        specifier: 0.2.0
-        version: 0.2.0(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.3(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.11))(@types/node@20.12.12)(typescript@5.4.5)))
+        specifier: workspace:^
+        version: link:../../packages/1ui
       '@0xintuition/api':
-        specifier: 0.1.2
-        version: 0.1.2
+        specifier: workspace:^
+        version: link:../../packages/api
       '@privy-io/react-auth':
         specifier: ^1.60.7
         version: 1.64.1(@babel/core@7.24.5)(@react-native-async-storage/async-storage@1.23.1(react-native@0.74.1(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5))(@types/react@18.3.2)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@6.0.4)))(@types/react@18.3.2)(bufferutil@4.0.8)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(typescript@5.4.5)(utf-8-validate@6.0.4)
@@ -517,8 +517,8 @@ importers:
   packages/sdk:
     dependencies:
       '@0xintuition/api':
-        specifier: 0.1.2
-        version: 0.1.2
+        specifier: workspace:^
+        version: link:../api
     devDependencies:
       typescript:
         specifier: ^5.4.5
@@ -531,14 +531,6 @@ importers:
         version: 1.6.0(@types/node@20.12.12)(@vitest/ui@1.6.0)(jsdom@22.1.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))(terser@5.31.0)
 
 packages:
-
-  '@0xintuition/1ui@0.2.0':
-    resolution: {integrity: sha512-NIEy0d91CsO+G1Wq4A393JhuBQ61rez7RdZu6Z+oGFu2rCLcs9HF9oomgb58QUrXZMK0K0phFiyhyWP1uvj6+Q==}
-    peerDependencies:
-      react: ^18.2.0
-
-  '@0xintuition/api@0.1.2':
-    resolution: {integrity: sha512-p+PyMSEQfmPVmtxhuyF1R6jLFQ3Gs8F8djDoGw33FKAnr9iUFZfNGJePUugXl2jw/oOrl3ZkbgY0pS3Jd8eYiQ==}
 
   '@adobe/css-tools@4.3.3':
     resolution: {integrity: sha512-rE0Pygv0sEZ4vBWHlAgJLGDU7Pm8xoO6p3wsEceb7GYAjScrOHpEo8KK/eVkAcnSM+slAEtXjA2JpdjLp4fJQQ==}
@@ -11723,37 +11715,6 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
 snapshots:
-
-  '@0xintuition/1ui@0.2.0(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.3(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.11))(@types/node@20.12.12)(typescript@5.4.5)))':
-    dependencies:
-      '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-avatar': 1.0.4(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-dialog': 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-dropdown-menu': 2.0.6(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-label': 2.0.2(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-navigation-menu': 1.1.4(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-popover': 1.0.7(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-separator': 1.0.3(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-slot': 1.0.2(@types/react@18.3.2)(react@18.3.1)
-      '@radix-ui/react-switch': 1.0.3(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-tooltip': 1.0.7(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@tailwindcss/container-queries': 0.1.1(tailwindcss@3.4.3(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.11))(@types/node@20.12.12)(typescript@5.4.5)))
-      class-variance-authority: 0.7.0
-      clsx: 2.1.1
-      cmdk: 1.0.0(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      lucide-react: 0.376.0(react@18.3.1)
-      react: 18.3.1
-      react-resizable-panels: 2.0.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      sonner: 1.4.41(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      tailwind-merge: 2.3.0
-      tailwindcss-animate: 1.0.7(tailwindcss@3.4.3(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.11))(@types/node@20.12.12)(typescript@5.4.5)))
-    transitivePeerDependencies:
-      - '@types/react'
-      - '@types/react-dom'
-      - react-dom
-      - tailwindcss
-
-  '@0xintuition/api@0.1.2': {}
 
   '@adobe/css-tools@4.3.3': {}
 
