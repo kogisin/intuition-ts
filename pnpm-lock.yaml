@@ -196,8 +196,8 @@ importers:
   apps/portal:
     dependencies:
       '@0xintuition/1ui':
-        specifier: 0.1.6
-        version: 0.1.6(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.3(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.11))(@types/node@20.12.12)(typescript@5.4.5)))
+        specifier: 0.1.7
+        version: 0.1.7(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.3(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.11))(@types/node@20.12.12)(typescript@5.4.5)))
       '@0xintuition/api':
         specifier: workspace:^
         version: link:../../packages/api
@@ -532,8 +532,8 @@ importers:
 
 packages:
 
-  '@0xintuition/1ui@0.1.6':
-    resolution: {integrity: sha512-Zc8CkuuOdUwLsuZi+9irvc4d15bRD8ZN7HekzrTsWCHHaZo06k943YGir/gxp2DoLKhiPsTCPcFMkNuMxy0/ZA==}
+  '@0xintuition/1ui@0.1.7':
+    resolution: {integrity: sha512-2Fl8q61y6nlzCMCptvRnecAFUPOVgxU6Ua+s8thF+A3ijfWO9suwPZcK+8GMim/F+LmpFe86OEQVYfKRJR2w4Q==}
     peerDependencies:
       react: ^18.2.0
 
@@ -11721,7 +11721,7 @@ packages:
 
 snapshots:
 
-  '@0xintuition/1ui@0.1.6(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.3(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.11))(@types/node@20.12.12)(typescript@5.4.5)))':
+  '@0xintuition/1ui@0.1.7(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.3(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.11))(@types/node@20.12.12)(typescript@5.4.5)))':
     dependencies:
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-avatar': 1.0.4(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
