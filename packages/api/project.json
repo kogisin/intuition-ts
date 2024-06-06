@@ -12,7 +12,7 @@
         "outputPath": "dist/packages/api",
         "tsConfig": "packages/api/tsconfig.lib.json",
         "packageJson": "packages/api/package.json",
-        "main": "packages/api/src/index.ts",
+        "main": "packages/api/src/index.js",
         "assets": ["packages/api/*.md"]
       }
     },

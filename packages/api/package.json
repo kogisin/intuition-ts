@@ -2,9 +2,9 @@
   "name": "@0xintuition/api",
   "version": "0.1.2",
   "description": "API",
-  "main": "dist/index.ts",
+  "main": "dist/index.js",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.js"
   },
   "types": "src/index.d.ts",
   "scripts": {
