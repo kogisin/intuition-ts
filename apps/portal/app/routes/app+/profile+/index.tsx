@@ -235,7 +235,14 @@ export function CreateButton({ onSuccess }: CreateButtonWrapperProps) {
         })
       }
     }
-  }, [offChainFetcher.state, offChainFetcher.data, dispatch])
+  }, [
+    offChainFetcher.state,
+    offChainFetcher.data,
+    dispatch,
+    createdIdentity,
+    handleIdentityTxReceiptReceived,
+    handleOnChainCreateIdentity,
+  ])
 
   useEffect(() => {
     if (state.status === 'transaction-error') {
@@ -397,7 +404,10 @@ export function CreateButton({ onSuccess }: CreateButtonWrapperProps) {
 }
 
 export default function Profile() {
-  const { userIdentity } = useLoaderData<{ userIdentity: IdentityPresenter }>()
+  const { userIdentity, user } = useLoaderData<{
+    userIdentity: IdentityPresenter
+    user: SessionUser
+  }>()
 
   return (
     <div className="m-8 flex flex-col items-center gap-4">
@@ -419,7 +429,9 @@ export default function Profile() {
                     </span>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <PrivyVerifiedLinks />
+                    <PrivyVerifiedLinks
+                      privyUser={JSON.parse(JSON.stringify(user))}
+                    />
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
@@ -428,6 +440,26 @@ export default function Profile() {
         ) : (
           <ClientOnly>{() => <CreateButton onSuccess={() => {}} />}</ClientOnly>
         )}
+      </div>
+      <div className="flex flex-col gap-4">
+        <Accordion
+          type="multiple"
+          className="w-full"
+          defaultValue={['verified-links']}
+        >
+          <AccordionItem value="verified-links">
+            <AccordionTrigger>
+              <span className="text-secondary-foreground text-sm font-normal">
+                Verified Links
+              </span>
+            </AccordionTrigger>
+            <AccordionContent>
+              <PrivyVerifiedLinks
+                privyUser={JSON.parse(JSON.stringify(user))}
+              />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </div>
     </div>
   )

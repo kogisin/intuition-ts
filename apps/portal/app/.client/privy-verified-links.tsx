@@ -2,7 +2,8 @@ import { Button } from '@0xintuition/1ui'
 
 import { useSocialLinking } from '@lib/hooks/usePrivySocialLinking'
 import logger from '@lib/utils/logger'
-import { ExtendedPrivyUser, PrivyPlatform } from 'types/privy'
+import { PrivyPlatform } from 'types/privy'
+import { SessionUser } from 'types/user'
 
 // colocated this for now but we can move into a constants if that is cleaner
 const verifiedPlatforms: PrivyPlatform[] = [
@@ -26,25 +27,27 @@ const verifiedPlatforms: PrivyPlatform[] = [
   },
 ]
 
-export function PrivyVerifiedLinks() {
+export function PrivyVerifiedLinks({ privyUser }: { privyUser: SessionUser }) {
   const {
-    privyUser,
+    privyUser: localPrivyUser,
     handleLink,
     handleUnlink,
     verifiedPlatforms: linkedPlatforms,
   } = useSocialLinking(verifiedPlatforms)
 
+  logger('privy user in privy-verified-links', privyUser)
+  logger('privy user (client)', localPrivyUser)
+
   return (
     <div className="flex w-full flex-col items-center gap-8">
       {linkedPlatforms.map((platform) => {
         if (privyUser === null) {
-          logger('Privy user is null')
           return null
         }
 
         const isConnected = privyUser
           ? Boolean(
-              (privyUser as ExtendedPrivyUser)[platform.platformPrivyName],
+              (privyUser as SessionUser).details?.[platform.platformPrivyName],
             )
           : false
 
@@ -53,12 +56,12 @@ export function PrivyVerifiedLinks() {
             key={platform.platformPrivyName}
             platformDisplayName={platform.platformDisplayName}
             isConnected={isConnected}
-            privyUser={privyUser as ExtendedPrivyUser}
+            privyUser={privyUser as SessionUser}
             platform={platform}
             linkMethod={() => handleLink(platform.linkMethod)}
             unlinkMethod={() => {
               return new Promise<void>((resolve, reject) => {
-                const userDetails = (privyUser as ExtendedPrivyUser)[
+                const userDetails = (privyUser as SessionUser).details?.[
                   platform.platformPrivyName
                 ]
                 if (
@@ -97,7 +100,7 @@ interface VerifiedLinkItemProps {
   linkMethod: () => Promise<void>
   unlinkMethod: () => Promise<void>
   isConnected: boolean
-  privyUser: ExtendedPrivyUser | null
+  privyUser: SessionUser | null
   platform: PrivyPlatform
 }
 
@@ -116,7 +119,7 @@ export function VerifiedLinkItem({
       {isConnected ? (
         <span>
           {(privyUser &&
-            (privyUser as ExtendedPrivyUser)[platform.platformPrivyName]
+            (privyUser as SessionUser).details?.[platform.platformPrivyName]
               ?.username) ??
             platformDisplayName}
         </span>
