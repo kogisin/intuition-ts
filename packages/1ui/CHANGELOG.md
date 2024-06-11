@@ -1,3 +1,45 @@
+## 0.3.0 (2024-06-11)
+
+### Features
+
+- **1ui:** create radio group components
+
+- **1ui:** create textarea component
+
+- **1ui:** create label component
+
+- **1ui:** create input component
+
+- **1ui:** finalize incomplete components
+
+- **1ui:** create pagination & select components
+
+- **portal:** user identity creation
+
+- **1ui:** create hover card component
+
+- **1ui:** create table components
+
+- **1ui:** create value display component
+
+### Fixes
+
+- **1ui:** pagination interfaces
+
+- **1ui:** hover card story imports
+
+- **1ui:** pagination test
+
+### 🧱 Updated Dependencies
+
+- Updated @0xintuition/portal to 0.3.0
+
+### ❤️ Thank You
+
+- Alexander Mann
+- Jonathan Prozzi
+- Vital
+
 ## 0.2.0 (2024-06-04)
 
 ### Features

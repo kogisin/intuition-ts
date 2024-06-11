@@ -1,3 +1,7 @@
+## 0.2.1 (2024-06-11)
+
+This was a version bump only for @0xintuition/sdk to align it with other projects, there were no code changes.
+
 ## 0.2.0 (2024-06-04)
 
 ### Features
