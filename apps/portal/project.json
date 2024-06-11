@@ -16,11 +16,6 @@
       "options": {
         "config": "apps/portal/vitest.config.ts"
       }
-    },
-    "nx-release-publish": {
-      "options": {
-        "packageRoot": "dist/{projectRoot}"
-      }
     }
   }
 }
