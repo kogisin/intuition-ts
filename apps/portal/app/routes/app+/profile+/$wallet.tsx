@@ -5,10 +5,12 @@ import {
   UsersService,
 } from '@0xintuition/api'
 
+import { NestedLayout } from '@components/nested-layout'
 import { useLiveLoader } from '@lib/hooks/useLiveLoader'
 import logger from '@lib/utils/logger'
 import { getAuthHeaders } from '@lib/utils/misc'
 import { json, LoaderFunctionArgs } from '@remix-run/node'
+import { Outlet } from '@remix-run/react'
 import { getPrivyAccessToken } from '@server/privy'
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
@@ -62,19 +64,18 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 }
 
 export default function PublicProfile() {
-  const { userIdentity, userTotals } = useLiveLoader<typeof loader>([
+  const { userIdentity } = useLiveLoader<typeof loader>([
     'create-meme',
     'stake',
   ])
 
   return (
-    <div className="m-8 flex flex-col items-center gap-4">
+    <NestedLayout outlet={Outlet}>
       <div className="flex flex-col">
         <h3>User Identity</h3>
         <p className="w-[600px] text-wrap">{JSON.stringify(userIdentity)}</p>
         <h3>User Totals</h3>
-        <p>{JSON.stringify(userTotals)}</p>
       </div>
-    </div>
+    </NestedLayout>
   )
 }
