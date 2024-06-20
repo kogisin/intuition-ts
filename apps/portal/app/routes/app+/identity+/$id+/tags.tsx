@@ -7,13 +7,13 @@ export async function loader() {
   })
 }
 
-export default function ProfileOverview() {
+export default function IdentityTags() {
   const { message } = useLoaderData<typeof loader>()
 
   return (
-    <div className="m-8 flex flex-col items-center gap-4">
-      <div className="flex flex-col">Profile Overview Route</div>
-      <div>{message}</div>
+    <div className="flex flex-col items-center gap-4">
+      <pre>Identity Tags Route</pre>
+      identity tags loader {message}
     </div>
   )
 }

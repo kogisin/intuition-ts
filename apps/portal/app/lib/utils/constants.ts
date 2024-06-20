@@ -61,3 +61,54 @@ export const verifiedPlatforms: PrivyPlatform[] = [
     unlinkMethod: 'unlinkFarcaster',
   },
 ]
+
+// Routes
+
+export const userProfileRouteOptions = [
+  { value: 'overview', label: 'Overview', path: '/app/profile/' },
+  { value: 'data-about', label: 'Data About', path: '/app/profile/data-about' },
+  {
+    value: 'data-created',
+    label: 'Data Created',
+    path: '/app/profile/data-created',
+  },
+  {
+    value: 'connections',
+    label: 'Connections',
+    path: '/app/profile/connections',
+  },
+]
+
+export const userIdentityRouteOptions = [
+  { value: 'overview', label: 'Overview', basePath: '/app/profile' },
+  {
+    value: 'data-about',
+    label: 'Data About',
+    basePath: '/app/profile',
+  },
+  {
+    value: 'data-created',
+    label: 'Data Created',
+    basePath: '/app/profile',
+  },
+  {
+    value: 'connections',
+    label: 'Connections',
+    basePath: '/app/profile',
+  },
+]
+
+export const identityRouteOptions = [
+  { value: 'overview', label: 'Overview', basePath: '/app/identity' },
+  {
+    value: 'data-about',
+    label: 'Data About',
+    basePath: '/app/identity',
+  },
+
+  {
+    value: 'tags',
+    label: 'Tags',
+    basePath: '/app/identity',
+  },
+]
