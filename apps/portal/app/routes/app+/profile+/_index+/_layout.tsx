@@ -1,6 +1,12 @@
 import { useEffect } from 'react'
 
-import { Avatar, AvatarFallback, AvatarImage, Button } from '@0xintuition/1ui'
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Button,
+  StakeCard,
+} from '@0xintuition/1ui'
 import {
   ApiError,
   IdentitiesService,
@@ -20,7 +26,8 @@ import {
   editSocialLinksModalAtom,
 } from '@lib/state/store'
 import { userProfileRouteOptions } from '@lib/utils/constants'
-import { getAuthHeaders, sliceString } from '@lib/utils/misc'
+import logger from '@lib/utils/logger'
+import { formatBalance, getAuthHeaders, sliceString } from '@lib/utils/misc'
 import { SessionContext } from '@middleware/session'
 import { json, LoaderFunctionArgs, redirect } from '@remix-run/node'
 import {
@@ -96,9 +103,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
   } catch (error: unknown) {
     if (error instanceof ApiError) {
       userTotals = undefined
-      console.log(
-        `${error.name} - ${error.status}: ${error.message} ${error.url}`,
-      )
+      logger(`${error.name} - ${error.status}: ${error.message} ${error.url}`)
     } else {
       throw error
     }
@@ -108,7 +113,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
 }
 
 export default function Profile() {
-  const { user, userObject, userTotals } = useLoaderData<{
+  const { user, userObject, userIdentity, userTotals } = useLoaderData<{
     user: SessionUser
     userIdentity: IdentityPresenter
     userObject: UserPresenter
@@ -141,7 +146,6 @@ export default function Profile() {
 
   const matches = useMatches()
   const currentPath = matches[matches.length - 1].pathname
-  console.log('currentPath', currentPath)
 
   // List of paths that should not use the ProfileLayout
   const excludedPaths = ['/app/profile/create']
@@ -223,6 +227,13 @@ export default function Profile() {
               handleOpenEditSocialLinksModal={() =>
                 setEditSocialLinksModalActive(true)
               }
+            />
+            {/* position card will go here */}
+            <StakeCard
+              tvl={formatBalance(userIdentity.assets_sum)}
+              holders={userIdentity.num_positions}
+              onBuyClick={() => logger('click buy')} // this will open the stake modal
+              onViewAllClick={() => logger('click view all')} // this will navigate to the data-about positions
             />
           </div>
           <EditProfileModal
