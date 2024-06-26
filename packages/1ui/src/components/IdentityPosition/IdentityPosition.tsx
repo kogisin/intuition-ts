@@ -11,6 +11,7 @@ import {
   Icon,
   IconName,
   PositionValueDisplay,
+  PositionValueVariants,
   TagsContent,
   TagWithValue,
   TagWithValueProps,
@@ -102,7 +103,7 @@ const IdentityPosition = ({
 
       <PositionValueDisplay
         value={amount}
-        position="identity"
+        position={PositionValueVariants.identity}
         feesAccrued={feesAccrued}
         currency={currency}
       />
