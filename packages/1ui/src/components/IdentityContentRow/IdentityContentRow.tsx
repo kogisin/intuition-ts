@@ -1,14 +1,10 @@
 import * as React from 'react'
 
-import { CurrencyType } from 'types'
+import { CurrencyType, Subject, SubjectType } from 'types'
 import { formatWalletAddress } from 'utils/wallet'
 
 import {
   Avatar,
-  AvatarFallback,
-  AvatarImage,
-  Icon,
-  IconName,
   IdentityValueDisplay,
   TagsContent,
   TagWithValue,
@@ -16,13 +12,10 @@ import {
   Text,
   TextVariant,
 } from '..'
-import { IdentityContentVariant } from './IdentityContentRow.utils'
-
-export type IdentityContentVariantType = keyof typeof IdentityContentVariant
 
 export interface IdentityContentRowProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  variant: IdentityContentVariantType
+  variant?: SubjectType
   amount: number
   currency?: CurrencyType
   name: string
@@ -33,7 +26,7 @@ export interface IdentityContentRowProps
 }
 
 const IdentityContentRow = ({
-  variant,
+  variant = Subject.identity,
   amount,
   currency,
   name,
@@ -49,18 +42,11 @@ const IdentityContentRow = ({
       <div className="w-full flex justify-between items-center" {...props}>
         <div className="flex items-center">
           <Avatar
-            className={`w-[64px] h-[64px] mr-4 ${variant === IdentityContentVariant.entity ? 'rounded-lg' : ''}`}
-          >
-            <AvatarImage src={avatarSrc} alt={name} />
-            {variant === IdentityContentVariant.user && (
-              <AvatarFallback>{name.slice(0, 2)}</AvatarFallback>
-            )}
-            {variant === IdentityContentVariant.entity && (
-              <AvatarFallback className="rounded-lg">
-                <Icon name={IconName.fingerprint} className="h-full w-full" />
-              </AvatarFallback>
-            )}
-          </Avatar>
+            variant={variant}
+            src={avatarSrc}
+            name={name}
+            className="w-[64px] h-[64px] mr-4"
+          />
           <div className="flex flex-col">
             <div className="flex items-center mb-1.5">
               <Text variant={TextVariant.bodyLarge} className="mr-1">

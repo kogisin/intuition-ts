@@ -49,9 +49,9 @@ describe('IdentityContentRow', () => {
                 class="relative flex shrink-0 overflow-hidden rounded-full w-[64px] h-[64px] mr-4"
               >
                 <span
-                  class="bg-muted flex h-full w-full items-center justify-center rounded-full"
+                  class="flex h-full w-full items-center justify-center bg-inherit"
                 >
-                  Jo
+                  JO
                 </span>
               </span>
               <div

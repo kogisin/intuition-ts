@@ -2,21 +2,22 @@ import React from 'react'
 
 import type { Meta, StoryObj } from '@storybook/react'
 import { Button } from 'components/Button'
+import { Subject } from 'types'
 
 import { ProfileCard, ProfileCardProps } from './ProfileCard'
-import { ProfileVariant } from './ProfileCard.utils'
 
 const meta: Meta<typeof ProfileCard> = {
   title: 'Components/ProfileCard',
   component: ProfileCard,
   argTypes: {
     variant: {
-      description: 'Type of the profile card (user or entity)',
-      options: Object.keys(ProfileVariant),
-      control: { type: 'radio' },
+      description: 'Variant of avatar',
+      options: Object.values(Subject),
       table: {
-        type: { summary: 'user | entity' },
+        type: { summary: 'string' },
+        defaultValue: { summary: 'user' },
       },
+      control: 'select',
     },
     avatarSrc: {
       description: 'URL of the avatar image',
@@ -68,7 +69,7 @@ type Story = StoryObj<typeof ProfileCard>
 
 export const BasicUsage: Story = {
   args: {
-    variant: 'user',
+    variant: 'identity',
     avatarSrc: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4"',
     name: 'John Doe',
     walletAddress: '0x1234567890abcdef1234567890abcdef12345678',

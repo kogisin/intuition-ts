@@ -1,14 +1,12 @@
 import React from 'react'
 
 import { Text } from 'components/Text'
+import { Subject, SubjectType } from 'types'
 
 import { ProfileCardHeader, ProfileCardStatItem } from './components'
-import { ProfileVariant } from './ProfileCard.utils'
-
-export type ProfileVariantType = keyof typeof ProfileVariant
 
 export interface ProfileCardProps {
-  variant: ProfileVariantType
+  variant?: SubjectType
   avatarSrc: string
   name: string
   walletAddress: string
@@ -23,7 +21,7 @@ export interface ProfileCardProps {
 }
 
 const ProfileCard = ({
-  variant,
+  variant = Subject.identity,
   avatarSrc,
   name,
   walletAddress,
@@ -40,7 +38,7 @@ const ProfileCard = ({
         name={name}
         walletAddress={walletAddress}
       />
-      {variant === ProfileVariant.user && (
+      {variant === Subject.identity && (
         <div className="flex justify-between items-center space-x-4 mt-5">
           <ProfileCardStatItem
             value={stats?.numberOfFollowing ?? 0}
@@ -64,7 +62,7 @@ const ProfileCard = ({
           {bio}
         </Text>
 
-        {variant === ProfileVariant.entity && link && (
+        {variant === Subject.entity && link && (
           <div className="mt-5">
             <Text variant="body" className="text-muted-foreground">
               Link

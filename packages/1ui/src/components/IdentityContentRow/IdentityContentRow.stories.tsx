@@ -1,12 +1,24 @@
 import React from 'react'
 
 import type { Meta, StoryObj } from '@storybook/react'
+import { Subject } from 'types'
 
 import { IdentityContentRow } from './IdentityContentRow'
 
 const meta: Meta<typeof IdentityContentRow> = {
   title: 'Components/IdentityContentRow',
   component: IdentityContentRow,
+  argTypes: {
+    variant: {
+      description: 'Variant of avatar',
+      options: Object.values(Subject),
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'user' },
+      },
+      control: 'select',
+    },
+  },
 }
 
 export default meta
@@ -16,7 +28,7 @@ type Story = StoryObj<typeof IdentityContentRow>
 // Example story for the default state
 export const UserVariant: Story = {
   args: {
-    variant: 'user',
+    variant: 'identity',
     name: 'John Doe',
     walletAddress: '0x1234567890abcdef1234567890abcdef12345678',
     avatarSrc: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4"',

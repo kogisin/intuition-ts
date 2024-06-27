@@ -9,7 +9,7 @@ describe('IdentityPosition', () => {
   it('should render UI for user variant', () => {
     const { asFragment } = render(
       <IdentityPosition
-        variant="identity"
+        variant="entity"
         name="John Doe"
         walletAddress="0x1234567890abcdef1234567890abcdef12345678"
         avatarSrc="https://avatars.githubusercontent.com/u/94311139?s=200&v=4"
@@ -27,13 +27,13 @@ describe('IdentityPosition', () => {
             class="flex items-center"
           >
             <span
-              class="relative flex shrink-0 overflow-hidden w-16 h-16 mr-4 rounded-lg"
+              class="relative flex shrink-0 overflow-hidden rounded bg-background border border-border/30 w-16 h-16 mr-4"
             >
               <span
-                class="bg-muted flex h-full w-full items-center justify-center rounded-lg"
+                class="flex h-full w-full items-center justify-center bg-inherit"
               >
                 <svg
-                  class="h-full w-full"
+                  class="h-6 w-6 text-primary/30"
                 >
                   <use
                     href="/src/components/Icon/Icon.sprites.svg#fingerprint"
@@ -94,7 +94,7 @@ describe('IdentityPosition', () => {
     it('should render UI for identity variant', () => {
       const { asFragment } = render(
         <IdentityPosition
-          variant="identity"
+          variant="entity"
           name="John Doe"
           walletAddress="0x1234567890abcdef1234567890abcdef12345678"
           avatarSrc="https://avatars.githubusercontent.com/u/94311139?s=200&v=4"
@@ -119,13 +119,13 @@ describe('IdentityPosition', () => {
               class="flex items-center"
             >
               <span
-                class="relative flex shrink-0 overflow-hidden w-16 h-16 mr-4 rounded-lg"
+                class="relative flex shrink-0 overflow-hidden rounded bg-background border border-border/30 w-16 h-16 mr-4"
               >
                 <span
-                  class="bg-muted flex h-full w-full items-center justify-center rounded-lg"
+                  class="flex h-full w-full items-center justify-center bg-inherit"
                 >
                   <svg
-                    class="h-full w-full"
+                    class="h-6 w-6 text-primary/30"
                   >
                     <use
                       href="/src/components/Icon/Icon.sprites.svg#fingerprint"
