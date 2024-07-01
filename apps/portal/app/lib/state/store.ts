@@ -20,3 +20,17 @@ export function atomWithToggle(
 
 export const editProfileModalAtom = atomWithToggle(false)
 export const editSocialLinksModalAtom = atomWithToggle(false)
+
+export const stakeModalAtom = atom<{
+  isOpen: boolean
+  id: string | null
+  direction?: 'for' | 'against' | null
+  modalType?: 'identity' | 'claim' | null
+  mode?: 'deposit' | 'redeem'
+}>({
+  isOpen: false,
+  id: null,
+  direction: null,
+  modalType: null,
+  mode: undefined,
+})
