@@ -14,6 +14,8 @@ import { IdentityPresenter, UserPresenter } from '@0xintuition/api'
 
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { getZodConstraint, parseWithZod } from '@conform-to/zod'
+import { useImageUploadFetcher } from '@lib/hooks/useImageUploadFetcher'
+import { useOffChainFetcher } from '@lib/hooks/useOffChainFetcher'
 import { updateProfileSchema } from '@lib/schemas/update-profile-schema'
 import {
   DESCRIPTION_MAX_LENGTH,
@@ -22,8 +24,7 @@ import {
 } from '@lib/utils/constants'
 import logger from '@lib/utils/logger'
 import { cn, truncateString } from '@lib/utils/misc'
-import { useFetcher, useLocation } from '@remix-run/react'
-import { type UploadApiResponse } from 'cloudinary'
+import { useLocation } from '@remix-run/react'
 import {
   AlertCircle,
   CircleXIcon,
@@ -151,13 +152,20 @@ export function EditProfileForm({ userObject, onClose }: EditProfileFormProps) {
   const isCreateRoute = location.pathname.includes('create')
 
   // image upload fetcher
-  const uploadFetcher = useFetcher<UploadApiResponse>()
+  // const uploadFetcher = useFetcher<UploadApiResponse>()
+
+  const imageUploadFetcher = useImageUploadFetcher()
 
   // off-chain fetcher
-  const offChainFetcher = useFetcher<OffChainFetcherData>()
+  // const offChainFetcher = useFetcher<OffChainFetcherData>()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const lastOffchainSubmission = offChainFetcher.data as any
-  const userIdentity = offChainFetcher?.data?.userIdentity
+  // const lastOffchainSubmission = offChainFetcher.data as any
+  const {
+    offChainFetcher,
+    lastOffChainSubmission,
+    identity: userIdentity,
+  } = useOffChainFetcher()
+  // const userIdentity = offChainFetcher?.data?.userIdentity
   logger('userIdentity', userIdentity)
 
   const [imageFilename, setImageFilename] = useState<string | null>(null)
@@ -167,7 +175,7 @@ export function EditProfileForm({ userObject, onClose }: EditProfileFormProps) {
 
   const [form, fields] = useForm({
     id: 'update-profile',
-    lastResult: lastOffchainSubmission?.submission,
+    lastResult: lastOffChainSubmission,
     constraint: getZodConstraint(updateProfileSchema()),
     onValidate({ formData }) {
       return parseWithZod(formData, {
@@ -186,16 +194,17 @@ export function EditProfileForm({ userObject, onClose }: EditProfileFormProps) {
 
   // Handle Triggering Image Upload
   useEffect(() => {
-    if (uploadFetcher.state === 'submitting') {
+    if (imageUploadFetcher.state === 'submitting') {
       dispatch({ type: 'START_IMAGE_UPLOAD' })
+      logger('uploading img')
     }
     if (
-      uploadFetcher.state === 'idle' &&
-      uploadFetcher.data &&
-      uploadFetcher.data
+      imageUploadFetcher.state === 'idle' &&
+      imageUploadFetcher.data &&
+      imageUploadFetcher.data
     ) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const data = uploadFetcher.data as any
+      const data = imageUploadFetcher.data as any
 
       if (typeof data.submission.payload.image_url !== 'string') {
         logger('Transaction Error')
@@ -212,12 +221,7 @@ export function EditProfileForm({ userObject, onClose }: EditProfileFormProps) {
         })
       }
     }
-  }, [uploadFetcher.state, uploadFetcher.data, dispatch])
-
-  interface OffChainFetcherData {
-    success: 'success' | 'error'
-    userIdentity: IdentityPresenter
-  }
+  }, [imageUploadFetcher.state, imageUploadFetcher.data, dispatch])
 
   useEffect(() => {
     if (state.status === 'image-upload-complete') {
@@ -262,7 +266,7 @@ export function EditProfileForm({ userObject, onClose }: EditProfileFormProps) {
         console.error('Error creating identity', error)
       }
     }
-  }, [uploadFetcher.state, uploadFetcher.data, state])
+  }, [imageUploadFetcher.state, imageUploadFetcher.data, state])
 
   useEffect(() => {
     if (state.status === 'transaction-error') {
@@ -294,8 +298,8 @@ export function EditProfileForm({ userObject, onClose }: EditProfileFormProps) {
 
         setLoading(true)
         dispatch({ type: 'START_IMAGE_UPLOAD' })
-        uploadFetcher.submit(formData, {
-          action: '/actions/upload',
+        imageUploadFetcher.submit(formData, {
+          action: '/actions/upload-with-metadata',
           method: 'post',
           encType: 'multipart/form-data',
         })

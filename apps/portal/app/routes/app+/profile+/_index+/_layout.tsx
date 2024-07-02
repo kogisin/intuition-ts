@@ -20,12 +20,14 @@ import {
   UserTotalsPresenter,
 } from '@0xintuition/api'
 
+import CreateIdentityModal from '@components/create-identity-modal'
 import EditProfileModal from '@components/edit-profile-modal'
 import EditSocialLinksModal from '@components/edit-social-links-modal'
 import { NestedLayout } from '@components/nested-layout'
 import { ProfileSocialAccounts } from '@components/profile-social-accounts'
 import StakeModal from '@components/stake/stake-modal'
 import {
+  createIdentityModalAtom,
   editProfileModalAtom,
   editSocialLinksModalAtom,
   stakeModalAtom,
@@ -116,8 +118,6 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     }
   }
 
-  logger('userIdentity', userIdentity)
-
   let vaultDetails: VaultDetailsType | null = null
 
   if (userIdentity !== undefined && userIdentity.vault_id) {
@@ -157,6 +157,10 @@ export default function Profile() {
 
   const [editSocialLinksModalActive, setEditSocialLinksModalActive] = useAtom(
     editSocialLinksModalAtom,
+  )
+
+  const [createIdentityModalActive, setCreateIdentityModalActive] = useAtom(
+    createIdentityModalAtom,
   )
 
   const [stakeModalActive, setStakeModalActive] = useAtom(stakeModalAtom)
@@ -269,6 +273,13 @@ export default function Profile() {
               }
               onViewAllClick={() => logger('click view all')} // this will navigate to the data-about positions
             />
+            <Button
+              variant="secondary"
+              className="w-full"
+              onClick={() => setCreateIdentityModalActive(true)}
+            >
+              Create Identity
+            </Button>
           </div>
 
           <EditProfileModal
@@ -280,6 +291,10 @@ export default function Profile() {
             privyUser={JSON.parse(JSON.stringify(user))}
             open={editSocialLinksModalActive}
             onClose={() => setEditSocialLinksModalActive(false)}
+          />
+          <CreateIdentityModal
+            open={createIdentityModalActive}
+            onClose={() => setCreateIdentityModalActive(false)}
           />
           <StakeModal
             user={user}

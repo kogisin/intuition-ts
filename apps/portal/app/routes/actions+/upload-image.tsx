@@ -1,5 +1,5 @@
 import { parseWithZod } from '@conform-to/zod'
-import { createIdentitySchema } from '@lib/schemas/create-identity-schema'
+import { imageUrlSchema } from '@lib/schemas/create-identity-schema'
 import { MAX_UPLOAD_SIZE } from '@lib/utils/constants'
 import logger from '@lib/utils/logger'
 import {
@@ -39,9 +39,10 @@ export async function action({ request }: ActionFunctionArgs) {
   const formData = await parseMultipartFormData(request, uploadHandler)
 
   const submission = await parseWithZod(formData, {
-    schema: createIdentitySchema(),
+    schema: imageUrlSchema(),
     async: true,
   })
+  logger('submission', submission)
   // Image that fails moderation will be returned as {..., img: Blob { size: 0, type: 'image/png' }}
   if (submission.status !== 'success') {
     return json(submission.reply(), {
