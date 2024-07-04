@@ -12,10 +12,15 @@ import {
 } from '@0xintuition/1ui'
 import { IdentityPresenter } from '@0xintuition/api'
 
-import { getFormProps, getInputProps, useForm } from '@conform-to/react'
+import {
+  getFormProps,
+  getInputProps,
+  SubmissionResult,
+  useForm,
+} from '@conform-to/react'
 import { getZodConstraint, parseWithZod } from '@conform-to/zod'
 import { multivaultAbi } from '@lib/abis/multivault'
-import { useCreateIdentity } from '@lib/hooks/useCreateIdentity'
+import { useCreateAtom } from '@lib/hooks/useCreateAtom'
 import { useImageUploadFetcher } from '@lib/hooks/useImageUploadFetcher'
 import {
   OffChainFetcherData,
@@ -62,7 +67,7 @@ export function IdentityForm({ onSuccess, onClose }: IdentityFormProps) {
   >(identityTransactionReducer, initialIdentityTransactionState)
 
   const [transactionResponseData, setTransactionResponseData] =
-    React.useState<IdentityPresenter | null>(null)
+    useState<IdentityPresenter | null>(null)
 
   const isTransactionStarted = [
     'preparing-identity',
@@ -112,6 +117,11 @@ interface CreateIdentityFormProps {
   >
   transactionResponseData: IdentityPresenter | null
   onClose: () => void
+}
+export interface OffChainIdentityFetcherData {
+  success: 'success' | 'error'
+  identity: IdentityPresenter
+  submission: SubmissionResult<string[]> | null
 }
 
 function CreateIdentityForm({
@@ -214,10 +224,11 @@ function CreateIdentityForm({
     writeContractAsync: writeCreateIdentity,
     awaitingWalletConfirmation,
     awaitingOnChainConfirmation,
-  } = useCreateIdentity()
+  } = useCreateAtom()
   const emitterFetcher = useFetcher()
 
   const createdIdentity = offChainFetcher?.data?.identity
+  // const createdIdentity = identity
 
   const [loading, setLoading] = useState(false)
   const [imageFilename, setImageFilename] = useState<string | null>(null)
@@ -259,8 +270,8 @@ function CreateIdentityForm({
     ].includes(status)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    logger('form submitting')
     event.preventDefault()
+    logger('form submitting')
     try {
       if (walletClient) {
         dispatch({ type: 'PREPARING_IDENTITY' })
@@ -591,6 +602,7 @@ function CreateIdentityForm({
         </div>
       ) : (
         <TransactionStatus
+          transactionType="identity"
           state={state}
           dispatch={dispatch}
           transactionDetail={transactionResponseData?.id}
