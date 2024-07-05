@@ -9,10 +9,7 @@ import { formatBalance } from '@lib/utils/misc'
 import { Cookie } from '@remix-run/node'
 import { useNavigation } from '@remix-run/react'
 import { useSetAtom } from 'jotai'
-import type {
-  StakeTransactionAction,
-  StakeTransactionState,
-} from 'types/stake-transaction'
+import { TransactionActionType, TransactionStateType } from 'types/transaction'
 import { SessionUser } from 'types/user'
 import { formatUnits } from 'viem'
 import { useAccount, useSwitchChain } from 'wagmi'
@@ -21,12 +18,11 @@ interface StakeButtonProps {
   user: SessionUser
   tosCookie: Cookie
   val: string
-  setVal: (val: string) => void
   mode: string | undefined
   handleAction: () => void
-  handleClose?: () => void
-  dispatch: (action: StakeTransactionAction) => void
-  state: StakeTransactionState
+  handleClose: () => void
+  dispatch: (action: TransactionActionType) => void
+  state: TransactionStateType
   min_deposit: string
   walletBalance: string
   user_conviction: string
@@ -40,9 +36,9 @@ interface StakeButtonProps {
 
 const StakeButton: React.FC<StakeButtonProps> = ({
   val,
-  setVal,
   mode,
   handleAction,
+  handleClose,
   dispatch,
   state,
   min_deposit,
@@ -68,14 +64,17 @@ const StakeButton: React.FC<StakeButtonProps> = ({
   const getButtonText = () => {
     if (val === '') {
       return 'Enter an Amount'
-    } else if (state.status === 'review') {
+    } else if (state.status === 'review-transaction') {
       return 'Confirm'
     } else if (state.status === 'confirm') {
       return 'Continue in Wallet'
-    } else if (state.status === 'pending') {
+    } else if (state.status === 'transaction-pending') {
       return 'Pending'
-    } else if (state.status === 'confirmed' || state.status === 'complete') {
-      return 'Buy More'
+    } else if (
+      state.status === 'transaction-confirmed' ||
+      state.status === 'complete'
+    ) {
+      return 'Close'
     } else if (state.status === 'error') {
       return 'Retry'
     } else if (chain?.id !== getChainEnvConfig(CURRENT_ENV).chainId) {
@@ -113,10 +112,13 @@ const StakeButton: React.FC<StakeButtonProps> = ({
       variant="primary"
       onClick={(e) => {
         e.preventDefault()
-        if (state.status === 'complete' || state.status === 'confirmed') {
-          dispatch({ type: 'START_TRANSACTION' })
-          setVal('')
-        } else if (state.status === 'review') {
+        if (
+          state.status === 'complete' ||
+          state.status === 'transaction-confirmed'
+        ) {
+          handleClose()
+        } else if (state.status === 'review-transaction') {
+          dispatch({ type: 'APPROVE_TRANSACTION' })
           handleAction()
         } else {
           if (chain?.id !== getChainEnvConfig(CURRENT_ENV).chainId) {
@@ -153,7 +155,7 @@ const StakeButton: React.FC<StakeButtonProps> = ({
         !address ||
         val === '' ||
         state.status === 'confirm' ||
-        state.status === 'pending'
+        state.status === 'transaction-pending'
       }
       className="w-[159px] m-auto mt-10"
     >
