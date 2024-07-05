@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react'
 
-import { Badge, Claim, IdentityTag } from '@0xintuition/1ui'
+import {
+  Badge,
+  Claim,
+  DialogHeader,
+  DialogTitle,
+  IdentityTag,
+} from '@0xintuition/1ui'
 import { ClaimPresenter, IdentityPresenter } from '@0xintuition/api'
 
 import { formatDisplayBalance } from '@lib/utils/misc'
@@ -80,6 +86,9 @@ export default function StakeReview({
   }, [state.status])
   return (
     <>
+      <DialogHeader>
+        <DialogTitle />
+      </DialogHeader>
       <div className="flex w-full flex-col gap-5 px-2">
         <div
           className={`flex h-full w-full flex-col items-center justify-center gap-2 px-2 pt-5`}
