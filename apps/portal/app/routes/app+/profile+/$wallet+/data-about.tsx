@@ -27,7 +27,6 @@ import {
   ClaimPresenter,
   ClaimSortColumn,
   ClaimsService,
-  IdentitiesService,
   OpenAPI,
   PositionPresenter,
   PositionSortColumn,
@@ -37,13 +36,14 @@ import {
 
 import DataAboutHeader from '@components/profile/data-about-header'
 import { useLiveLoader } from '@lib/hooks/useLiveLoader'
+import { fetchUserIdentity } from '@lib/utils/fetches'
 import logger from '@lib/utils/logger'
 import {
   calculateTotalPages,
   formatBalance,
   getAuthHeaders,
 } from '@lib/utils/misc'
-import { json, LoaderFunctionArgs } from '@remix-run/node'
+import { json, LoaderFunctionArgs, redirect } from '@remix-run/node'
 import { useFetcher, useSearchParams } from '@remix-run/react'
 import { getPrivyAccessToken } from '@server/privy'
 import { formatUnits } from 'viem'
@@ -60,18 +60,10 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     throw new Error('Wallet is undefined.')
   }
 
-  let userIdentity
-  try {
-    userIdentity = await IdentitiesService.getIdentityById({
-      id: wallet,
-    })
-  } catch (error: unknown) {
-    if (error instanceof ApiError) {
-      userIdentity = undefined
-      logger(`${error.name} - ${error.status}: ${error.message} ${error.url}`)
-    } else {
-      throw error
-    }
+  const userIdentity = await fetchUserIdentity(wallet)
+
+  if (!userIdentity) {
+    return redirect('/create')
   }
 
   const url = new URL(request.url)
@@ -128,13 +120,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     }
   }
 
-  console.log('claims', claims)
-
-  // console.log('search', search)
-  // console.log('sortBy', sortBy)
-  // console.log('direction', direction)
-  // console.log('page', page)
-  // console.log('limit', limit)
+  logger('claims', claims)
 
   return json({
     userIdentity,
