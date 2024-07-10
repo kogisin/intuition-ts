@@ -10,6 +10,7 @@ import {
 } from '@0xintuition/1ui'
 import { ClaimPresenter, IdentityPresenter } from '@0xintuition/api'
 
+import { BLOCK_EXPLORER_URL } from '@lib/utils/constants'
 import { formatBalance } from '@lib/utils/misc'
 import { Link, type FetcherWithComponents } from '@remix-run/react'
 import { HelpCircleIcon } from 'lucide-react'
@@ -140,7 +141,7 @@ export default function FollowForm({
             <TransactionStatusCard status={state.status} />
           ) : (
             <Link
-              to={`https://base-sepolia.blockscout.com/tx/${state.txHash}`}
+              to={`${BLOCK_EXPLORER_URL}/tx/${state.txHash}`}
               target="_blank"
               className="flex flex-row items-center gap-1 mx-auto leading-tight text-blue-500 transition-colors duration-300 hover:text-blue-400"
             >
