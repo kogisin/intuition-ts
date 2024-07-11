@@ -1,5 +1,4 @@
 import {
-  Button,
   PositionCard,
   PositionCardFeesAccrued,
   PositionCardLastUpdated,
@@ -16,7 +15,8 @@ import { OpenAPI } from '@0xintuition/api'
 
 import { NestedLayout } from '@components/nested-layout'
 import StakeModal from '@components/stake/stake-modal'
-import { stakeModalAtom } from '@lib/state/store'
+import TagsModal from '@components/tags/tags-modal'
+import { stakeModalAtom, tagsModalAtom } from '@lib/state/store'
 import { identityRouteOptions } from '@lib/utils/constants'
 import { fetchIdentity } from '@lib/utils/fetches'
 import logger from '@lib/utils/logger'
@@ -95,6 +95,7 @@ export default function IdentityDetails() {
 
   const { user_assets, assets_sum } = vaultDetails ? vaultDetails : identity
   const [stakeModalActive, setStakeModalActive] = useAtom(stakeModalAtom)
+  const [tagsModalActive, setTagsModalActive] = useAtom(tagsModalAtom)
 
   return (
     <NestedLayout outlet={Outlet} options={identityRouteOptions}>
@@ -106,17 +107,9 @@ export default function IdentityDetails() {
             name={identity?.display_name ?? ''}
             walletAddress={sliceString(identity?.identity_id, 6, 4)}
             bio={identity?.description ?? ''}
-          >
-            <Button
-              variant="secondary"
-              className="w-full"
-              onClick={() => logger('follow functionality')}
-            >
-              Follow
-            </Button>
-          </ProfileCard>
-          {identity?.tags !== null && (
-            <Tags>
+          />
+          <Tags>
+            {identity?.tags && identity?.tags.length > 0 && (
               <TagsContent numberOfTags={identity?.tag_count ?? 0}>
                 {identity?.tags?.map((tag, index) => (
                   <TagWithValue
@@ -126,9 +119,13 @@ export default function IdentityDetails() {
                   />
                 ))}
               </TagsContent>
-              <TagsButton onClick={() => 'add tags clicked'} />
-            </Tags>
-          )}
+            )}
+            <TagsButton
+              onClick={() => {
+                setTagsModalActive({ isOpen: true, mode: 'add' })
+              }}
+            />
+          </Tags>
           {vaultDetails !== null && user_assets !== '0' ? (
             <PositionCard onButtonClick={() => logger('sell position clicked')}>
               <PositionCardStaked
@@ -184,6 +181,17 @@ export default function IdentityDetails() {
               mode: undefined,
             }))
           }}
+        />
+        <TagsModal
+          identity={identity}
+          open={tagsModalActive.isOpen}
+          mode={tagsModalActive.mode}
+          onClose={() =>
+            setTagsModalActive({
+              ...tagsModalActive,
+              isOpen: false,
+            })
+          }
         />
       </div>
     </NestedLayout>
