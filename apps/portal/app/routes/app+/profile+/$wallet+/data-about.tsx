@@ -7,7 +7,7 @@ import {
   SortDirection,
 } from '@0xintuition/api'
 
-import { ClaimsAboutIdentity } from '@components/list/claims-about-identity'
+import { ClaimsList as ClaimsAboutIdentity } from '@components/list/claims'
 import { PositionsOnIdentity } from '@components/list/positions-on-identity'
 import DataAboutHeader from '@components/profile/data-about-header'
 import { useLiveLoader } from '@lib/hooks/useLiveLoader'
@@ -133,7 +133,11 @@ export default function ProfileDataAbout() {
         totalClaims={claimsPagination.totalEntries}
         totalStake={+formatBalance(claimsSummary?.assets_sum ?? 0, 18, 4)}
       />
-      <ClaimsAboutIdentity claims={claims} pagination={claimsPagination} />
+      <ClaimsAboutIdentity
+        claims={claims}
+        pagination={claimsPagination}
+        paramPrefix="claims"
+      />
       <DataAboutHeader
         variant="positions"
         title="Positions on this Identity"

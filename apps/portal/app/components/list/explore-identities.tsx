@@ -5,16 +5,10 @@ import { PaginationComponent } from '@components/pagination-component'
 import { useSearchAndSortParamsHandler } from '@lib/hooks/useSearchAndSortParams'
 import { formatBalance } from '@lib/utils/misc'
 import { useNavigate } from '@remix-run/react'
+import { PaginationType } from 'types/pagination'
 
 import { SearchAndSort } from '../search-and-sort'
 import { SortOption } from '../sort-select'
-
-interface PaginationType {
-  totalEntries: number | undefined
-  currentPage: number
-  totalPages: number
-  limit: number
-}
 
 export function ExploreIdentities({
   identities,
@@ -25,10 +19,8 @@ export function ExploreIdentities({
 }) {
   const navigate = useNavigate()
   const options: SortOption<SortColumn>[] = [
-    { value: 'Position Amount', sortBy: 'UserAssets' },
     { value: 'Total ETH', sortBy: 'AssetsSum' },
-    { value: 'Updated At', sortBy: 'UpdatedAt' },
-    { value: 'Created At', sortBy: 'CreatedAt' },
+    { value: 'Total Positions', sortBy: 'NumPositions' },
   ]
 
   const { handleSortChange, handleSearchChange, onPageChange, onLimitChange } =
@@ -36,7 +28,7 @@ export function ExploreIdentities({
 
   return (
     <>
-      <div className="flex flex-col w-full gap-5">
+      <div className="flex flex-col w-full gap-6">
         <SearchAndSort
           options={options}
           handleSortChange={handleSortChange}
@@ -74,7 +66,7 @@ export function ExploreIdentities({
           limit={pagination.limit ?? 0}
           onPageChange={onPageChange}
           onLimitChange={onLimitChange}
-          label="positions"
+          label="identities"
         />
       </div>
     </>
