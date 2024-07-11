@@ -46,7 +46,7 @@ import {
   IdentityTransactionActionType,
   IdentityTransactionStateType,
 } from 'types/transaction'
-import { toHex } from 'viem'
+import { parseUnits, toHex } from 'viem'
 import { usePublicClient, useWalletClient } from 'wagmi'
 
 import ErrorList from './error-list'
@@ -137,6 +137,7 @@ function CreateIdentityForm({
   const [identityImageFile, setIdentityImageFile] = useState<File | undefined>(
     undefined,
   )
+  const [initialDeposit, setInitialDeposit] = useState<string>('0')
   const loaderFetcher = useFetcher<CreateLoaderData>()
   const loaderFetcherUrl = '/resources/create'
   const loaderFetcherRef = useRef(loaderFetcher.load)
@@ -296,6 +297,10 @@ function CreateIdentityForm({
           formData.append('external_reference', prefixedUrl)
         }
 
+        if (event.currentTarget.initial_deposit?.value !== undefined) {
+          setInitialDeposit(event.currentTarget.initial_deposit.value)
+        }
+
         // Initial form validation
         const submission = parseWithZod(formData, {
           schema: createIdentitySchema(),
@@ -376,7 +381,9 @@ function CreateIdentityForm({
           abi: multivaultAbi,
           functionName: 'createAtom',
           args: [toHex(atomData)],
-          value: atomCost,
+          value:
+            BigInt(atomCost) +
+            parseUnits(initialDeposit === '' ? '0' : initialDeposit, 18),
         })
 
         if (txHash) {
@@ -471,7 +478,9 @@ function CreateIdentityForm({
           setTransactionResponseData(responseData.identity)
           logger('responseData identity', responseData.identity)
           logger('onchain create starting. identity_id:', identity_id)
-          handleOnChainCreateIdentity({ atomData: identity_id })
+          handleOnChainCreateIdentity({
+            atomData: identity_id,
+          })
         }
       }
       if (offChainFetcher.data === null || offChainFetcher.data === undefined) {
@@ -514,7 +523,7 @@ function CreateIdentityForm({
           <div className="flex flex-col w-full gap-1.5">
             <div className="self-stretch flex-col justify-start items-start flex">
               <Text variant="caption" className="text-secondary-foreground/90">
-                Identity Display Picture
+                Identity Display Picture (Optional)
               </Text>
             </div>
             <div className="self-stretch h-[100px] px-9 py-2.5 bg-neutral-900 rounded-lg border border-solid border-white/10 justify-between items-center inline-flex">
@@ -566,7 +575,6 @@ function CreateIdentityForm({
             <Input
               {...getInputProps(fields.display_name, { type: 'text' })}
               placeholder="Enter a display name"
-              className="border border-solid border-white/10 bg-neutral-900"
               onChange={() => setFormTouched(true)}
             />
             <ErrorList
@@ -576,38 +584,48 @@ function CreateIdentityForm({
           </div>
           <div className="flex flex-col w-full gap-1.5">
             <Text variant="caption" className="text-secondary-foreground/90">
-              Identity Description
+              Identity Description (Optional)
             </Text>
             <Label htmlFor={fields.description.id} hidden>
-              Identity Description
+              Identity Description (Optional)
             </Label>
             <Textarea
               {...getInputProps(fields.description, { type: 'text' })}
               placeholder="Tell us about yourself!"
-              className="h-20 border border-solid border-white/10 bg-neutral-900"
             />
           </div>
           <div className="flex flex-col w-full gap-1.5">
             <Text variant="caption" className="text-secondary-foreground/90">
-              Add Link
+              Add Link (Optional)
             </Text>
             <Label htmlFor={fields.external_reference.id} hidden>
-              Add Link
+              Add Link (Optional)
             </Label>
-
-            <div className="flex items-center overflow-hidden border border-solid border-white/10 bg-neutral-900 rounded-md relative">
-              <span className="font-medium text-secondary-foreground py px-2 border-r border-solid border-white/10">
-                https://
-              </span>
-              <Input
-                {...getInputProps(fields.external_reference, { type: 'text' })}
-                placeholder="Enter an external link"
-                className="border-white/10 bg-neutral-900 rounded-none border-none"
-              />
-            </div>
+            <Input
+              {...getInputProps(fields.external_reference, { type: 'text' })}
+              placeholder="Enter an external link"
+              startAdornment="http://"
+            />
             <ErrorList
               id={fields.external_reference.errorId}
               errors={fields.external_reference.errors}
+            />
+          </div>
+          <div className="flex flex-col w-full gap-1.5">
+            <Text variant="caption" className="text-secondary-foreground/90">
+              Initial Deposit (Optional)
+            </Text>
+            <Label htmlFor={fields.initial_deposit.id} hidden>
+              Initial Deposit (Optional)
+            </Label>
+            <Input
+              {...getInputProps(fields.initial_deposit, { type: 'text' })}
+              placeholder="0"
+              startAdornment="ETH"
+            />
+            <ErrorList
+              id={fields.initial_deposit.errorId}
+              errors={fields.initial_deposit.errors}
             />
           </div>
           <Button
