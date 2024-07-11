@@ -15,6 +15,7 @@ import {
   IdentityPositionsService,
   PositionSortColumn,
   SearchClaimsResponse,
+  SearchIdentityResponse,
   SearchPositionsResponse,
   SortColumn,
   SortDirection,
@@ -53,11 +54,63 @@ export async function fetchClaim(
   }
 }
 
+export async function fetchUsers(
+  page: number,
+  limit: number,
+  sortBy: SortColumn,
+  direction: SortDirection,
+  search: string | null,
+): Promise<SearchIdentityResponse | null> {
+  try {
+    return await IdentitiesService.searchIdentity({
+      page: page,
+      limit: limit,
+      sortBy: sortBy,
+      direction: direction,
+      displayName: search,
+      isUser: true,
+    })
+  } catch (error: unknown) {
+    if (error instanceof ApiError) {
+      logger(`${error.name} - ${error.status}: ${error.message} ${error.url}`)
+      return null
+    } else {
+      throw error
+    }
+  }
+}
+
 export async function fetchUserTotals(
   creatorId: string,
 ): Promise<GetUserTotalsResponse | null> {
   try {
     return await UsersService.getUserTotals({ id: creatorId })
+  } catch (error: unknown) {
+    if (error instanceof ApiError) {
+      logger(`${error.name} - ${error.status}: ${error.message} ${error.url}`)
+      return null
+    } else {
+      throw error
+    }
+  }
+}
+
+export async function fetchIdentities(
+  page: number,
+  limit: number,
+  sortBy: SortColumn,
+  direction: SortDirection,
+  search: string | null,
+): Promise<SearchIdentityResponse | null> {
+  try {
+    return await IdentitiesService.searchIdentity({
+      page: page,
+      limit: limit,
+      sortBy: sortBy,
+      direction: direction,
+      displayName: search,
+      isUser: false,
+    })
   } catch (error: unknown) {
     if (error instanceof ApiError) {
       logger(`${error.name} - ${error.status}: ${error.message} ${error.url}`)
@@ -84,6 +137,31 @@ export async function fetchPositionsOnIdentity(
       sortBy: sortBy,
       direction: direction,
       creator: search,
+    })
+  } catch (error: unknown) {
+    if (error instanceof ApiError) {
+      logger(`${error.name} - ${error.status}: ${error.message} ${error.url}`)
+      return null
+    } else {
+      throw error
+    }
+  }
+}
+
+export async function fetchClaims(
+  page: number,
+  limit: number,
+  sortBy: ClaimSortColumn,
+  direction: SortDirection,
+  search: string | null,
+): Promise<SearchClaimsResponse | null> {
+  try {
+    return await ClaimsService.searchClaims({
+      page: page,
+      limit: limit,
+      sortBy: sortBy,
+      direction: direction,
+      displayName: search,
     })
   } catch (error: unknown) {
     if (error instanceof ApiError) {
