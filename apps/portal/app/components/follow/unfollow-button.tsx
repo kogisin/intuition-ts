@@ -8,19 +8,15 @@ import { getChainEnvConfig } from '@lib/utils/environment'
 import { useNavigation } from '@remix-run/react'
 import { useSetAtom } from 'jotai'
 import { TransactionActionType, TransactionStateType } from 'types/transaction'
-import { SessionUser } from 'types/user'
 import { useAccount, useSwitchChain } from 'wagmi'
 
 interface UnfollowButtonProps {
-  user: SessionUser
   setMode: (mode: 'follow' | 'unfollow') => void
   handleAction: () => void
   handleClose: () => void
   dispatch: (action: TransactionActionType) => void
   state: TransactionStateType
   user_conviction: string
-  id?: string
-  claimOrIdentity?: string
   className?: string
 }
 
@@ -88,6 +84,7 @@ const UnfollowButton: React.FC<UnfollowButtonProps> = ({
   return (
     <Button
       variant={`${state.status === 'idle' ? 'destructiveOutline' : 'primary'}`}
+      size="lg"
       onClick={(e) => {
         e.preventDefault()
         if (
@@ -112,7 +109,7 @@ const UnfollowButton: React.FC<UnfollowButtonProps> = ({
         state.status === 'transaction-pending' ||
         state.status === 'awaiting'
       }
-      className={cn(`w-[159px] m-auto mt-10`, className)}
+      className={cn(`w-40`, className)}
     >
       {getButtonText()}
     </Button>
