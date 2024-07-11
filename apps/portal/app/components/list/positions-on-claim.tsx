@@ -1,10 +1,11 @@
 import { ClaimPositionRow } from '@0xintuition/1ui'
-import { ClaimPresenter, SortColumn } from '@0xintuition/api'
+import { PositionPresenter, SortColumn } from '@0xintuition/api'
 
 import { PaginationComponent } from '@components/pagination-component'
 import { useSearchAndSortParamsHandler } from '@lib/hooks/useSearchAndSortParams'
 import { formatBalance } from '@lib/utils/misc'
 import { useNavigate } from '@remix-run/react'
+import { formatUnits } from 'viem'
 
 import { SearchAndSort } from '../search-and-sort'
 import { SortOption } from '../sort-select'
@@ -16,11 +17,11 @@ interface PaginationType {
   limit: number
 }
 
-export function ActivePositionsOnClaims({
-  claims,
+export function PositionsOnClaim({
+  positions,
   pagination,
 }: {
-  claims: ClaimPresenter[]
+  positions: PositionPresenter[]
   pagination: PaginationType
 }) {
   const navigate = useNavigate()
@@ -42,30 +43,26 @@ export function ActivePositionsOnClaims({
         handleSearchChange={handleSearchChange}
       />
       <div className="mt-6 flex flex-col w-full">
-        {claims?.map((claim) => (
+        {positions?.map((position) => (
           <div
-            key={claim.claim_id}
+            key={position.id}
             className={`grow shrink basis-0 self-stretch p-6 bg-black first:rounded-t-xl last:rounded-b-xl border border-neutral-300/20 flex-col justify-start items-start gap-5 inline-flex`}
           >
             <ClaimPositionRow
-              variant="claim"
+              variant="user"
+              avatarSrc={position.user?.image ?? ''}
+              name={position.user?.display_name ?? ''}
+              walletAddress={position.user?.wallet ?? ''}
+              amount={+formatBalance(BigInt(position.assets), 18, 4)}
               position={
-                claim.user_assets_for > '0' ? 'claimFor' : 'claimAgainst'
+                position.direction === 'for' ? 'claimFor' : 'claimAgainst'
               }
-              claimsFor={claim.for_num_positions}
-              claimsAgainst={claim.against_num_positions}
-              amount={
-                +formatBalance(
-                  claim.user_assets_for > '0'
-                    ? claim.user_assets_for
-                    : claim.user_assets_against,
-                  18,
-                  5,
-                )
-              }
-              feesAccrued={0} // TODO: Update once BE adds deltas to the data output
+              feesAccrued={Number(
+                formatUnits(BigInt(+position.assets - +position.value), 18),
+              )}
+              updatedAt={position.updated_at}
               onClick={() => {
-                navigate(`/app/claim/${claim.claim_id}`)
+                navigate(`/app/profile/${position.user?.wallet}`)
               }}
               className="hover:cursor-pointer"
             />
