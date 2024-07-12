@@ -148,7 +148,7 @@ export default function FollowModal({
           logger('txHash', txHash)
           dispatch({
             type: 'TRANSACTION_COMPLETE',
-            txHash: txHash,
+            txHash,
             txReceipt: receipt!,
           })
           fetchReval.submit(formRef.current, {
@@ -291,8 +291,9 @@ export default function FollowModal({
   })
 
   useEffect(() => {
-    if (blockNumber && blockNumber % 5n === 0n)
+    if (blockNumber && blockNumber % 5n === 0n) {
       queryClient.invalidateQueries({ queryKey })
+    }
   }, [blockNumber, queryClient, queryKey])
 
   const walletBalance = formatUnits(balance?.value ?? 0n, 18)

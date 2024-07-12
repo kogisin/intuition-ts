@@ -32,8 +32,25 @@ module.exports = {
         'plugin:prettier/recommended',
       ],
       rules: {
+        eqeqeq: 'error',
+        yoda: 'error',
+        curly: 'error',
+        semi: ['error', 'never'],
+        'no-else-return': 'error',
         'react/prop-types': 'off',
         'prettier/prettier': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
+        'prefer-const': 'error',
+        'no-var': 'error',
+        'prefer-spread': 'error',
+        'prefer-template': 'error',
+        'object-shorthand': 'error',
+        'no-undef-init': 'error',
+        'no-lonely-if': 'error',
+        'no-unneeded-ternary': 'error',
+        'no-confusing-arrow': 'error',
+        'no-extra-semi': 'error',
+        'dot-notation': 'error',
       },
       settings: {
         react: {
@@ -65,10 +82,14 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'plugin:import/recommended',
         'plugin:import/typescript',
-        'plugin:prettier/recommended',
       ],
       rules: {
-        'prettier/prettier': 'error',
+        '@typescript-eslint/ban-ts-comment': [
+          'error',
+          {
+            'ts-ignore': 'allow-with-description',
+          },
+        ],
       },
     },
     {

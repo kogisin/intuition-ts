@@ -43,7 +43,9 @@ export function invariant(
 }
 
 export function getErrorMessage(error: unknown) {
-  if (typeof error === 'string') return error
+  if (typeof error === 'string') {
+    return error
+  }
   if (
     error &&
     typeof error === 'object' &&
@@ -69,12 +71,14 @@ export function sliceString(
   if (endNum === undefined) {
     endNum = startNum
   }
-  return id?.slice(0, startNum) + '...' + id?.slice(-endNum)
+  return `${id?.slice(0, startNum)}...${id?.slice(-endNum)}`
 }
 
 export function truncateString(str: string, maxLength: number): string {
-  if (str.length <= maxLength) return str
-  return str.slice(0, maxLength) + '...'
+  if (str.length <= maxLength) {
+    return str
+  }
+  return `${str.slice(0, maxLength)}...`
 }
 
 export async function copyToClipboard(text: string) {
@@ -92,7 +96,7 @@ export function getAuthHeaders(token?: string) {
   }
 
   if (token) {
-    headers['authorization'] = `Bearer ${token}`
+    headers.authorization = `Bearer ${token}`
   }
 
   if (!token) {
@@ -115,7 +119,9 @@ export function useUpdateQueryStringValueWithoutNavigation(
   React.useEffect(() => {
     const currentSearchParams = new URLSearchParams(window.location.search)
     const oldQuery = currentSearchParams.get(queryKey) ?? ''
-    if (queryValue === oldQuery) return
+    if (queryValue === oldQuery) {
+      return
+    }
 
     if (queryValue) {
       currentSearchParams.set(queryKey, queryValue)
@@ -142,7 +148,9 @@ export function combineHeaders(
 ) {
   const combined = new Headers()
   for (const header of headers) {
-    if (!header) continue
+    if (!header) {
+      continue
+    }
     for (const [key, value] of new Headers(header).entries()) {
       combined.append(key, value)
     }
@@ -155,7 +163,9 @@ export const formatBalance = (
   decimals = 18,
   precision?: number,
 ): string => {
-  if (!balance) return '0'
+  if (!balance) {
+    return '0'
+  }
 
   const n = Number(balance.toString()) / 10 ** decimals
   let result: string
@@ -211,9 +221,8 @@ export function calculateTotalPages(total: number, limit: number) {
 export const renderTooltipIcon = (icon: React.ReactNode | string) => {
   if (typeof icon === 'string') {
     return <img src={icon} className="h-4 w-4" alt="Icon" />
-  } else {
-    return icon
   }
+  return icon
 }
 
 // this replaces the node module `crypto` which is causing issues (known issue)
@@ -226,11 +235,10 @@ export function getRandomBytes(size: number) {
     window.crypto.getRandomValues
   ) {
     return window.crypto.getRandomValues(new Uint8Array(size))
-  } else {
-    throw new Error(
-      'Secure random bytes generation is not supported in this environment',
-    )
   }
+  throw new Error(
+    'Secure random bytes generation is not supported in this environment',
+  )
 }
 
 export function calculatePercentageGain(
@@ -238,7 +246,9 @@ export function calculatePercentageGain(
   totalValue: number,
 ): number {
   const originalValue = totalValue - delta
-  if (originalValue === 0) return 0
+  if (originalValue === 0) {
+    return 0
+  }
   return (delta / originalValue) * 100
 }
 
@@ -259,13 +269,13 @@ export const truncateNumber = (balance: string | number): string => {
     return 'Invalid number'
   }
   if (n >= 1000000000) {
-    return (n / 1000000000).toFixed(2).replace(/\.0$/, '') + 'B'
+    return `${(n / 1000000000).toFixed(2).replace(/\.0$/, '')}B`
   }
   if (n >= 1000000) {
-    return (n / 1000000).toFixed(2).replace(/\.0$/, '') + 'M'
+    return `${(n / 1000000).toFixed(2).replace(/\.0$/, '')}M`
   }
   if (n >= 1000) {
-    return (n / 1000).toFixed(2).replace(/\.0$/, '') + 'K'
+    return `${(n / 1000).toFixed(2).replace(/\.0$/, '')}K`
   }
   return n.toFixed(2)
 }
