@@ -21,12 +21,14 @@ export function List<T extends SortColumnType>({
   paginationLabel,
   options,
   paramPrefix,
+  enableSearch = true,
 }: {
   children: ReactNode
   pagination: PaginationType
   paginationLabel: string
   options: SortOption<T>[]
   paramPrefix?: string
+  enableSearch?: boolean
 }) {
   const { handleSortChange, handleSearchChange, onPageChange, onLimitChange } =
     useSearchAndSortParamsHandler<T>(paramPrefix)
@@ -34,11 +36,13 @@ export function List<T extends SortColumnType>({
   return (
     <>
       <div className="flex flex-col w-full gap-6">
-        <SearchAndSort
-          options={options}
-          handleSortChange={handleSortChange}
-          handleSearchChange={handleSearchChange}
-        />
+        {enableSearch && (
+          <SearchAndSort
+            options={options}
+            handleSortChange={handleSortChange}
+            handleSearchChange={handleSearchChange}
+          />
+        )}
         <div className="flex flex-col w-full">{children}</div>
         <PaginationComponent
           totalEntries={pagination.totalEntries ?? 0}

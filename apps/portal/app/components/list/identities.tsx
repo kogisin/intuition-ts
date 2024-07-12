@@ -29,6 +29,7 @@ export function IdentitiesList({
       paginationLabel="identities"
       options={options}
       paramPrefix={paramPrefix}
+      enableSearch={false}
     >
       {identities?.map((identity) => (
         <div
