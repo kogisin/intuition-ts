@@ -41,8 +41,8 @@ import { createClaimSchema } from '@lib/schemas/create-claim-schema'
 import {
   BLOCK_EXPLORER_URL,
   CREATE_RESOURCE_ROUTE,
-  GET_IDENTITIES_RESOURCE_ROUTE,
   MULTIVAULT_CONTRACT_ADDRESS,
+  SEARCH_IDENTITIES_RESOURCE_ROUTE,
 } from '@lib/utils/constants'
 import logger from '@lib/utils/logger'
 import { sliceString, truncateString } from '@lib/utils/misc'
@@ -154,22 +154,36 @@ function CreateClaimForm({
     submission: SubmissionResult<string[]> | null
   }
 
-  interface GetIdentitiesResponse {
-    identities: IdentityPresenter[]
+  const [searchQuery, setSearchQuery] = useState('')
+  const [isSubjectPopoverOpen, setIsSubjectPopoverOpen] = useState(true)
+  const [isPredicatePopoverOpen, setIsPredicatePopoverOpen] = useState(true)
+  const [isObjectPopoverOpen, setIsObjectPopoverOpen] = useState(true)
+
+  const handleInput = async (event: React.FormEvent<HTMLInputElement>) => {
+    event.preventDefault()
+    const value = (event.target as HTMLInputElement).value
+    setSearchQuery(value)
   }
 
-  const [identities, setIdentities] = useState<IdentityPresenter[]>([])
-
-  const identitiesFetcher = useLoaderFetcher<GetIdentitiesResponse>(
-    GET_IDENTITIES_RESOURCE_ROUTE,
-  )
+  const [identities, setIdentities] = React.useState<IdentityPresenter[]>([])
+  const identitiesFetcher = useFetcher<IdentityPresenter[]>()
 
   useEffect(() => {
-    const data = identitiesFetcher.data as GetIdentitiesResponse
-    if (data && data.identities) {
-      setIdentities(data.identities)
+    logger('identitiesFetcher.data changed:', identitiesFetcher.data)
+    if (identitiesFetcher.data) {
+      setIdentities(identitiesFetcher.data)
     }
   }, [identitiesFetcher.data])
+
+  useEffect(() => {
+    logger('searchQuery changed:', searchQuery)
+    if (searchQuery) {
+      const searchParam = `?search=${encodeURIComponent(searchQuery)}`
+      identitiesFetcher.load(
+        `${SEARCH_IDENTITIES_RESOURCE_ROUTE}${searchParam}`,
+      )
+    }
+  }, [searchQuery, SEARCH_IDENTITIES_RESOURCE_ROUTE])
 
   const { atomCost, tripleCost } = (feeFetcher.data as CreateLoaderData) ?? {
     atomEquityFeeRaw: BigInt(0),
@@ -370,8 +384,27 @@ function CreateClaimForm({
       ...prevState,
       [identityType]: identity,
     }))
-    logger('selected', identity)
+    setSearchQuery('')
+    setIdentities([])
+    if (identityType === 'subject') {
+      setIsSubjectPopoverOpen(false)
+    } else if (identityType === 'predicate') {
+      setIsPredicatePopoverOpen(false)
+    } else if (identityType === 'object') {
+      setIsObjectPopoverOpen(false)
+    }
   }
+
+  useEffect(() => {
+    if (
+      !isSubjectPopoverOpen &&
+      !isPredicatePopoverOpen &&
+      !isObjectPopoverOpen
+    ) {
+      setSearchQuery('')
+      setIdentities([])
+    }
+  }, [isSubjectPopoverOpen, isPredicatePopoverOpen, isObjectPopoverOpen])
 
   const isTransactionStarted = [
     'approve',
@@ -398,7 +431,10 @@ function CreateClaimForm({
         {!isTransactionStarted ? (
           <div className="flex flex-col items-center gap-14">
             <div className="flex items-center">
-              <Popover>
+              <Popover
+                open={isSubjectPopoverOpen}
+                onOpenChange={setIsSubjectPopoverOpen}
+              >
                 <PopoverTrigger asChild>
                   <div className="flex flex-col gap-2 items-start">
                     <Text variant="small" className="text-primary/60">
@@ -485,14 +521,20 @@ function CreateClaimForm({
                 <PopoverContent className="bg-transparent">
                   <IdentitySearchCombobox
                     identities={identities}
-                    onIdentityClick={(identity) =>
+                    onIdentitySelect={(identity) =>
                       handleIdentitySelection('subject', identity)
                     }
+                    onValueChange={setSearchQuery}
+                    onInput={handleInput}
+                    shouldFilter={false}
                   />
                 </PopoverContent>
               </Popover>
               <Divider />
-              <Popover>
+              <Popover
+                open={isPredicatePopoverOpen}
+                onOpenChange={setIsPredicatePopoverOpen}
+              >
                 <PopoverTrigger asChild>
                   <div className="flex flex-col gap-2 items-start">
                     <Text variant="small" className="text-primary/60">
@@ -588,14 +630,20 @@ function CreateClaimForm({
                 >
                   <IdentitySearchCombobox
                     identities={identities}
-                    onIdentityClick={(identity) =>
+                    onIdentitySelect={(identity) =>
                       handleIdentitySelection('predicate', identity)
                     }
+                    onValueChange={setSearchQuery}
+                    onInput={handleInput}
+                    shouldFilter={false}
                   />
                 </PopoverContent>
               </Popover>
               <Divider />
-              <Popover>
+              <Popover
+                open={isObjectPopoverOpen}
+                onOpenChange={setIsObjectPopoverOpen}
+              >
                 <PopoverTrigger asChild>
                   <div className="flex flex-col gap-2 items-start">
                     <Text variant="small" className="text-primary/60">
@@ -686,9 +734,12 @@ function CreateClaimForm({
                 >
                   <IdentitySearchCombobox
                     identities={identities}
-                    onIdentityClick={(identity) =>
+                    onIdentitySelect={(identity) =>
                       handleIdentitySelection('object', identity)
                     }
+                    onValueChange={setSearchQuery}
+                    onInput={handleInput}
+                    shouldFilter={false}
                   />
                 </PopoverContent>
               </Popover>
@@ -726,7 +777,7 @@ function CreateClaimForm({
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center min-h-96">
-            <TransactionStatusIndicator status={state.status} />
+            <TransactionStatusIndicator status={state.status} type="claim" />
             {state.status !== 'complete' ? (
               <TransactionStatusCard status={state.status} />
             ) : (
