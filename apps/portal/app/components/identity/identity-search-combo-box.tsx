@@ -21,6 +21,7 @@ import { IdentitySearchComboboxItem } from './identity-search-combo-box-item'
 export interface IdentitySearchComboboxProps
   extends React.HTMLAttributes<HTMLDivElement> {
   identities: IdentityPresenter[]
+  placeholder?: string
   onIdentityClick?: (identity: IdentityPresenter) => void
   onIdentitySelect?: (identity: IdentityPresenter) => void
   onCreateIdentityClick?: () => void
@@ -31,6 +32,7 @@ export interface IdentitySearchComboboxProps
 }
 
 const IdentitySearchCombobox = ({
+  placeholder = 'Search for an identity...',
   onIdentityClick = () => {},
   onIdentitySelect = () => {},
   onCreateIdentityClick,
@@ -45,7 +47,7 @@ const IdentitySearchCombobox = ({
     <div className="min-w-96" {...props}>
       <Command shouldFilter={shouldFilter}>
         <CommandInput
-          placeholder="Search for an identity..."
+          placeholder={placeholder}
           value={value}
           onValueChange={onValueChange}
           onInput={onInput}
