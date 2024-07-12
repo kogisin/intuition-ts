@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react'
+
+import { Tabs, TabsList, TabsTrigger, Text } from '@0xintuition/1ui'
 import {
   OpenAPI,
   PositionPresenter,
@@ -10,6 +13,7 @@ import { useLiveLoader } from '@lib/hooks/useLiveLoader'
 import { fetchClaim, fetchPositionsOnClaim } from '@lib/utils/fetches'
 import { calculateTotalPages, getAuthHeaders } from '@lib/utils/misc'
 import { json, LoaderFunctionArgs } from '@remix-run/node'
+import { useSearchParams } from '@remix-run/react'
 import { getPrivyAccessToken } from '@server/privy'
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
@@ -70,12 +74,63 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 }
 
 export default function ClaimOverview() {
-  const { positions, pagination } = useLiveLoader<typeof loader>([
+  const { claim, positions, pagination } = useLiveLoader<typeof loader>([
     'attest',
     'create',
   ])
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [positionDirection, setPositionDirection] = useState<string>('all')
+
+  useEffect(() => {
+    setSearchParams({
+      ...Object.fromEntries(searchParams),
+      positionDirection: positionDirection,
+      page: '1',
+    })
+  }, [positionDirection])
+
   return (
     <div className="flex-col justify-start items-start flex w-full">
+      <div className="self-stretch justify-between items-center inline-flex mb-6">
+        <Text
+          variant="headline"
+          weight="medium"
+          className="theme-secondary-foreground w-full"
+        >
+          Positions on this Claim
+        </Text>
+      </div>
+      <Tabs defaultValue="">
+        <TabsList>
+          <TabsTrigger
+            value=""
+            label="All"
+            totalCount={claim?.num_positions}
+            onClick={(e) => {
+              e.preventDefault()
+              setPositionDirection('all')
+            }}
+          />
+          <TabsTrigger
+            value="for"
+            label="For"
+            totalCount={claim?.for_num_positions}
+            onClick={(e) => {
+              e.preventDefault()
+              setPositionDirection('for')
+            }}
+          />
+          <TabsTrigger
+            value="against"
+            label="Against"
+            totalCount={claim?.against_num_positions}
+            onClick={(e) => {
+              e.preventDefault()
+              setPositionDirection('against')
+            }}
+          />
+        </TabsList>
+      </Tabs>
       <PositionsOnClaim positions={positions} pagination={pagination} />
     </div>
   )

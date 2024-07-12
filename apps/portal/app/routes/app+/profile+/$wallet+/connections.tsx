@@ -15,8 +15,7 @@ import {
   SortDirection,
 } from '@0xintuition/api'
 
-import { FollowersOnIdentity } from '@components/list/identity-followers'
-import { FollowingOnIdentity } from '@components/list/identity-following'
+import { FollowList } from '@components/list/follow'
 import {
   ConnectionsHeader,
   ConnectionsHeaderVariants,
@@ -187,18 +186,19 @@ export default function ProfileConnections() {
     )
   }
   return (
-    <div className="flex flex-col items-center w-full mt-10">
-      <Text
-        variant="headline"
-        weight="medium"
-        className="theme-secondary-foreground w-full mb-3"
-      >
-        Connections
-      </Text>
-
+    <div className="flex-col justify-start items-start flex w-full">
+      <div className="self-stretch justify-between items-center inline-flex mb-6">
+        <Text
+          variant="headline"
+          weight="medium"
+          className="theme-secondary-foreground w-full"
+        >
+          Connections
+        </Text>
+      </div>
       <div className="w-full">
         <Tabs defaultValue={ConnectionsHeaderVariants.followers}>
-          <TabsList>
+          <TabsList className="mb-4">
             <TabsTrigger
               value={ConnectionsHeaderVariants.followers}
               label="Followers"
@@ -215,9 +215,10 @@ export default function ProfileConnections() {
             claim={followClaim}
             variant={ConnectionsHeaderVariants.followers}
           >
-            <FollowersOnIdentity
-              followers={followers}
+            <FollowList
+              identities={followers}
               pagination={followersPagination}
+              paramPrefix="followers"
             />
           </TabContent>
           <TabContent
@@ -225,9 +226,10 @@ export default function ProfileConnections() {
             claim={followClaim}
             variant={ConnectionsHeaderVariants.following}
           >
-            <FollowingOnIdentity
-              following={following}
+            <FollowList
+              identities={following}
               pagination={followingPagination}
+              paramPrefix="following"
             />
           </TabContent>
         </Tabs>
