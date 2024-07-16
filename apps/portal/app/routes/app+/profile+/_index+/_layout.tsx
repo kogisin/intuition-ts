@@ -11,11 +11,9 @@ import {
   StakeCard,
 } from '@0xintuition/1ui'
 import {
-  ApiError,
   IdentityPresenter,
   OpenAPI,
   UserPresenter,
-  UsersService,
   UserTotalsPresenter,
 } from '@0xintuition/api'
 
@@ -31,7 +29,11 @@ import {
   stakeModalAtom,
 } from '@lib/state/store'
 import { userProfileRouteOptions } from '@lib/utils/constants'
-import { fetchIdentity, fetchUserTotals } from '@lib/utils/fetches'
+import {
+  fetchIdentity,
+  fetchUserTotals,
+  getUserByWallet,
+} from '@lib/utils/fetches'
 import logger from '@lib/utils/logger'
 import {
   calculatePercentageOfTvl,
@@ -73,22 +75,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
     return redirect('/create')
   }
 
-  let userObject
-  try {
-    userObject = await UsersService.getUserByWallet({
-      wallet: userWallet,
-    })
-  } catch (error: unknown) {
-    if (error instanceof ApiError) {
-      userObject = undefined
-      logger(`${error.name} - ${error.status}: ${error.message} ${error.url}`)
-    } else {
-      throw error
-    }
-  }
+  const userObject = await getUserByWallet(userWallet)
 
   if (!userObject) {
-    return logger('No user found in DB')
+    logger('No user found in DB')
+    return
   }
 
   const userTotals = await fetchUserTotals(userObject.id)
@@ -119,21 +110,15 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function Profile() {
-  const {
-    privyUser,
-    userWallet,
-    userObject,
-    userIdentity,
-    userTotals,
-    vaultDetails,
-  } = useLiveLoader<{
-    privyUser: User
-    userWallet: string
-    userIdentity: IdentityPresenter
-    userObject: UserPresenter
-    userTotals: UserTotalsPresenter
-    vaultDetails: VaultDetailsType
-  }>(['attest', 'create'])
+  const { privyUser, userWallet, userIdentity, userTotals, vaultDetails } =
+    useLiveLoader<{
+      privyUser: User
+      userWallet: string
+      userIdentity: IdentityPresenter
+      userObject: UserPresenter
+      userTotals: UserTotalsPresenter
+      vaultDetails: VaultDetailsType
+    }>(['attest', 'create'])
 
   const { user_assets, assets_sum } = vaultDetails ? vaultDetails : userIdentity
 
@@ -174,7 +159,7 @@ export default function Profile() {
     return <Outlet />
   }
 
-  if (!userIdentity && !userObject) {
+  if (!userIdentity.user) {
     return null
   }
 
@@ -185,17 +170,18 @@ export default function Profile() {
           <div className="w-[300px] h-[230px] flex-col justify-start items-start gap-5 inline-flex">
             <ProfileCard
               variant="user"
-              avatarSrc={userObject.image ?? imgSrc}
-              name={userObject.display_name ?? ''}
+              avatarSrc={userIdentity.user.image ?? imgSrc}
+              name={userIdentity.user.display_name ?? ''}
               walletAddress={
-                userObject.ens_name ?? sliceString(userObject.wallet, 6, 4)
+                userIdentity.user.ens_name ??
+                sliceString(userIdentity.user.wallet, 6, 4)
               }
               stats={{
                 numberOfFollowers: userTotals.follower_count,
                 numberOfFollowing: userTotals.followed_count,
                 points: userTotals.user_points,
               }}
-              bio={userObject.description ?? ''}
+              bio={userIdentity.user.description ?? ''}
             >
               <Button
                 variant="secondary"
@@ -264,7 +250,7 @@ export default function Profile() {
             />
           </div>
           <EditProfileModal
-            userObject={userObject}
+            userObject={userIdentity.user}
             open={editProfileModalActive}
             onClose={() => setEditProfileModalActive(false)}
           />
