@@ -1,15 +1,21 @@
 import * as React from 'react'
 
-import { IdentityInput, Separator, Text } from '@0xintuition/1ui'
+import { IdentityPresenter } from '@0xintuition/api'
 
+import { ExploreSearchClaimInput } from './ExploreSearchClaimInput'
 import { ExploreSearchInput } from './ExploreSearchInput'
 
 export interface ExploreSearchProps
   extends React.HTMLAttributes<HTMLDivElement> {
   variant: 'user' | 'identity' | 'claim' | 'tag'
+  identities?: IdentityPresenter[]
 }
 
-const ExploreSearch = ({ variant, ...props }: ExploreSearchProps) => {
+const ExploreSearch: React.FC<ExploreSearchProps> = ({
+  variant,
+  identities,
+  ...props
+}: ExploreSearchProps) => {
   return (
     <div className="min-w-96 flex flex-col items-center" {...props}>
       {['user', 'identity', 'tag'].includes(variant) && (
@@ -18,42 +24,7 @@ const ExploreSearch = ({ variant, ...props }: ExploreSearchProps) => {
       )}
 
       {variant === 'claim' && (
-        <>
-          <Text
-            variant="bodyLarge"
-            weight="regular"
-            className="mb-2.5 text-secondary-foreground"
-          >
-            Select any combination of identities to find matching claims
-          </Text>
-          <Text
-            variant="caption"
-            weight="regular"
-            className="mb-2.5 text-secondary-foreground"
-          >
-            Need help? Learn more about claims
-          </Text>
-          <Separator className="mb-7" />
-          {/* TODO: Implement search in ENG-2575 */}
-          <IdentityInput
-            subject={{
-              placeholder: 'Select an identity',
-              selectedValue: {},
-              onClick: () => {},
-            }}
-            predicate={{
-              placeholder: 'Select an identity',
-              selectedValue: {},
-              onClick: () => {},
-            }}
-            object={{
-              placeholder: 'Select an identity',
-              selectedValue: {},
-              onClick: () => {},
-            }}
-            showLabels
-          />
-        </>
+        <ExploreSearchClaimInput identities={identities} />
       )}
     </div>
   )
