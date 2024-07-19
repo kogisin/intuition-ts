@@ -1,14 +1,15 @@
 import {
   ClaimPresenter,
   ClaimSortColumn,
+  ClaimsService,
+  IdentitiesService,
   SortDirection,
 } from '@0xintuition/api'
 
 import { ExploreSearch } from '@components/explore/ExploreSearch'
 import { ClaimsList } from '@components/list/claims'
 import { NO_WALLET_ERROR } from '@lib/utils/errors'
-import { fetchClaims, fetchIdentities } from '@lib/utils/fetches'
-import { calculateTotalPages, invariant } from '@lib/utils/misc'
+import { calculateTotalPages, fetchWrapper, invariant } from '@lib/utils/misc'
 import { json, LoaderFunctionArgs } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 import { requireUserWallet } from '@server/auth'
@@ -29,15 +30,26 @@ export async function loader({ request }: LoaderFunctionArgs) {
     : 1
   const limit = searchParams.get('limit') ?? '10'
 
-  const claims = await fetchClaims(
-    page,
-    Number(limit),
-    sortBy as ClaimSortColumn,
-    direction as SortDirection,
-    search,
-  )
+  const claims = await fetchWrapper({
+    method: ClaimsService.searchClaims,
+    args: {
+      page,
+      limit: Number(limit),
+      sortBy: sortBy as ClaimSortColumn,
+      direction: direction as SortDirection,
+      displayName: search,
+    },
+  })
 
-  const identities = await fetchIdentities()
+  const identities = await fetchWrapper({
+    method: IdentitiesService.searchIdentity,
+    args: {
+      page: 1,
+      limit: 10,
+      sortBy: 'AssetsSum',
+      direction: 'desc',
+    },
+  })
 
   const claimsTotalPages = calculateTotalPages(
     claims?.total ?? 0,

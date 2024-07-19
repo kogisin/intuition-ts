@@ -10,7 +10,10 @@ import {
 } from '@0xintuition/1ui'
 import {
   ClaimPresenter,
+  ClaimsService,
+  IdentitiesService,
   IdentityPresenter,
+  UsersService,
   UserTotalsPresenter,
 } from '@0xintuition/api'
 
@@ -21,10 +24,10 @@ import { useLiveLoader } from '@lib/hooks/useLiveLoader'
 import { followModalAtom, stakeModalAtom } from '@lib/state/store'
 import { userIdentityRouteOptions } from '@lib/utils/constants'
 import { NO_WALLET_ERROR } from '@lib/utils/errors'
-import { fetchClaim, fetchIdentity, fetchUserTotals } from '@lib/utils/fetches'
 import logger from '@lib/utils/logger'
 import {
   calculatePercentageOfTvl,
+  fetchWrapper,
   formatBalance,
   invariant,
   sliceString,
@@ -51,7 +54,12 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     throw redirect('/app/profile')
   }
 
-  const userIdentity = await fetchIdentity(wallet)
+  const userIdentity = await fetchWrapper({
+    method: IdentitiesService.getIdentityById,
+    args: {
+      id: wallet,
+    },
+  })
 
   if (!userIdentity) {
     return logger('No user identity found')
@@ -62,7 +70,12 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     return
   }
 
-  const userTotals = await fetchUserTotals(userIdentity.creator.id)
+  const userTotals = await fetchWrapper({
+    method: UsersService.getUserTotals,
+    args: {
+      id: userIdentity.creator.id,
+    },
+  })
 
   if (!userTotals) {
     return logger('No user totals found')
@@ -87,7 +100,12 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   let followVaultDetails: VaultDetailsType | null = null
 
   if (userIdentity.follow_claim_id) {
-    followClaim = await fetchClaim(userIdentity.follow_claim_id)
+    followClaim = await fetchWrapper({
+      method: ClaimsService.getClaimById,
+      args: {
+        id: userIdentity.follow_claim_id,
+      },
+    })
   }
 
   if (userIdentity.user && followClaim && followClaim.vault_id) {

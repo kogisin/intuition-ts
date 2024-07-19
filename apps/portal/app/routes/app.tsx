@@ -1,9 +1,9 @@
-import { UserPresenter } from '@0xintuition/api'
+import { UserPresenter, UsersService } from '@0xintuition/api'
 
 import SidebarNav from '@components/sidebar-nav'
 import { chainalysisOracleAbi } from '@lib/abis/chainalysisOracle'
-import { getUserByWallet } from '@lib/utils/fetches'
 import logger from '@lib/utils/logger'
+import { fetchWrapper } from '@lib/utils/misc'
 import { json, LoaderFunctionArgs, redirect } from '@remix-run/node'
 import { Outlet, useLoaderData } from '@remix-run/react'
 import { requireUserWallet } from '@server/auth'
@@ -29,7 +29,12 @@ export async function loader({ request }: LoaderFunctionArgs) {
     return redirect('/sanctioned')
   }
 
-  const userObject = await getUserByWallet(wallet)
+  const userObject = await fetchWrapper({
+    method: UsersService.getUserByWalletPublic,
+    args: {
+      wallet,
+    },
+  })
 
   return json({
     userObject,
