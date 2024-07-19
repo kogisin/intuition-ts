@@ -12,7 +12,6 @@ import {
 } from '@0xintuition/1ui'
 import {
   IdentityPresenter,
-  OpenAPI,
   UserPresenter,
   UserTotalsPresenter,
 } from '@0xintuition/api'
@@ -29,6 +28,7 @@ import {
   stakeModalAtom,
 } from '@lib/state/store'
 import { userProfileRouteOptions } from '@lib/utils/constants'
+import { NO_WALLET_ERROR } from '@lib/utils/errors'
 import {
   fetchIdentity,
   fetchUserTotals,
@@ -38,7 +38,6 @@ import logger from '@lib/utils/logger'
 import {
   calculatePercentageOfTvl,
   formatBalance,
-  getAuthHeaders,
   invariant,
   sliceString,
 } from '@lib/utils/misc'
@@ -50,9 +49,8 @@ import {
   useNavigate,
   useRevalidator,
 } from '@remix-run/react'
-import { requireUser } from '@server/auth'
+import { requireUser, requireUserWallet } from '@server/auth'
 import { getVaultDetails } from '@server/multivault'
-import { getPrivyAccessToken } from '@server/privy'
 import * as blockies from 'blockies-ts'
 import { useAtom } from 'jotai'
 import { VaultDetailsType } from 'types/vault'
@@ -63,11 +61,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
   invariant(user.wallet?.address, 'User wallet not found')
   const userWallet = user.wallet?.address
 
-  OpenAPI.BASE = 'https://dev.api.intuition.systems'
-  const accessToken = getPrivyAccessToken(request)
-  logger('accessToken', accessToken)
-  const headers = getAuthHeaders(accessToken !== null ? accessToken : '')
-  OpenAPI.HEADERS = headers as Record<string, string>
+  const wallet = await requireUserWallet(request)
+  invariant(wallet, NO_WALLET_ERROR)
 
   const userIdentity = await fetchIdentity(userWallet)
   logger('userIdentity', userIdentity)

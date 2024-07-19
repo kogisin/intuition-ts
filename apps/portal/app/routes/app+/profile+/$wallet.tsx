@@ -11,7 +11,6 @@ import {
 import {
   ClaimPresenter,
   IdentityPresenter,
-  OpenAPI,
   UserTotalsPresenter,
 } from '@0xintuition/api'
 
@@ -21,38 +20,31 @@ import StakeModal from '@components/stake/stake-modal'
 import { useLiveLoader } from '@lib/hooks/useLiveLoader'
 import { followModalAtom, stakeModalAtom } from '@lib/state/store'
 import { userIdentityRouteOptions } from '@lib/utils/constants'
+import { NO_WALLET_ERROR } from '@lib/utils/errors'
 import { fetchClaim, fetchIdentity, fetchUserTotals } from '@lib/utils/fetches'
 import logger from '@lib/utils/logger'
 import {
   calculatePercentageOfTvl,
   formatBalance,
-  getAuthHeaders,
+  invariant,
   sliceString,
 } from '@lib/utils/misc'
 import { json, LoaderFunctionArgs, redirect } from '@remix-run/node'
 import { Outlet, useNavigate } from '@remix-run/react'
 import { requireUserWallet } from '@server/auth'
 import { getVaultDetails } from '@server/multivault'
-import { getPrivyAccessToken } from '@server/privy'
 import * as blockies from 'blockies-ts'
 import { useAtom } from 'jotai'
 import { VaultDetailsType } from 'types/vault'
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const userWallet = await requireUserWallet(request)
-  OpenAPI.BASE = 'https://dev.api.intuition.systems'
-  const accessToken = getPrivyAccessToken(request)
-  const headers = getAuthHeaders(accessToken !== null ? accessToken : '')
-  OpenAPI.HEADERS = headers as Record<string, string>
-
-  if (!userWallet) {
-    return logger('No user found in session')
-  }
+  invariant(userWallet, NO_WALLET_ERROR)
 
   const wallet = params.wallet
 
   if (!wallet) {
-    throw new Error('Wallet is undefined.')
+    throw new Error('Wallet is undefined in params')
   }
 
   if (wallet === userWallet) {

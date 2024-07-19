@@ -1,7 +1,6 @@
 import {
   ClaimPresenter,
   ClaimSortColumn,
-  OpenAPI,
   PositionPresenter,
   PositionSortColumn,
   SortDirection,
@@ -11,28 +10,22 @@ import { ClaimsList as ClaimsAboutIdentity } from '@components/list/claims'
 import { PositionsOnIdentity } from '@components/list/positions-on-identity'
 import DataAboutHeader from '@components/profile/data-about-header'
 import { useLiveLoader } from '@lib/hooks/useLiveLoader'
+import { NO_WALLET_ERROR } from '@lib/utils/errors'
 import {
   fetchClaimsAboutIdentity,
   fetchClaimsSummary,
   fetchIdentity,
   fetchPositionsOnIdentity,
 } from '@lib/utils/fetches'
-import {
-  calculateTotalPages,
-  formatBalance,
-  getAuthHeaders,
-} from '@lib/utils/misc'
+import { calculateTotalPages, formatBalance, invariant } from '@lib/utils/misc'
 import { json, LoaderFunctionArgs, redirect } from '@remix-run/node'
-import { getPrivyAccessToken } from '@server/privy'
+import { requireUserWallet } from '@server/auth'
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
-  OpenAPI.BASE = 'https://dev.api.intuition.systems'
-  const accessToken = getPrivyAccessToken(request)
-  const headers = getAuthHeaders(accessToken !== null ? accessToken : '')
-  OpenAPI.HEADERS = headers as Record<string, string>
+  const userWallet = await requireUserWallet(request)
+  invariant(userWallet, NO_WALLET_ERROR)
 
   const wallet = params.wallet
-
   if (!wallet) {
     throw new Error('Wallet is undefined.')
   }

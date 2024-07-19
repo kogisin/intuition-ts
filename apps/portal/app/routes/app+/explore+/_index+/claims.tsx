@@ -1,23 +1,21 @@
 import {
   ClaimPresenter,
   ClaimSortColumn,
-  OpenAPI,
   SortDirection,
 } from '@0xintuition/api'
 
 import { ExploreSearch } from '@components/explore/ExploreSearch'
 import { ClaimsList } from '@components/list/claims'
+import { NO_WALLET_ERROR } from '@lib/utils/errors'
 import { fetchClaims, fetchIdentities } from '@lib/utils/fetches'
-import { calculateTotalPages, getAuthHeaders } from '@lib/utils/misc'
+import { calculateTotalPages, invariant } from '@lib/utils/misc'
 import { json, LoaderFunctionArgs } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
-import { getPrivyAccessToken } from '@server/privy'
+import { requireUserWallet } from '@server/auth'
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  OpenAPI.BASE = 'https://dev.api.intuition.systems'
-  const accessToken = getPrivyAccessToken(request)
-  const headers = getAuthHeaders(accessToken !== null ? accessToken : '')
-  OpenAPI.HEADERS = headers as Record<string, string>
+  const wallet = await requireUserWallet(request)
+  invariant(wallet, NO_WALLET_ERROR)
 
   const url = new URL(request.url)
   const searchParams = new URLSearchParams(url.search)

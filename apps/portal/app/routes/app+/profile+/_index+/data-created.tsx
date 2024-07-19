@@ -11,7 +11,6 @@ import {
   ClaimPresenter,
   ClaimSortColumn,
   IdentityPresenter,
-  OpenAPI,
   SortColumn,
   SortDirection,
   UserTotalsPresenter,
@@ -27,6 +26,7 @@ import {
   DataCreatedHeaderVariantType,
 } from '@components/profile/data-created-header'
 import { useLiveLoader } from '@lib/hooks/useLiveLoader'
+import { NO_WALLET_ERROR } from '@lib/utils/errors'
 import {
   fetchClaimsCreatedByUser,
   fetchClaimsSummary,
@@ -39,25 +39,13 @@ import {
   fetchUserTotals,
 } from '@lib/utils/fetches'
 import logger from '@lib/utils/logger'
-import {
-  calculateTotalPages,
-  formatBalance,
-  getAuthHeaders,
-} from '@lib/utils/misc'
+import { calculateTotalPages, formatBalance, invariant } from '@lib/utils/misc'
 import { json, LoaderFunctionArgs } from '@remix-run/node'
 import { requireUserWallet } from '@server/auth'
-import { getPrivyAccessToken } from '@server/privy'
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const userWallet = await requireUserWallet(request)
-  OpenAPI.BASE = 'https://dev.api.intuition.systems'
-  const accessToken = getPrivyAccessToken(request)
-  const headers = getAuthHeaders(accessToken !== null ? accessToken : '')
-  OpenAPI.HEADERS = headers as Record<string, string>
-
-  if (!userWallet) {
-    return logger('No user found in session')
-  }
+  invariant(userWallet, NO_WALLET_ERROR)
 
   const userIdentity = await fetchIdentity(userWallet)
 

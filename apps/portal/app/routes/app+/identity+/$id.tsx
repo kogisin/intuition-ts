@@ -11,27 +11,25 @@ import {
   TagsContent,
   TagWithValue,
 } from '@0xintuition/1ui'
-import { OpenAPI } from '@0xintuition/api'
 
 import { NestedLayout } from '@components/nested-layout'
 import StakeModal from '@components/stake/stake-modal'
 import TagsModal from '@components/tags/tags-modal'
 import { stakeModalAtom, tagsModalAtom } from '@lib/state/store'
 import { identityRouteOptions } from '@lib/utils/constants'
+import { NO_WALLET_ERROR } from '@lib/utils/errors'
 import { fetchIdentity } from '@lib/utils/fetches'
 import logger from '@lib/utils/logger'
 import {
   calculatePercentageOfTvl,
   formatBalance,
-  getAuthHeaders,
   invariant,
   sliceString,
 } from '@lib/utils/misc'
 import { json, LoaderFunctionArgs } from '@remix-run/node'
 import { Outlet, useLoaderData, useNavigate } from '@remix-run/react'
-import { requireUser } from '@server/auth'
+import { requireUser, requireUserWallet } from '@server/auth'
 import { getVaultDetails } from '@server/multivault'
-import { getPrivyAccessToken } from '@server/privy'
 import { useAtom } from 'jotai'
 import { ExtendedIdentityPresenter } from 'types/identity'
 import { VaultDetailsType } from 'types/vault'
@@ -40,15 +38,9 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   const user = await requireUser(request)
   invariant(user, 'User not found')
   invariant(user.wallet?.address, 'User wallet not found')
-  const userWallet = user.wallet?.address
-  OpenAPI.BASE = 'https://dev.api.intuition.systems'
-  const accessToken = getPrivyAccessToken(request)
-  const headers = getAuthHeaders(accessToken !== null ? accessToken : '')
-  OpenAPI.HEADERS = headers as Record<string, string>
 
-  if (!userWallet) {
-    return logger('No user found in session')
-  }
+  const userWallet = await requireUserWallet(request)
+  invariant(userWallet, NO_WALLET_ERROR)
 
   if (!params.id) {
     return
