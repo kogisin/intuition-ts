@@ -59,9 +59,7 @@ interface IdentityFormProps {
   onSuccess?: () => void
   onClose: () => void
 }
-export function IdentityForm({ onSuccess, onClose }: IdentityFormProps) {
-  logger(onClose, onSuccess)
-
+export function IdentityForm({ onClose }: IdentityFormProps) {
   const { state, dispatch } = useTransactionState<
     IdentityTransactionStateType,
     IdentityTransactionActionType
@@ -620,7 +618,9 @@ function CreateIdentityForm({
                   type="button"
                   variant="primary"
                   onClick={() => {
-                    navigate(`/app/identity/${transactionResponseData.id}`)
+                    navigate(
+                      `/app/identity/${transactionResponseData.identity_id}`,
+                    )
                     onClose()
                   }}
                 >
