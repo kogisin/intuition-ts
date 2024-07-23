@@ -61,7 +61,11 @@ describe('ClaimStatus', () => {
                   </svg>
                 </span>
               </span>
-              0xintuition
+              <p
+                class="text-primary text-base font-normal"
+              >
+                0xintuition
+              </p>
             </button>
             <div
               class="shrink-0 bg-border/20 h-[1px] w-4 group-hover:bg-primary"
@@ -86,7 +90,11 @@ describe('ClaimStatus', () => {
                   </svg>
                 </span>
               </span>
-              is really
+              <p
+                class="text-primary text-base font-normal"
+              >
+                is really
+              </p>
             </button>
             <div
               class="shrink-0 bg-border/20 h-[1px] w-4 group-hover:bg-primary"
@@ -111,7 +119,11 @@ describe('ClaimStatus', () => {
                   </svg>
                 </span>
               </span>
-              cool
+              <p
+                class="text-primary text-base font-normal"
+              >
+                cool
+              </p>
             </button>
           </div>
         </div>
