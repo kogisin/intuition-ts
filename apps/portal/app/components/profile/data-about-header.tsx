@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 
-import { IdentityTag, Text } from '@0xintuition/1ui'
+import { IdentityTag, Text, Trunctacular } from '@0xintuition/1ui'
 import { IdentityPresenter } from '@0xintuition/api'
 
 export const DataAboutHeaderVariants = {
@@ -73,9 +73,12 @@ const DataAboutHeader: React.FC<DataAboutHeaderProps> = ({
             imgSrc={userIdentity?.user?.image ?? userIdentity?.image}
             variant={userIdentity?.user ? 'user' : 'non-user'}
           >
-            <span className="min-w-20 text-ellipsis">
-              {userIdentity?.user?.display_name ?? userIdentity?.display_name}
-            </span>
+            <Trunctacular
+              value={
+                userIdentity?.user?.display_name ?? userIdentity?.display_name
+              }
+              maxStringLength={40}
+            />
           </IdentityTag>
         </div>
         <div className="flex justify-between w-full">
