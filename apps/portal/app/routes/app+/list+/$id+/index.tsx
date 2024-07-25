@@ -6,7 +6,6 @@ import { ClaimPresenter, ClaimsService } from '@0xintuition/api'
 import { IdentitiesList } from '@components/list/identities'
 import { DataHeaderSkeleton, PaginatedListSkeleton } from '@components/skeleton'
 import { getListIdentities, getListIdentitiesCount } from '@lib/services/lists'
-import logger from '@lib/utils/logger'
 import { DataErrorDisplay, fetchWrapper, invariant } from '@lib/utils/misc'
 import { defer, LoaderFunctionArgs } from '@remix-run/node'
 import { Await, useLoaderData, useRouteLoaderData } from '@remix-run/react'
@@ -45,8 +44,6 @@ export default function ListOverview() {
   const { claim } =
     useRouteLoaderData<{ claim: ClaimPresenter }>('routes/app+/list+/$id') ?? {}
   invariant(claim, NO_CLAIM_ERROR)
-  logger('claim on index from routeloader', claim)
-  logger('listIdentities', listIdentities)
 
   return (
     <div className="flex-col justify-start items-start flex w-full gap-6">
