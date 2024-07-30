@@ -49,6 +49,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
       },
     })
   ).data
+  logger('userId', userId)
 
   const userQuests = (
     await fetchWrapper({

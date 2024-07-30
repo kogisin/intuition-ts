@@ -46,6 +46,7 @@ export interface TagWithValueProps extends TagProps {
   label?: string
   value?: string | number
   onRemove?: () => void
+  onStake?: () => void
   className?: string | undefined
 }
 
@@ -53,14 +54,12 @@ const TagWithValue = ({
   label,
   value,
   onRemove,
+  onStake,
   className,
   ...props
 }: TagWithValueProps) => {
-  return (
-    <Tag
-      {...props}
-      className={cn('flex items-center cursor-default pl-2', className)}
-    >
+  const TagContent = (
+    <>
       {label}
       {value && (
         <>
@@ -70,13 +69,31 @@ const TagWithValue = ({
       )}
       {onRemove && (
         <button
-          onClick={onRemove}
+          onClick={(e) => {
+            e.stopPropagation()
+            onRemove()
+          }}
           className="ml-2 cursor-pointer"
           aria-label="Remove tag"
         >
           <Icon name="cross-large" className="h-3 w-3" />
         </button>
       )}
+    </>
+  )
+
+  return onStake ? (
+    <button onClick={onStake} className={cn('cursor-pointer', className)}>
+      <Tag {...props} className={cn('flex items-center pl-2', className)}>
+        {TagContent}
+      </Tag>
+    </button>
+  ) : (
+    <Tag
+      {...props}
+      className={cn('flex items-center cursor-default pl-2', className)}
+    >
+      {TagContent}
     </Tag>
   )
 }
@@ -87,7 +104,7 @@ export interface TagsButtonProps
 const TagsButton = ({ ...props }: TagsButtonProps) => {
   return (
     <Button variant="secondary" {...props}>
-      Add tags
+      Add new tags
     </Button>
   )
 }
