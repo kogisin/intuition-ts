@@ -2,16 +2,16 @@ import { Dialog, DialogContent } from '@0xintuition/1ui'
 
 import { ClaimForm } from './create-claim-form'
 
-// import { ClaimForm } from './create-identity-form'
-
 export interface CreateClaimModalProps {
   open?: boolean
+  wallet: string
   onClose: () => void
   onSuccess?: () => void
 }
 
 export default function CreateClaimModal({
   open,
+  wallet,
   onClose,
   onSuccess,
 }: CreateClaimModalProps) {
@@ -22,8 +22,8 @@ export default function CreateClaimModal({
         onClose?.()
       }}
     >
-      <DialogContent className="bg-neutral-950 rounded-xl shadow border border-solid border-black/10">
-        <ClaimForm onClose={onClose} onSuccess={onSuccess} />
+      <DialogContent className="flex flex-col min-w-[640px] h-[420px]">
+        <ClaimForm onClose={onClose} onSuccess={onSuccess} wallet={wallet} />
       </DialogContent>
     </Dialog>
   )
