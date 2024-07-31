@@ -37,7 +37,6 @@ import {
   fetchWrapper,
   formatBalance,
   invariant,
-  sliceString,
 } from '@lib/utils/misc'
 import { User } from '@privy-io/react-auth'
 import { json, LoaderFunctionArgs, redirect } from '@remix-run/node'
@@ -193,9 +192,7 @@ export default function Profile() {
           variant="user"
           avatarSrc={userObject.image ?? ''}
           name={userObject.display_name ?? ''}
-          walletAddress={
-            userObject.ens_name ?? sliceString(userObject.wallet, 6, 4)
-          }
+          walletAddress={userObject.ens_name ?? userObject.wallet}
           stats={{
             numberOfFollowers: userTotals.follower_count,
             numberOfFollowing: userTotals.followed_count,
