@@ -26,6 +26,7 @@ import {
 import { fetchWrapper } from '@server/api'
 import { requireUserWallet } from '@server/auth'
 import { NO_CLAIM_ERROR, NO_PARAM_ID_ERROR, NO_WALLET_ERROR } from 'consts'
+import { IdentityListType } from 'types'
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const id = params.id
@@ -102,7 +103,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
           objectId: claim.object.id,
           creator: paramWallet,
         })
-      : null,
+      : [],
     additionalUserObject,
   })
 }
@@ -116,6 +117,7 @@ export default function ListOverview() {
     userObject,
     additionalUserObject,
   } = useLoaderData<typeof loader>()
+
   const { claim } =
     useRouteLoaderData<{ claim: ClaimPresenter }>('routes/app+/list+/$id') ?? {}
   invariant(claim, NO_CLAIM_ERROR)
@@ -186,140 +188,141 @@ export default function ListOverview() {
           </Await>
         </Suspense>
         <Tabs defaultValue={defaultTab}>
-          <Suspense fallback={<PaginatedListSkeleton />}>
-            <Await
-              resolve={Promise.all([
-                globalListIdentities,
-                userListIdentities,
-                additionalUserListIdentities,
-                userObject,
-              ])}
-            >
-              {([
-                globalListIdentities,
-                userListIdentities,
-                additionalUserListIdentities,
-                userObject,
-              ]) => (
-                <>
-                  <TabsList>
+          <TabsList>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Await resolve={globalListIdentities}>
+                {(resolvedGlobalListIdentities) => (
+                  <TabsTrigger
+                    value="global"
+                    label="Global"
+                    totalCount={
+                      resolvedGlobalListIdentities?.pagination.totalEntries
+                    }
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleTabChange('global')
+                    }}
+                  />
+                )}
+              </Await>
+            </Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Await resolve={userListIdentities}>
+                {(resolvedUserListIdentities) => (
+                  <TabsTrigger
+                    value="you"
+                    label={
+                      <ListTabIdentityDisplay imgSrc={userObject.image}>
+                        You
+                      </ListTabIdentityDisplay>
+                    }
+                    totalCount={
+                      resolvedUserListIdentities?.pagination.totalEntries
+                    }
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleTabChange('you')
+                    }}
+                  />
+                )}
+              </Await>
+            </Suspense>
+            {userWalletAddress && (
+              <Suspense fallback={<div>Loading...</div>}>
+                <Await resolve={additionalUserListIdentities}>
+                  {(resolvedAdditionalUserListIdentities) => (
                     <TabsTrigger
-                      value="global"
-                      label="Global"
-                      totalCount={globalListIdentities?.pagination.totalEntries}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        handleTabChange('global')
-                      }}
-                    />
-                    <TabsTrigger
-                      value="you"
-                      label={
-                        <Suspense fallback={<div>Loading...</div>}>
-                          <ListTabIdentityDisplay imgSrc={userObject.image}>
-                            You
-                          </ListTabIdentityDisplay>
-                        </Suspense>
+                      className="text-left"
+                      value="additional"
+                      totalCount={
+                        resolvedAdditionalUserListIdentities?.pagination
+                          .totalEntries
                       }
-                      totalCount={userListIdentities?.pagination.totalEntries}
+                      label={
+                        <ListTabIdentityDisplay
+                          imgSrc={additionalUserObject?.image}
+                        >
+                          {additionalUserObject?.display_name ?? 'Additional'}
+                        </ListTabIdentityDisplay>
+                      }
                       onClick={(e) => {
                         e.preventDefault()
-                        handleTabChange('you')
+                        handleTabChange('additional')
                       }}
                     />
-                    {userWalletAddress && (
-                      <TabsTrigger
-                        className="text-left"
-                        value="additional"
-                        totalCount={
-                          additionalUserListIdentities?.pagination.totalEntries
-                        }
-                        label={
-                          <Suspense fallback={<div>Loading...</div>}>
-                            <ListTabIdentityDisplay
-                              imgSrc={additionalUserObject?.image}
-                            >
-                              {additionalUserObject?.display_name ??
-                                'Additional'}
-                            </ListTabIdentityDisplay>
-                          </Suspense>
-                        }
-                        onClick={(e) => {
-                          e.preventDefault()
-                          handleTabChange('additional')
-                        }}
-                      />
-                    )}
-                  </TabsList>
-                  <TabsContent value="global">
-                    {isNavigating ? (
-                      <PaginatedListSkeleton />
-                    ) : (
-                      <Suspense fallback={<PaginatedListSkeleton />}>
-                        <Await resolve={globalListIdentities}>
-                          {(resolvedListIdentities) => (
-                            <IdentitiesList
-                              identities={resolvedListIdentities.listIdentities}
-                              pagination={resolvedListIdentities.pagination}
-                              enableSearch={true}
-                              enableSort={true}
-                            />
-                          )}
-                        </Await>
-                      </Suspense>
-                    )}
-                  </TabsContent>
-                  <TabsContent value="you">
-                    {isNavigating ? (
-                      <PaginatedListSkeleton />
-                    ) : (
-                      <Suspense fallback={<PaginatedListSkeleton />}>
-                        <Await resolve={userListIdentities}>
-                          {(resolvedListIdentities) => (
-                            <IdentitiesList
-                              identities={resolvedListIdentities.listIdentities}
-                              pagination={resolvedListIdentities.pagination}
-                              enableSearch={true}
-                              enableSort={true}
-                            />
-                          )}
-                        </Await>
-                      </Suspense>
-                    )}
-                  </TabsContent>
-                  {userWalletAddress && (
-                    <TabsContent value="additional">
-                      {isNavigating ? (
-                        <PaginatedListSkeleton />
-                      ) : (
-                        <Suspense fallback={<PaginatedListSkeleton />}>
-                          <Await resolve={additionalUserListIdentities}>
-                            {(resolvedListIdentities) => {
-                              if (resolvedListIdentities) {
-                                return (
-                                  <IdentitiesList
-                                    identities={
-                                      resolvedListIdentities.listIdentities
-                                    }
-                                    pagination={
-                                      resolvedListIdentities.pagination
-                                    }
-                                    enableSearch={true}
-                                    enableSort={true}
-                                  />
-                                )
-                              }
-                              return null
-                            }}
-                          </Await>
-                        </Suspense>
-                      )}
-                    </TabsContent>
                   )}
-                </>
-              )}
-            </Await>
-          </Suspense>
+                </Await>
+              </Suspense>
+            )}
+          </TabsList>
+          <TabsContent value="global">
+            <Suspense fallback={<PaginatedListSkeleton />}>
+              <Await resolve={globalListIdentities}>
+                {(resolvedGlobalListIdentities: IdentityListType | null) => {
+                  if (!resolvedGlobalListIdentities) {
+                    return <PaginatedListSkeleton />
+                  }
+                  return isNavigating ? (
+                    <PaginatedListSkeleton />
+                  ) : (
+                    <IdentitiesList
+                      identities={resolvedGlobalListIdentities.listIdentities}
+                      pagination={resolvedGlobalListIdentities.pagination}
+                      enableSearch={true}
+                      enableSort={true}
+                    />
+                  )
+                }}
+              </Await>
+            </Suspense>
+          </TabsContent>
+          <TabsContent value="you">
+            <Suspense fallback={<PaginatedListSkeleton />}>
+              <Await resolve={userListIdentities}>
+                {(resolvedUserListIdentities: IdentityListType | null) => {
+                  if (!resolvedUserListIdentities) {
+                    return <PaginatedListSkeleton />
+                  }
+                  return isNavigating ? (
+                    <PaginatedListSkeleton />
+                  ) : (
+                    <IdentitiesList
+                      identities={resolvedUserListIdentities.listIdentities}
+                      pagination={resolvedUserListIdentities.pagination}
+                      enableSearch={true}
+                      enableSort={true}
+                    />
+                  )
+                }}
+              </Await>
+            </Suspense>
+          </TabsContent>
+          {userWalletAddress && !!additionalUserListIdentities && (
+            <TabsContent value="additional">
+              <Suspense fallback={<PaginatedListSkeleton />}>
+                <Await resolve={additionalUserListIdentities}>
+                  {(
+                    resolvedAdditionalUserListIdentities: IdentityListType | null,
+                  ) => {
+                    return isNavigating ? (
+                      <PaginatedListSkeleton />
+                    ) : resolvedAdditionalUserListIdentities ? (
+                      <IdentitiesList
+                        identities={
+                          resolvedAdditionalUserListIdentities.listIdentities
+                        }
+                        pagination={
+                          resolvedAdditionalUserListIdentities.pagination
+                        }
+                        enableSearch={true}
+                        enableSort={true}
+                      />
+                    ) : null
+                  }}
+                </Await>
+              </Suspense>
+            </TabsContent>
+          )}
         </Tabs>
       </div>
     </div>

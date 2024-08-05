@@ -9,7 +9,6 @@ import AddIdentitiesListModal from '@components/list/add-identities-list-modal'
 import { ListIdentityDisplayCard } from '@components/list/list-identity-display-card'
 import NavigationButton from '@components/navigation-link'
 import { addIdentitiesListModalAtom } from '@lib/state/store'
-import logger from '@lib/utils/logger'
 import { invariant, sliceString } from '@lib/utils/misc'
 import { json, LoaderFunctionArgs } from '@remix-run/node'
 import {
@@ -43,7 +42,6 @@ export default function ListDetails() {
     claim: ClaimPresenter
   }>()
 
-  logger('claim on list route', claim)
   const [addIdentitiesListModalActive, setAddIdentitiesListModalActive] =
     useAtom(addIdentitiesListModalAtom)
   const navigate = useNavigate()
