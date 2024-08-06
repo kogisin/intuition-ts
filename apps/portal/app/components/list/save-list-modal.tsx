@@ -44,7 +44,7 @@ interface SaveListModalProps {
   userWallet: string
   contract?: string
   open: boolean
-  tag: TagEmbeddedPresenter
+  tag: TagEmbeddedPresenter | IdentityPresenter
   identity: IdentityPresenter
 
   onClose?: () => void
@@ -72,6 +72,8 @@ export default function SaveListModal({
   >(transactionReducer, initialTxState)
   const publicClient = usePublicClient()
 
+  logger('tag in save modal', tag)
+  logger('identity in save modal', identity)
   const [isLoading, setIsLoading] = useState(true)
 
   const depositHook = useDepositTriple(identity.contract)
@@ -122,6 +124,7 @@ export default function SaveListModal({
       const fetchedClaimResponse = claimFetcher.data[0] as unknown as {
         vault_id: string
       }
+      logger('fetched claim response', fetchedClaimResponse)
       setFetchedClaimVaultId(fetchedClaimResponse.vault_id)
     }
   }, [claimFetcher.state, claimFetcher.data])
