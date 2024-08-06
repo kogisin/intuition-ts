@@ -64,7 +64,7 @@ describe('ProfileCard', () => {
                   </p>
                 </a>
                 <button
-                  class="flex justify-center items-center gap-2 text-sm font-medium border disabled:text-muted-foreground bg-transparent border-transparent disabled:border-transparent disabled:bg-transparent shadow-md-subtle p-0 h-4 w-4 text-primary/60 hover:text-primary undefined"
+                  class="flex justify-center items-center gap-2 text-sm font-medium border disabled:text-muted-foreground bg-transparent border-transparent disabled:border-transparent disabled:bg-transparent shadow-none p-0 h-4 w-4 text-primary/60 hover:text-primary undefined"
                 >
                   <svg
                     class="h-4 w-4"
@@ -130,7 +130,7 @@ describe('ProfileCard', () => {
               John Doe is a blockchain enthusiast. He loves to learn new things and share his knowledge with others. He is also a contributor to various open-source projects.
             </p>
             <div
-              class="pt-2.5"
+              class="pt-2.5 max-lg:flex max-lg:flex-col max-lg:items-center"
             >
               <p
                 class="text-base font-normal text-muted-foreground"
@@ -212,7 +212,7 @@ describe('ProfileCard', () => {
                   </p>
                 </a>
                 <button
-                  class="flex justify-center items-center gap-2 text-sm font-medium border disabled:text-muted-foreground bg-transparent border-transparent disabled:border-transparent disabled:bg-transparent shadow-md-subtle p-0 h-4 w-4 text-primary/60 hover:text-primary undefined"
+                  class="flex justify-center items-center gap-2 text-sm font-medium border disabled:text-muted-foreground bg-transparent border-transparent disabled:border-transparent disabled:bg-transparent shadow-none p-0 h-4 w-4 text-primary/60 hover:text-primary undefined"
                 >
                   <svg
                     class="h-4 w-4"
@@ -308,7 +308,7 @@ describe('ProfileCard', () => {
                   </p>
                 </a>
                 <button
-                  class="flex justify-center items-center gap-2 text-sm font-medium border disabled:text-muted-foreground bg-transparent border-transparent disabled:border-transparent disabled:bg-transparent shadow-md-subtle p-0 h-4 w-4 text-primary/60 hover:text-primary undefined"
+                  class="flex justify-center items-center gap-2 text-sm font-medium border disabled:text-muted-foreground bg-transparent border-transparent disabled:border-transparent disabled:bg-transparent shadow-none p-0 h-4 w-4 text-primary/60 hover:text-primary undefined"
                 >
                   <svg
                     class="h-4 w-4"
@@ -374,7 +374,7 @@ describe('ProfileCard', () => {
               John Doe is a blockchain enthusiast. He loves to learn new things and share his knowledge with others. He is also a contributor to various open-source projects.
             </p>
             <div
-              class="pt-2.5"
+              class="pt-2.5 max-lg:flex max-lg:flex-col max-lg:items-center"
             >
               <p
                 class="text-base font-normal text-muted-foreground"
