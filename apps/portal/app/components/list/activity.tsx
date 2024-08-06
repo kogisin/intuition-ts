@@ -11,9 +11,20 @@ import {
   IdentityTag,
   Text,
 } from '@0xintuition/1ui'
-import { ActivityPresenter, SortColumn } from '@0xintuition/api'
+import {
+  ActivityPresenter,
+  IdentityPresenter,
+  SortColumn,
+} from '@0xintuition/api'
 
-import { formatBalance } from '@lib/utils/misc'
+import {
+  formatBalance,
+  getAtomDescription,
+  getAtomImage,
+  getAtomIpfsLink,
+  getAtomLabel,
+  getAtomLink,
+} from '@lib/utils/misc'
 import { Link, useNavigate } from '@remix-run/react'
 import { PATHS } from 'consts'
 import { formatDistance } from 'date-fns'
@@ -178,38 +189,68 @@ function ActivityItem({
               className="hover:cursor-pointer w-full"
             >
               <Claim
+                size="md"
+                link={`${PATHS.CLAIM}/${activity.claim.claim_id}`}
                 subject={{
                   variant: activity.claim.subject?.is_user
                     ? Identity.user
                     : Identity.nonUser,
-                  label:
-                    activity.claim.subject?.user_display_name ??
-                    activity.claim.subject?.display_name ??
-                    activity.claim.subject?.identity_id ??
-                    '',
-                  imgSrc: activity.claim.subject?.image,
+                  label: getAtomLabel(
+                    activity.claim.subject as IdentityPresenter,
+                  ),
+                  imgSrc: getAtomImage(
+                    activity.claim.subject as IdentityPresenter,
+                  ),
+                  id: activity.claim.subject?.identity_id,
+                  description: getAtomDescription(
+                    activity.claim.subject as IdentityPresenter,
+                  ),
+                  ipfsLink: getAtomIpfsLink(
+                    activity.claim.subject as IdentityPresenter,
+                  ),
+                  link: getAtomLink(
+                    activity.claim.subject as IdentityPresenter,
+                  ),
                 }}
                 predicate={{
                   variant: activity.claim.predicate?.is_user
                     ? Identity.user
                     : Identity.nonUser,
-                  label:
-                    activity.claim.predicate?.user_display_name ??
-                    activity.claim.predicate?.display_name ??
-                    activity.claim.predicate?.identity_id ??
-                    '',
-                  imgSrc: activity.claim.predicate?.image,
+                  label: getAtomLabel(
+                    activity.claim.predicate as IdentityPresenter,
+                  ),
+                  imgSrc: getAtomImage(
+                    activity.claim.predicate as IdentityPresenter,
+                  ),
+                  id: activity.claim.predicate?.identity_id,
+                  description: getAtomDescription(
+                    activity.claim.predicate as IdentityPresenter,
+                  ),
+                  ipfsLink: getAtomIpfsLink(
+                    activity.claim.predicate as IdentityPresenter,
+                  ),
+                  link: getAtomLink(
+                    activity.claim.predicate as IdentityPresenter,
+                  ),
                 }}
                 object={{
                   variant: activity.claim.object?.is_user
                     ? Identity.user
                     : Identity.nonUser,
-                  label:
-                    activity.claim.object?.user_display_name ??
-                    activity.claim.object?.display_name ??
-                    activity.claim.object?.identity_id ??
-                    '',
-                  imgSrc: activity.claim.object?.image,
+                  label: getAtomLabel(
+                    activity.claim.object as IdentityPresenter,
+                  ),
+                  imgSrc: getAtomImage(
+                    activity.claim.object as IdentityPresenter,
+                  ),
+                  id: activity.claim.object?.identity_id,
+                  description: getAtomDescription(
+                    activity.claim.object as IdentityPresenter,
+                  ),
+                  ipfsLink: getAtomIpfsLink(
+                    activity.claim.object as IdentityPresenter,
+                  ),
+                  link: getAtomLink(activity.claim.object as IdentityPresenter),
                 }}
               />
             </ClaimRow>

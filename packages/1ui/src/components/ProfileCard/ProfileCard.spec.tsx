@@ -9,7 +9,7 @@ describe('ProfileCard', () => {
     variant: 'user',
     avatarSrc: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4',
     name: 'John Doe',
-    walletAddress: '0x1234567890abcdef1234567890abcdef12345678',
+    id: '0x1234567890abcdef1234567890abcdef12345678',
     stats: {
       numberOfFollowers: 123,
       numberOfFollowing: 45,
@@ -58,15 +58,11 @@ describe('ProfileCard', () => {
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <button
-                    data-state="closed"
+                  <p
+                    class="text-base font-medium text-muted-foreground"
                   >
-                    <p
-                      class="text-base font-medium text-muted-foreground"
-                    >
-                      0x1234...5678
-                    </p>
-                  </button>
+                    0x1234...5678
+                  </p>
                 </a>
                 <button
                   class="flex justify-center items-center gap-2 text-sm font-medium border disabled:text-muted-foreground bg-transparent border-transparent disabled:border-transparent disabled:bg-transparent shadow-md-subtle p-0 h-4 w-4 text-primary/60 hover:text-primary undefined"
@@ -145,11 +141,12 @@ describe('ProfileCard', () => {
       variant: 'non-user',
       avatarSrc: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4',
       name: 'Blockchain Corp',
-      walletAddress: '0x1234567890abcdef1234567890abcdef12345678',
+      id: '0x1234567890abcdef1234567890abcdef12345678',
       stats: {
         numberOfFollowers: 300,
       },
       ipfsLink: 'https://ipfs.io/ipfs/QmZKfjJ8v',
+      externalLink: 'https://blockchaincorp.com',
       bio: 'Blockchain Corp is a leading company in blockchain technology. Visit our website for more information about how you can benefit from our services.',
     }
 
@@ -191,15 +188,11 @@ describe('ProfileCard', () => {
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <button
-                    data-state="closed"
+                  <p
+                    class="text-base font-medium text-muted-foreground"
                   >
-                    <p
-                      class="text-base font-medium text-muted-foreground"
-                    >
-                      0x1234...5678
-                    </p>
-                  </button>
+                    0x1234...5678
+                  </p>
                 </a>
                 <button
                   class="flex justify-center items-center gap-2 text-sm font-medium border disabled:text-muted-foreground bg-transparent border-transparent disabled:border-transparent disabled:bg-transparent shadow-md-subtle p-0 h-4 w-4 text-primary/60 hover:text-primary undefined"
@@ -221,6 +214,21 @@ describe('ProfileCard', () => {
             >
               Blockchain Corp is a leading company in blockchain technology. Visit our website for more information about how you can benefit from our services.
             </p>
+            <div
+              class=""
+            >
+              <p
+                class="text-base font-normal text-muted-foreground"
+              >
+                Link
+              </p>
+              <a
+                class="text-primary-300"
+                href="https://blockchaincorp.com"
+              >
+                https://blockchaincorp.com
+              </a>
+            </div>
           </div>
         </div>
       </DocumentFragment>
@@ -271,15 +279,11 @@ describe('ProfileCard', () => {
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <button
-                    data-state="closed"
+                  <p
+                    class="text-base font-medium text-muted-foreground"
                   >
-                    <p
-                      class="text-base font-medium text-muted-foreground"
-                    >
-                      0x1234...5678
-                    </p>
-                  </button>
+                    0x1234...5678
+                  </p>
                 </a>
                 <button
                   class="flex justify-center items-center gap-2 text-sm font-medium border disabled:text-muted-foreground bg-transparent border-transparent disabled:border-transparent disabled:bg-transparent shadow-md-subtle p-0 h-4 w-4 text-primary/60 hover:text-primary undefined"
