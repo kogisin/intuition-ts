@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import {
   Claim,
   ClaimStakeCard,
@@ -108,7 +110,19 @@ export default function ClaimDetails() {
   }>()
   const navigate = useNavigate()
   const location = useLocation()
-  const from = location.state?.from
+  const [fromUrl, setFromUrl] = useState<string | number>(-1)
+
+  useEffect(() => {
+    const from = location.state?.from
+
+    if (from) {
+      setFromUrl(from.split('?')[0])
+    } else if (document.referrer) {
+      setFromUrl(document.referrer)
+    } else {
+      setFromUrl(-1)
+    }
+  }, [location.state])
 
   const [stakeModalActive, setStakeModalActive] = useAtom(stakeModalAtom)
 
@@ -139,8 +153,8 @@ export default function ClaimDetails() {
   const directionTagText = +userConviction > 0 ? 'FOR' : 'AGAINST'
 
   const ClaimWithNav = () => (
-    <div className="flex items-center w-full mb-6 gap-6">
-      <NavigationButton variant="secondary" size="icon" to={from ?? -1}>
+    <div className="flex justify-between items-center w-full mb-6">
+      <NavigationButton variant="secondary" size="icon" to={fromUrl.toString()}>
         <Icon name="arrow-left" />
       </NavigationButton>
       <Claim
