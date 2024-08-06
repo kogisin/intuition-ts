@@ -11,8 +11,8 @@ describe('ClaimRow', () => {
       <ClaimRow
         claimsFor={736}
         claimsAgainst={234}
-        claimsForValue={'1.91'}
-        claimsAgainstValue={'1.92'}
+        claimsForValue={1.91}
+        claimsAgainstValue={1.92}
         tvl={0.383}
       >
         <Claim
@@ -45,12 +45,14 @@ describe('ClaimRow', () => {
               <div
                 class="flex items-center h-[6px] mb-4"
               >
-                <span
+                <button
                   class="h-full bg-against block rounded-l-sm"
-                  style="min-width: 49.869451697127936%;"
+                  data-state="closed"
+                  style="min-width: 50.13054830287206%;"
                 />
-                <span
+                <button
                   class="h-full w-full bg-for block rounded-r-sm"
+                  data-state="closed"
                 />
               </div>
               <div
