@@ -20,6 +20,7 @@ interface ClaimItemProps {
   description?: string | null
   ipfsLink?: string
   link?: string
+  shouldHover?: boolean
 }
 
 export interface ClaimProps {
@@ -36,10 +37,12 @@ const ClaimItem = ({
   link,
   size,
   disabled,
+  shouldHover = true,
 }: {
   item: ClaimItemProps
   link?: string
   size?: keyof typeof IdentityTagSize
+  shouldHover?: boolean
   disabled?: boolean
 }) => {
   const content = (
@@ -49,6 +52,7 @@ const ClaimItem = ({
       imgSrc={item.imgSrc}
       disabled={disabled}
       className="group-hover:border-primary group-hover:bg-primary/20 relative z-10"
+      shouldHover={shouldHover}
     >
       <Trunctacular value={item.label} disableTooltip />
     </IdentityTag>
@@ -56,6 +60,10 @@ const ClaimItem = ({
 
   if (disabled) {
     return link ? <a href={link}>{content}</a> : content
+  }
+
+  if (item.shouldHover === false) {
+    return content
   }
 
   return (
@@ -112,7 +120,8 @@ export const Claim = ({
             item={item}
             link={link}
             size={size}
-            disabled={(!item.link && true) || disabled}
+            disabled={disabled || !item.link}
+            shouldHover={item.shouldHover}
           />
         </Fragment>
       ))}
