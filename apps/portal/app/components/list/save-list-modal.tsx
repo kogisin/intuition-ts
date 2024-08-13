@@ -98,6 +98,7 @@ export default function SaveListModal({
   const claimFetcher = useFetcher<ClaimLoaderData[]>()
   const vaultDetailsFetcher = useFetcher<VaultDetailsType>()
 
+  console.log('claimFetcher.state', claimFetcher.state)
   useEffect(() => {
     if (identity && tag) {
       const fetchClaim = () => {
@@ -117,6 +118,15 @@ export default function SaveListModal({
     // omits the fetcher from the exhaustive deps
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [identity, tag])
+
+  useEffect(() => {
+    if (
+      claimFetcher.state === 'loading' ||
+      vaultDetailsFetcher.state === 'loading'
+    ) {
+      setIsLoading(true)
+    }
+  }, [claimFetcher.state, vaultDetailsFetcher.state])
 
   useEffect(() => {
     if (
@@ -389,11 +399,12 @@ export default function SaveListModal({
             setValidationErrors={setValidationErrors}
             showErrors={showErrors}
             setShowErrors={setShowErrors}
+            isLoading={isLoading}
           />
         </div>
         <DialogFooter className="!justify-center !items-center gap-5">
           {!isTransactionStarted ? (
-            isLoading ? (
+            isLoading && state.status !== 'complete' ? (
               <>
                 <Skeleton className="h-7 w-40" />
                 <Skeleton className="h-7 w-40" />
@@ -406,6 +417,7 @@ export default function SaveListModal({
                   handleClose={handleClose}
                   dispatch={dispatch}
                   state={state}
+                  id={identity.id}
                   user_conviction={vaultDetails?.user_conviction ?? '0'}
                   className={`${(vaultDetails?.user_conviction && vaultDetails?.user_conviction > '0' && state.status === 'idle') || mode !== 'save' ? '' : 'hidden'}`}
                 />
@@ -416,6 +428,7 @@ export default function SaveListModal({
                   handleClose={handleClose}
                   dispatch={dispatch}
                   state={state}
+                  id={identity.id}
                   min_deposit={vaultDetails?.min_deposit ?? '0'}
                   walletBalance={walletBalance}
                   conviction_price={vaultDetails?.conviction_price ?? '0'}

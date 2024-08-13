@@ -117,6 +117,7 @@ export default function IdentityDetails() {
     useAtom(saveListModalAtom)
   const [selectedTag, setSelectedTag] = useState<TagEmbeddedPresenter>()
 
+  console.log('saveListModalActive', saveListModalActive)
   const leftPanel = (
     <div className="flex-col justify-start items-start inline-flex gap-6 max-lg:w-full">
       <ProfileCard
@@ -136,7 +137,7 @@ export default function IdentityDetails() {
               <TagWithValue
                 key={tag.identity_id}
                 label={tag.display_name}
-                value={tag.num_positions}
+                value={tag.num_tagged_identities}
                 onStake={() => {
                   setSelectedTag(tag)
                   setSaveListModalActive({ isOpen: true, id: tag.vault_id })
@@ -245,7 +246,7 @@ export default function IdentityDetails() {
       />
       {selectedTag && (
         <SaveListModal
-          tag={selectedTag}
+          tag={saveListModalActive.tag ?? selectedTag}
           identity={identity}
           contract={identity.contract}
           userWallet={userWallet}
