@@ -8,7 +8,6 @@ import {
   UsersService,
 } from '@0xintuition/api'
 
-import logger from '@lib/utils/logger'
 import { calculateTotalPages } from '@lib/utils/misc'
 import { getStandardPageParams } from '@lib/utils/params'
 import { fetchWrapper } from '@server/api'
@@ -142,10 +141,9 @@ export async function getListIdentities({
     (claim) => claim.subject,
   ) as IdentityPresenter[]
 
-  logger('getListIdentities', listIdentities.total)
-
   return {
     listIdentities: listIdentitiesSubjects as IdentityPresenter[],
+    claims: listIdentities.data as ClaimPresenter[],
     pagination: {
       currentPage: Number(page),
       limit: Number(limit),

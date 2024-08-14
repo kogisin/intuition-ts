@@ -331,6 +331,7 @@ export default function ListOverview() {
                   ) : (
                     <TagsList
                       identities={resolvedGlobalListIdentities.listIdentities}
+                      claims={resolvedGlobalListIdentities.claims}
                       pagination={resolvedGlobalListIdentities.pagination}
                       claim={claim}
                       wallet={wallet}
@@ -354,6 +355,7 @@ export default function ListOverview() {
                   ) : (
                     <TagsList
                       identities={resolvedUserListIdentities.listIdentities}
+                      claims={resolvedUserListIdentities.claims}
                       pagination={resolvedUserListIdentities.pagination}
                       claim={claim}
                       tag={claim.object}
@@ -380,6 +382,7 @@ export default function ListOverview() {
                         identities={
                           resolvedAdditionalUserListIdentities.listIdentities
                         }
+                        claims={resolvedAdditionalUserListIdentities.claims}
                         pagination={
                           resolvedAdditionalUserListIdentities.pagination
                         }

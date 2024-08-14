@@ -20,7 +20,7 @@ import {
   getAtomLabel,
   getAtomLink,
 } from '@lib/utils/misc'
-import { MULTIVAULT_CONTRACT_ADDRESS } from 'app/consts'
+import { MULTIVAULT_CONTRACT_ADDRESS, PATHS } from 'app/consts'
 import { PaginationType } from 'app/types/pagination'
 import { useAtom } from 'jotai'
 
@@ -29,6 +29,7 @@ import { List } from './list'
 
 export function TagsList({
   identities,
+  claims,
   claim,
   tag,
   wallet,
@@ -39,6 +40,7 @@ export function TagsList({
   enableSort = true,
 }: {
   identities: IdentityPresenter[]
+  claims: ClaimPresenter[]
   claim: ClaimPresenter
   tag?: IdentityPresenter | null
   wallet: string
@@ -57,6 +59,18 @@ export function TagsList({
 
   const [saveListModalActive, setSaveListModalActive] =
     useAtom(saveListModalAtom)
+
+  const claimMap = new Map(
+    claims
+      .filter(
+        (
+          claim,
+        ): claim is ClaimPresenter & {
+          subject: NonNullable<ClaimPresenter['subject']>
+        } => claim.subject !== null,
+      )
+      .map((claim) => [claim.subject.id, claim.claim_id]),
+  )
 
   return (
     <>
@@ -81,6 +95,8 @@ export function TagsList({
             return null
           }
 
+          const matchingClaim = claimMap.get(identity.id)
+
           return (
             <div
               key={identity.id}
@@ -93,6 +109,13 @@ export function TagsList({
                   name={getAtomLabel(identity)}
                   description={getAtomDescription(identity)}
                   id={identity.user?.wallet ?? identity.identity_id}
+                  claimLink={`${PATHS.CLAIM}/${matchingClaim}`}
+                  tags={
+                    identity.tags?.map((tag) => ({
+                      label: tag.display_name,
+                      value: tag.num_tagged_identities,
+                    })) ?? undefined
+                  }
                   amount={
                     +formatBalance(BigInt(identity.assets_sum || ''), 18, 4)
                   }
