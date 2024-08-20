@@ -1,15 +1,20 @@
 import {
+  ClaimPositionsService,
   ClaimPresenter,
   ClaimsService,
   IdentitiesService,
   IdentityPresenter,
+  PositionSortColumn,
   SortColumn,
   SortDirection,
+  UsersService,
 } from '@0xintuition/api'
 
+import { getSpecialPredicate } from '@lib/utils/app'
 import { calculateTotalPages } from '@lib/utils/misc'
 import { getStandardPageParams } from '@lib/utils/params'
 import { fetchWrapper } from '@server/api'
+import { CURRENT_ENV } from 'app/consts'
 
 interface PaginationData {
   currentPage: number
@@ -21,10 +26,11 @@ interface PaginationData {
 export interface ConnectionsData {
   followClaim?: ClaimPresenter
   followers?: IdentityPresenter[]
-  followersSortBy?: SortColumn
+  followersSortBy?: PositionSortColumn
   followersDirection?: SortDirection
   followersPagination?: PaginationData
-  following: IdentityPresenter[]
+  followingIdentities: IdentityPresenter[]
+  followingClaims: ClaimPresenter[]
   followingSortBy: SortColumn
   followingDirection: SortDirection
   followingPagination: PaginationData
@@ -33,10 +39,12 @@ export interface ConnectionsData {
 export async function getConnectionsData({
   request,
   userWallet,
+  searchParams,
 }: {
   request: Request
   userWallet: string
-}): Promise<ConnectionsData | null> {
+  searchParams: URLSearchParams
+}) {
   const userIdentity = await fetchWrapper(request, {
     method: IdentitiesService.getIdentityById,
     args: {
@@ -44,31 +52,37 @@ export async function getConnectionsData({
     },
   })
 
-  const url = new URL(request.url)
-  const searchParams = new URLSearchParams(url.search)
-
-  const followingParams = getStandardPageParams({
+  const {
+    page: followingPage,
+    limit: followingLimit,
+    sortBy: followingSortBy,
+    direction: followingDirection,
+  } = getStandardPageParams({
     searchParams,
     paramPrefix: 'following',
-    defaultSortByValue: SortColumn.USER_ASSETS,
   })
 
-  const following = await fetchWrapper(request, {
-    method: IdentitiesService.getIdentityFollowed,
+  const followingClaims = await fetchWrapper(request, {
+    method: UsersService.getUserClaims,
     args: {
-      id: userIdentity.id,
-      ...followingParams,
-      offset: null,
-      timeframe: null,
-      userWallet: null,
+      page: followingPage,
+      limit: followingLimit,
+      sortBy: followingSortBy as SortColumn,
+      direction: followingDirection,
+      displayName:
+        getSpecialPredicate(CURRENT_ENV).amFollowingPredicate.displayName,
+      user: userWallet,
     },
   })
 
   const followingTotalPages = calculateTotalPages(
-    following?.total ?? 0,
-    Number(followingParams.limit),
+    followingClaims?.total ?? 0,
+    followingLimit,
   )
 
+  const followingIdentitiesObjects = followingClaims.data.map(
+    (claim) => claim.object,
+  ) as IdentityPresenter[]
   if (userIdentity.follow_claim_id) {
     const followClaim = await fetchWrapper(request, {
       method: ClaimsService.getClaimById,
@@ -77,59 +91,70 @@ export async function getConnectionsData({
       },
     })
 
-    const followersParams = getStandardPageParams({
+    const {
+      page: followersPage,
+      limit: followersLimit,
+      sortBy: followersSortBy,
+      direction: followersDirection,
+    } = getStandardPageParams({
       searchParams,
       paramPrefix: 'followers',
-      defaultSortByValue: SortColumn.USER_ASSETS,
+      defaultSortByValue: PositionSortColumn.ASSETS,
     })
 
+    const followersSearch =
+      (searchParams.get('followersSearch') as string) || null
+
     const followers = await fetchWrapper(request, {
-      method: IdentitiesService.getIdentityFollowers,
+      method: ClaimPositionsService.getClaimPositions,
       args: {
-        id: userIdentity.id,
-        ...followersParams,
-        offset: null,
-        timeframe: null,
-        userWallet: null,
+        id: followClaim.claim_id,
+        page: followersPage,
+        limit: followersLimit,
+        sortBy: followersSortBy as PositionSortColumn,
+        direction: followersDirection,
+        creator: followersSearch,
       },
     })
 
     const followersTotalPages = calculateTotalPages(
       followers?.total ?? 0,
-      Number(followersParams.limit),
+      Number(followersLimit),
     )
 
     return {
       followClaim,
       followers: followers?.data,
-      followersSortBy: followersParams.sortBy,
-      followersDirection: followersParams.direction,
+      followersSortBy,
+      followersDirection,
       followersPagination: {
-        currentPage: Number(followersParams.page),
-        limit: Number(followersParams.limit),
+        currentPage: Number(followersPage),
+        limit: Number(followersLimit),
         totalEntries: followers?.total ?? 0,
         totalPages: followersTotalPages,
       },
-      following: following?.data,
-      followingSortBy: followingParams.sortBy,
-      followingDirection: followingParams.direction,
+      followingIdentities: followingIdentitiesObjects,
+      followingClaims: followingClaims.data,
+      followingSortBy,
+      followingDirection,
       followingPagination: {
-        currentPage: Number(followingParams.page),
-        limit: Number(followingParams.limit),
-        totalEntries: following?.total ?? 0,
+        currentPage: Number(followingPage),
+        limit: Number(followingLimit),
+        totalEntries: followingClaims?.total ?? 0,
         totalPages: followingTotalPages,
       },
     }
   }
 
   return {
-    following: following?.data,
-    followingSortBy: followingParams.sortBy,
-    followingDirection: followingParams.direction,
+    followingIdentities: followingIdentitiesObjects,
+    followingClaims: followingClaims.data,
+    followingSortBy,
+    followingDirection,
     followingPagination: {
-      currentPage: Number(followingParams.page),
-      limit: Number(followingParams.limit),
-      totalEntries: following?.total ?? 0,
+      currentPage: Number(followingPage),
+      limit: Number(followingLimit),
+      totalEntries: followingClaims?.total ?? 0,
       totalPages: followingTotalPages,
     },
   }

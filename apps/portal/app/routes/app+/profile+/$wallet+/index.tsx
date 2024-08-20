@@ -87,7 +87,11 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
           userWallet: wallet,
           searchParams: listSearchParams,
         }),
-        connectionsData: getConnectionsData({ request, userWallet: wallet }),
+        connectionsData: getConnectionsData({
+          request,
+          userWallet: wallet,
+          searchParams,
+        }),
       }),
   })
 }
@@ -196,41 +200,7 @@ export default function ProfileOverview() {
           </Await>
         </Suspense>
       </div>
-      <div className="flex flex-col gap-6">
-        <Text
-          variant="headline"
-          weight="medium"
-          className="text-secondary-foreground"
-        >
-          Top Followers
-        </Text>
-        <Suspense fallback={<PaginatedListSkeleton />}>
-          <Await
-            resolve={connectionsData}
-            errorElement={
-              <ErrorStateCard>
-                <RevalidateButton />
-              </ErrorStateCard>
-            }
-          >
-            {(resolvedConnectionsData) => {
-              if (!resolvedConnectionsData) {
-                return (
-                  <EmptyStateCard message="This user has no follow claim yet. A follow claim will be created when the first person follows them." />
-                )
-              }
-              return (
-                <FollowList
-                  identities={resolvedConnectionsData.followers ?? []}
-                  paramPrefix={ConnectionsHeaderVariants.followers}
-                  enableSearch={false}
-                  enableSort={false}
-                />
-              )
-            }}
-          </Await>
-        </Suspense>
-      </div>
+      {connectionsData && <TopFollowers connectionsData={connectionsData} />}
       <div className="flex flex-col gap-6">
         <Text
           variant="headline"
@@ -261,4 +231,50 @@ export default function ProfileOverview() {
 
 export function ErrorBoundary() {
   return <ErrorPage routeName="wallet/index" />
+}
+
+function TopFollowers({
+  connectionsData,
+}: {
+  connectionsData: Promise<NonNullable<
+    Awaited<ReturnType<typeof getConnectionsData>>
+  > | null>
+}) {
+  return (
+    <div className="flex flex-col gap-6">
+      <Text
+        variant="headline"
+        weight="medium"
+        className="text-secondary-foreground"
+      >
+        Top Followers
+      </Text>
+      <Suspense fallback={<PaginatedListSkeleton />}>
+        <Await
+          resolve={connectionsData}
+          errorElement={
+            <ErrorStateCard>
+              <RevalidateButton />
+            </ErrorStateCard>
+          }
+        >
+          {(resolvedConnectionsData) => {
+            if (!resolvedConnectionsData) {
+              return (
+                <EmptyStateCard message="This user has no follow claim yet. A follow claim will be created when the first person follows them." />
+              )
+            }
+            return (
+              <FollowList
+                positions={resolvedConnectionsData.followers ?? []}
+                paramPrefix={ConnectionsHeaderVariants.followers}
+                enableSearch={false}
+                enableSort={false}
+              />
+            )
+          }}
+        </Await>
+      </Suspense>
+    </div>
+  )
 }

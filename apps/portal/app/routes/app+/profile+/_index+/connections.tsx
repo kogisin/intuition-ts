@@ -25,8 +25,8 @@ import {
 import { useLiveLoader } from '@lib/hooks/useLiveLoader'
 import { getConnectionsData } from '@lib/services/connections'
 import { formatBalance, invariant } from '@lib/utils/misc'
-import { defer, LoaderFunctionArgs, redirect } from '@remix-run/node'
-import { Await, useRouteLoaderData, useSearchParams } from '@remix-run/react'
+import { defer, LoaderFunctionArgs } from '@remix-run/node'
+import { Await, useRouteLoaderData } from '@remix-run/react'
 import { requireUserWallet } from '@server/auth'
 import {
   NO_USER_IDENTITY_ERROR,
@@ -41,13 +41,14 @@ export async function loader({ request }: LoaderFunctionArgs) {
   invariant(userWallet, NO_WALLET_ERROR)
 
   const url = new URL(request.url)
-  if (!url.searchParams.get('tab')) {
-    url.searchParams.set('tab', ConnectionsHeaderVariants.followers)
-    return redirect(url.toString())
-  }
+  const searchParams = new URLSearchParams(url.search)
 
   return defer({
-    connectionsData: getConnectionsData({ request, userWallet }),
+    connectionsData: getConnectionsData({
+      request,
+      userWallet,
+      searchParams,
+    }),
   })
 }
 
@@ -81,19 +82,12 @@ const TabContent = ({
 }
 
 export default function ProfileConnections() {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const tab = searchParams.get('tab') || 'followers'
-
   const { connectionsData } = useLiveLoader<typeof loader>(['attest'])
   const { userIdentity } =
     useRouteLoaderData<ProfileLoaderData>(
       'routes/app+/profile+/_index+/_layout',
     ) ?? {}
   invariant(userIdentity, NO_USER_IDENTITY_ERROR)
-
-  const handleTabChange = (value: string) => {
-    setSearchParams({ tab: value })
-  }
 
   return (
     <div className="flex flex-col w-full gap-10">
@@ -109,8 +103,6 @@ export default function ProfileConnections() {
       <ConnectionsContent
         userIdentity={userIdentity}
         connectionsData={connectionsData}
-        tab={tab}
-        onTabChange={handleTabChange}
       />
     </div>
   )
@@ -119,15 +111,11 @@ export default function ProfileConnections() {
 function ConnectionsContent({
   userIdentity,
   connectionsData,
-  tab,
-  onTabChange,
 }: {
   userIdentity: IdentityPresenter
   connectionsData: Promise<NonNullable<
     Awaited<ReturnType<typeof getConnectionsData>>
   > | null>
-  tab: string
-  onTabChange: (value: string) => void
 }) {
   const { userTotals } =
     useRouteLoaderData<ProfileLoaderData>(
@@ -151,11 +139,15 @@ function ConnectionsContent({
             followClaim,
             followers,
             followersPagination,
-            following,
+            followingIdentities,
+            followingClaims,
             followingPagination,
           } = resolvedConnectionsData || {}
           return (
-            <Tabs value={tab} onValueChange={onTabChange} className="w-full">
+            <Tabs
+              className="w-full"
+              defaultValue={ConnectionsHeaderVariants.followers}
+            >
               <TabsList className="mb-6">
                 <TabsTrigger
                   value={ConnectionsHeaderVariants.followers}
@@ -179,7 +171,7 @@ function ConnectionsContent({
                     variant={ConnectionsHeaderVariants.followers}
                   >
                     <FollowList
-                      identities={followers ?? []}
+                      positions={followers}
                       pagination={followersPagination!}
                       paramPrefix={ConnectionsHeaderVariants.followers}
                     />
@@ -197,13 +189,18 @@ function ConnectionsContent({
                   totalStake={formatBalance(userTotals.followed_assets, 18)}
                   variant={ConnectionsHeaderVariants.following}
                 >
-                  {following && followingPagination && (
-                    <FollowList
-                      identities={following}
-                      pagination={followingPagination}
-                      paramPrefix={ConnectionsHeaderVariants.following}
-                    />
-                  )}
+                  {followingIdentities &&
+                    followingClaims &&
+                    followingPagination && (
+                      <FollowList
+                        identities={followingIdentities}
+                        claims={followingClaims}
+                        pagination={followingPagination}
+                        paramPrefix={ConnectionsHeaderVariants.following}
+                        enableSearch={false}
+                        enableSort={false}
+                      />
+                    )}
                 </TabContent>
               </TabsContent>
             </Tabs>
