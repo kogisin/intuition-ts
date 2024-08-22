@@ -22,7 +22,6 @@ const QuestHeaderCard = ({
   const percentageOfQuestsCompleted =
     (numberOfCompletedQuests / totalNumberOfQuests) * 100
 
-  console.log(percentageOfQuestsCompleted < 100)
   return (
     <div
       className={`flex flex-col gap-6 p-6 rounded-xl theme-border bg-gradient-to-r ${percentageOfQuestsCompleted === 100 ? 'from-for/30' : 'from-against/30'}`}
@@ -30,7 +29,7 @@ const QuestHeaderCard = ({
     >
       <div className="flex justify-between items-start">
         <div className="flex-col gap-1">
-          <Text variant={TextVariant.caption} className="text-foreground/70">
+          <Text variant={TextVariant.body} className="text-foreground/70">
             {subtitle}
           </Text>
           <Text variant={TextVariant.bodyLarge}>{title}</Text>
@@ -52,7 +51,7 @@ const QuestHeaderCard = ({
         </div>
       </div>
       <div className="flex justify-between items-end">
-        <Text variant={TextVariant.caption} className="text-foreground/70">
+        <Text variant={TextVariant.body} className="text-foreground/70">
           {`${percentageOfQuestsCompleted.toFixed(0)}% Complete`}
         </Text>
         <Button variant={ButtonVariant.secondary} onClick={onButtonClick}>

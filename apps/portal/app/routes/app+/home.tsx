@@ -84,166 +84,176 @@ export default function HomePage() {
 
   return (
     <FullPageLayout>
-      <div className="w-full flex flex-col gap-6">
+      <div className="w-full flex flex-col gap-12">
         <HomeBanner />
-        <Text
-          variant="headline"
-          weight="medium"
-          className="text-secondary-foreground self-start w-full"
-        >
-          System Stats
-        </Text>
-        <Suspense fallback={<HomeStatsHeaderSkeleton />}>
-          <Await
-            resolve={systemStats}
-            errorElement={
-              <ErrorStateCard>
-                <RevalidateButton />
-              </ErrorStateCard>
+        <div className="flex flex-col gap-4">
+          <Text
+            variant="headline"
+            weight="medium"
+            className="text-secondary-foreground self-start w-full"
+          >
+            System Stats
+          </Text>
+          <Suspense fallback={<HomeStatsHeaderSkeleton />}>
+            <Await
+              resolve={systemStats}
+              errorElement={
+                <ErrorStateCard>
+                  <RevalidateButton />
+                </ErrorStateCard>
+              }
+            >
+              {(resolvedStats) => (
+                <HomeStatsHeader
+                  totalIdentities={resolvedStats.totalIdentities}
+                  totalClaims={resolvedStats.totalClaims}
+                  totalUsers={resolvedStats.totalUsers}
+                  totalStaked={
+                    Number(formatBalance(resolvedStats.totalStaked, 18)) || 0
+                  }
+                  totalSignals={resolvedStats.totalSignals || 0}
+                />
+              )}
+            </Await>
+          </Suspense>
+        </div>
+        <div className="flex flex-col gap-4">
+          <HomeSectionHeader
+            title="Featured Lists"
+            buttonText="Explore Lists"
+            buttonLink="/app/explore/lists"
+          />
+          <Suspense
+            fallback={
+              <ListClaimsSkeletonLayout
+                totalItems={6}
+                enableSearch={false}
+                enableSort={false}
+              />
             }
           >
-            {(resolvedStats) => (
-              <HomeStatsHeader
-                totalIdentities={resolvedStats.totalIdentities}
-                totalClaims={resolvedStats.totalClaims}
-                totalUsers={resolvedStats.totalUsers}
-                totalStaked={
-                  Number(formatBalance(resolvedStats.totalStaked, 18)) || 0
+            <Await
+              resolve={featuredLists}
+              errorElement={
+                <ErrorStateCard>
+                  <RevalidateButton />
+                </ErrorStateCard>
+              }
+            >
+              {(resolvedFeaturedLists) => {
+                if (
+                  !resolvedFeaturedLists ||
+                  resolvedFeaturedLists.featuredLists.length === 0
+                ) {
+                  return <EmptyStateCard message="No lists found." />
                 }
-                totalSignals={resolvedStats.totalSignals || 0}
-              />
-            )}
-          </Await>
-        </Suspense>
-        <HomeSectionHeader
-          title="Featured Lists"
-          buttonText="Explore Lists"
-          buttonLink="/app/explore/lists"
-        />
-        <Suspense
-          fallback={
-            <ListClaimsSkeletonLayout
-              totalItems={6}
-              enableSearch={false}
-              enableSort={false}
-            />
-          }
-        >
-          <Await
-            resolve={featuredLists}
-            errorElement={
-              <ErrorStateCard>
-                <RevalidateButton />
-              </ErrorStateCard>
+                return (
+                  <ListClaimsList
+                    listClaims={resolvedFeaturedLists.featuredLists}
+                    enableSort={false}
+                    enableSearch={false}
+                    columns={3}
+                  />
+                )
+              }}
+            </Await>
+          </Suspense>
+        </div>
+        <div className="flex flex-col gap-4">
+          <HomeSectionHeader
+            title="Top Claims"
+            buttonText="Explore Claims"
+            buttonLink="/app/explore/claims"
+          />
+          <Suspense
+            fallback={
+              <PaginatedListSkeleton enableSearch={false} enableSort={false} />
             }
           >
-            {(resolvedFeaturedLists) => {
-              if (
-                !resolvedFeaturedLists ||
-                resolvedFeaturedLists.featuredLists.length === 0
-              ) {
-                return <EmptyStateCard message="No lists found." />
+            <Await
+              resolve={topClaims}
+              errorElement={
+                <ErrorStateCard>
+                  <RevalidateButton />
+                </ErrorStateCard>
               }
-              return (
-                <ListClaimsList
-                  listClaims={resolvedFeaturedLists.featuredLists}
-                  enableSort={false}
-                  enableSearch={false}
-                  columns={3}
-                />
-              )
-            }}
-          </Await>
-        </Suspense>
-        <HomeSectionHeader
-          title="Top Claims"
-          buttonText="Explore Claims"
-          buttonLink="/app/explore/claims"
-        />
-        <Suspense
-          fallback={
-            <PaginatedListSkeleton enableSearch={false} enableSort={false} />
-          }
-        >
-          <Await
-            resolve={topClaims}
-            errorElement={
-              <ErrorStateCard>
-                <RevalidateButton />
-              </ErrorStateCard>
+            >
+              {(resolvedClaims) => {
+                if (!resolvedClaims || resolvedClaims.data.length === 0) {
+                  return <EmptyStateCard message="No claims found." />
+                }
+                return (
+                  <ClaimsList
+                    claims={resolvedClaims.data}
+                    paramPrefix="claims"
+                    enableHeader={false}
+                    enableSearch={false}
+                    enableSort={false}
+                  />
+                )
+              }}
+            </Await>
+          </Suspense>
+        </div>
+        <div className="flex flex-col gap-4">
+          <HomeSectionHeader
+            title="Top Users"
+            buttonText="Explore Users"
+            buttonLink="/app/explore/identities?identity=&tagIds=&isUser=true"
+          />
+          <Suspense
+            fallback={
+              <PaginatedListSkeleton enableSearch={false} enableSort={false} />
             }
           >
-            {(resolvedClaims) => {
-              if (!resolvedClaims || resolvedClaims.data.length === 0) {
-                return <EmptyStateCard message="No claims found." />
+            <Await
+              resolve={topUsers}
+              errorElement={
+                <ErrorStateCard>
+                  <RevalidateButton />
+                </ErrorStateCard>
               }
-              return (
-                <ClaimsList
-                  claims={resolvedClaims.data}
-                  paramPrefix="claims"
-                  enableHeader={false}
-                  enableSearch={false}
-                  enableSort={false}
-                />
-              )
-            }}
-          </Await>
-        </Suspense>
-        <HomeSectionHeader
-          title="Top Users"
-          buttonText="Explore Users"
-          buttonLink="/app/explore/identities?identity=&tagIds=&isUser=true"
-        />
-        <Suspense
-          fallback={
-            <PaginatedListSkeleton enableSearch={false} enableSort={false} />
-          }
-        >
-          <Await
-            resolve={topUsers}
-            errorElement={
-              <ErrorStateCard>
-                <RevalidateButton />
-              </ErrorStateCard>
-            }
-          >
-            {(resolvedTopUsers) => {
-              if (!resolvedTopUsers || resolvedTopUsers.data.length === 0) {
-                return <EmptyStateCard message="No users found." />
+            >
+              {(resolvedTopUsers) => {
+                if (!resolvedTopUsers || resolvedTopUsers.data.length === 0) {
+                  return <EmptyStateCard message="No users found." />
+                }
+                return (
+                  <IdentitiesList
+                    identities={resolvedTopUsers.data}
+                    enalbeHeader={false}
+                    enableSearch={false}
+                    enableSort={false}
+                  />
+                )
+              }}
+            </Await>
+          </Suspense>
+        </div>
+        <div className="flex flex-col gap-4">
+          <HomeSectionHeader
+            title="Global Feed"
+            buttonText="Open Feed"
+            buttonLink="/app/activity/global"
+          />
+          <Suspense fallback={<ActivitySkeleton />}>
+            <Await
+              resolve={activity}
+              errorElement={
+                <ErrorStateCard>
+                  <RevalidateButton />
+                </ErrorStateCard>
               }
-              return (
-                <IdentitiesList
-                  identities={resolvedTopUsers.data}
-                  enalbeHeader={false}
-                  enableSearch={false}
-                  enableSort={false}
+            >
+              {(resolvedActivity) => (
+                <ActivityList
+                  activities={resolvedActivity.activity as ActivityPresenter[]}
+                  pagination={resolvedActivity.pagination as PaginationType}
                 />
-              )
-            }}
-          </Await>
-        </Suspense>
-        <HomeSectionHeader
-          title="Global Feed"
-          buttonText="Open Feed"
-          buttonLink="/app/activity/global"
-        />
-        <Suspense fallback={<ActivitySkeleton />}>
-          <Await
-            resolve={activity}
-            errorElement={
-              <ErrorStateCard>
-                <RevalidateButton />
-              </ErrorStateCard>
-            }
-          >
-            {(resolvedActivity) => (
-              <ActivityList
-                activities={resolvedActivity.activity as ActivityPresenter[]}
-                pagination={resolvedActivity.pagination as PaginationType}
-              />
-            )}
-          </Await>
-        </Suspense>
+              )}
+            </Await>
+          </Suspense>
+        </div>
       </div>
     </FullPageLayout>
   )

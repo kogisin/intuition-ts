@@ -1,6 +1,13 @@
 import React from 'react'
 
-import { Button, ButtonVariant, Icon, IconName, Text } from '@0xintuition/1ui'
+import {
+  Button,
+  ButtonVariant,
+  Icon,
+  IconName,
+  Text,
+  TextWeight,
+} from '@0xintuition/1ui'
 
 import { Link } from '@remix-run/react'
 
@@ -27,15 +34,15 @@ export function OverviewCreatedHeader({
 }: OverviewCreatedHeaderProps) {
   return (
     <div
-      className="flex flex-col gap-4 w-full p-6 bg-black rounded-xl border border-neutral-300/20"
+      className="flex flex-col gap-4 w-full p-6 bg-black rounded-xl theme-border"
       {...props}
     >
       <div className="flex w-full justify-between items-center">
         <div className="flex flex-col">
           <Text
-            variant="caption"
-            weight="regular"
-            className="text-secondary-foreground"
+            variant="body"
+            weight={TextWeight.medium}
+            className="text-foreground/70"
           >
             Created {variant === 'claims' ? 'Claims' : 'Identities'}
           </Text>

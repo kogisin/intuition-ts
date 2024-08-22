@@ -147,7 +147,7 @@ export const themePlugin = plugin(
           sans: ['Geist', ...defaultTheme.fontFamily.sans],
         },
         borderWidth: {
-          DEFAULT: '0.5px',
+          DEFAULT: '1px',
           px: '1px',
         },
         fontSize: {

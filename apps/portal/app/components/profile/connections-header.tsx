@@ -4,6 +4,7 @@ import {
   MonetaryValue,
   Text,
   TextVariant,
+  TextWeight,
 } from '@0xintuition/1ui'
 import { ClaimPresenter, IdentityPresenter } from '@0xintuition/api'
 
@@ -39,14 +40,14 @@ export const ConnectionsHeader: React.FC<ConnectionsHeaderProps> = ({
 }) => {
   return (
     <div className="flex flex-col w-full gap-3">
-      <div className="p-6 bg-black rounded-xl border border-neutral-300/20 flex flex-col gap-5">
+      <div className="p-6 bg-black rounded-xl theme-border flex flex-col gap-5">
         <div className="flex justify-between items-center max-sm:flex-col max-sm:gap-3">
           <div className="flex gap-10 max-sm:flex-col max-sm:gap-3 max-sm:m-auto">
             <div className="flex flex-col items-start max-sm:items-center">
               <Text
-                variant="caption"
-                weight="regular"
-                className="text-secondary-foreground"
+                variant="body"
+                weight={TextWeight.medium}
+                className="text-foreground/70"
               >
                 {variant === 'followers' ? 'Followers' : 'Following'}
               </Text>
