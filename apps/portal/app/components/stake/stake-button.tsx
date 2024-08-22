@@ -138,7 +138,7 @@ const StakeButton: React.FC<StakeButtonProps> = ({
           }
           if (
             mode === 'deposit'
-              ? +val * +formattedConvictionPrice > +walletBalance
+              ? +val > +walletBalance
               : +val > +formattedUserConviction * +formattedConvictionPrice
           ) {
             errors.push('Insufficient funds')
