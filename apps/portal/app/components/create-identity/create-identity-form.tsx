@@ -3,11 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import {
   Badge,
   Button,
-  Checkbox,
-  DialogHeader,
-  DialogTitle,
   Icon,
-  IconName,
   Input,
   Label,
   Text,
@@ -71,76 +67,7 @@ interface IdentityFormProps {
   onSuccess?: (identity: IdentityPresenter) => void
   onClose: () => void
   successAction?: TransactionSuccessActionType
-}
-export function IdentityForm({
-  wallet,
-  onClose,
-  onSuccess,
-  successAction = TransactionSuccessAction.VIEW,
-}: IdentityFormProps) {
-  const { state, dispatch } = useTransactionState<
-    IdentityTransactionStateType,
-    IdentityTransactionActionType
-  >(identityTransactionReducer, initialIdentityTransactionState)
-
-  const [transactionResponseData, setTransactionResponseData] =
-    useState<IdentityPresenter | null>(null)
-
-  const isTransactionStarted = [
-    'review-transaction',
-    'preparing-identity',
-    'publishing-identity',
-    'approve-transaction',
-    'transaction-pending',
-    'confirm',
-    'complete',
-    'error',
-  ].includes(state.status)
-
-  useEffect(() => {
-    if (state.status === 'complete') {
-      if (transactionResponseData) {
-        onSuccess?.(transactionResponseData)
-      }
-    }
-  }, [state.status, transactionResponseData])
-
-  return (
-    <>
-      <>
-        {!isTransactionStarted && (
-          <DialogHeader className="pb-1">
-            <DialogTitle>
-              <div className="text-foreground flex items-center gap-2">
-                <Icon name={IconName.fingerprint} className="w-6 h-6" />
-                Create Identity{' '}
-                <InfoTooltip
-                  title="Create Identity"
-                  content="You are encouraged to create the best Atom/Identity you can, so that others will use it! As this Identity is interacted with, its shareholders will earn fees - so create a good one, and be the first to stake on it! Please note - you will not be able to change this data later."
-                  icon={IconName.fingerprint}
-                />
-              </div>
-            </DialogTitle>
-            <Text variant="caption" className="text-muted-foreground w-full">
-              In Intuition, every thing is given a unique, decentralized digital
-              identifier in the form of an Atom. These &rsquo;Identities&lsquo;
-              serve as conceptual anchors to which we attach and correlate data,
-              experiences, and perceptions.
-            </Text>
-          </DialogHeader>
-        )}
-        <CreateIdentityForm
-          wallet={wallet}
-          state={state}
-          dispatch={dispatch}
-          onClose={onClose}
-          setTransactionResponseData={setTransactionResponseData}
-          transactionResponseData={transactionResponseData}
-          successAction={successAction}
-        />
-      </>
-    </>
-  )
+  setIsTransactionStarted: (isTransactionStarted: boolean) => void
 }
 
 interface FormState {
@@ -151,32 +78,24 @@ interface FormState {
   is_contract?: boolean
 }
 
-interface CreateIdentityFormProps {
-  wallet?: string
-  state: IdentityTransactionStateType
-  dispatch: React.Dispatch<IdentityTransactionActionType>
-  setTransactionResponseData: React.Dispatch<
-    React.SetStateAction<IdentityPresenter | null>
-  >
-  transactionResponseData: IdentityPresenter | null
-  onClose: () => void
-  successAction: TransactionSuccessActionType
-}
 export interface OffChainIdentityFetcherData {
   success: 'success' | 'error'
   identity: IdentityPresenter
   submission: SubmissionResult<string[]> | null
 }
 
-function CreateIdentityForm({
+export function IdentityForm({
   wallet,
-  state,
-  dispatch,
-  setTransactionResponseData,
-  transactionResponseData,
   onClose,
-  successAction,
-}: CreateIdentityFormProps) {
+  onSuccess,
+  successAction = TransactionSuccessAction.VIEW,
+  setIsTransactionStarted,
+}: IdentityFormProps) {
+  const { state, dispatch } = useTransactionState<
+    IdentityTransactionStateType,
+    IdentityTransactionActionType
+  >(identityTransactionReducer, initialIdentityTransactionState)
+
   const { offChainFetcher, lastOffChainSubmission } = useOffChainFetcher()
   const navigate = useNavigate()
   const imageUploadFetcher = useImageUploadFetcher()
@@ -189,7 +108,16 @@ function CreateIdentityForm({
   )
   const [imageUploadError, setImageUploadError] = useState<string | null>(null)
   const [initialDeposit, setInitialDeposit] = useState<string>('')
-  const [isContract, setIsContract] = useState(false)
+  const [transactionResponseData, setTransactionResponseData] =
+    useState<IdentityPresenter | null>(null)
+
+  useEffect(() => {
+    if (state.status === 'complete') {
+      if (transactionResponseData) {
+        onSuccess?.(transactionResponseData)
+      }
+    }
+  }, [state.status, transactionResponseData])
 
   const loaderFetcher = useFetcher<CreateLoaderData>()
   const loaderFetcherUrl = '/resources/create'
@@ -288,10 +216,6 @@ function CreateIdentityForm({
 
         if (identityImageSrc !== null) {
           formData.set('image_url', identityImageSrc as string)
-        }
-
-        if (isContract) {
-          formData.set('is_contract', 'true')
         }
 
         const submission = parseWithZod(formData, {
@@ -498,6 +422,7 @@ function CreateIdentityForm({
       event.preventDefault()
       const formDataObject = Object.fromEntries(formData.entries())
       setFormState(formDataObject)
+      setIsTransactionStarted(true)
       dispatch({ type: 'REVIEW_TRANSACTION' })
     },
   })
@@ -524,7 +449,7 @@ function CreateIdentityForm({
     setIdentityImageSrc(null)
     setIdentityImageFile(undefined)
     setInitialDeposit('0')
-    setIsContract(false)
+    setIsTransactionStarted(false)
     onClose()
   }
 
@@ -643,27 +568,10 @@ function CreateIdentityForm({
               {fields.display_name.value &&
                 fields.display_name.value.length === 42 &&
                 /^0x[a-fA-F0-9]{1,42}$/.test(fields.display_name.value) && (
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      checked={isContract}
-                      onCheckedChange={(checked) => {
-                        const isChecked = checked === true
-                        setIsContract(isChecked)
-                        setFormState((prev) => ({
-                          ...prev,
-                          is_contract: isChecked,
-                        }))
-                      }}
-                      id={fields.is_contract.id}
-                      className="h-4 w-4 text-muted theme-border rounded focus:ring-primary focus:ring-1 bg-primary/10 cursor-pointer checked:bg-primary/10 form-checkbox"
-                    />
-                    <Label
-                      htmlFor={fields.is_contract.id}
-                      className="text-sm text-foreground/70"
-                    >
-                      is Contract?
-                    </Label>
-                  </div>
+                  <Text className="text-xs font-semibold text-destructive">
+                    {`If this is a smart contract, select 'Smart Contract' from
+                    the Atom Type dropdown above.`}
+                  </Text>
                 )}
             </div>
 
@@ -803,6 +711,7 @@ function CreateIdentityForm({
                   onClick={() => {
                     const result = form.valid && !imageUploadError
                     if (result && !imageUploadError) {
+                      setIsTransactionStarted(true)
                       dispatch({ type: 'REVIEW_TRANSACTION' })
                     }
                   }}
