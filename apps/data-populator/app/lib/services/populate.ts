@@ -775,43 +775,46 @@ export async function processBatchAtoms(
       )
     : null
   let numChunks = 1
-  let staticExecutionReverted = true
-  let latestBatch: string[] = [] // for debugging
-  while (staticExecutionReverted && numChunks < cids.length) {
-    try {
-      const chunkSize = Math.ceil(cids.length / numChunks)
-      const chunks = chunk(cids, chunkSize)
-      for (const batch of chunks) {
-        latestBatch = batch // for debugging
-        const request = batchCreateAtomRequest(batch)
-        const gasEstimate = await estimateGas(request)
-        if (gasEstimate > 30000000) {
-          throw new Error(
-            'Gas estimate for batch atoms will likely exceed block gas limit',
-          )
-        }
-      }
-      staticExecutionReverted = false
-    } catch (error) {
-      console.log(
-        'Batch failed gas estimation, chunking further: ',
-        latestBatch,
-      )
-      requestHash
-        ? await pushUpdate(requestHash, `Reducing chunks: ${latestBatch}`)
-        : null
-      numChunks++
-    }
-  }
 
-  if (staticExecutionReverted) {
-    requestHash
-      ? await pushUpdate(
-          requestHash,
-          'static execution reverted with chunk size of 1',
+  if (cids.length > 1) {
+    let staticExecutionReverted = true
+    let latestBatch: string[] = [] // for debugging
+    while (staticExecutionReverted && numChunks < cids.length) {
+      try {
+        const chunkSize = Math.ceil(cids.length / numChunks)
+        const chunks = chunk(cids, chunkSize)
+        for (const batch of chunks) {
+          latestBatch = batch // for debugging
+          const request = batchCreateAtomRequest(batch)
+          const gasEstimate = await estimateGas(request)
+          if (gasEstimate > 30000000) {
+            throw new Error(
+              'Gas estimate for batch atoms will likely exceed block gas limit',
+            )
+          }
+        }
+        staticExecutionReverted = false
+      } catch (error) {
+        console.log(
+          'Batch failed gas estimation, chunking further: ',
+          latestBatch,
         )
-      : null
-    throw new Error('static execution reverted with chunk size of 1')
+        requestHash
+          ? await pushUpdate(requestHash, `Reducing chunks: ${latestBatch}`)
+          : null
+        numChunks++
+      }
+    }
+
+    if (staticExecutionReverted) {
+      requestHash
+        ? await pushUpdate(
+            requestHash,
+            'static execution reverted with chunk size of 1',
+          )
+        : null
+      throw new Error('static execution reverted with chunk size of 1')
+    }
   }
 
   const chunkSize = Math.ceil(cids.length / numChunks)
@@ -872,54 +875,57 @@ export async function processBatchTriples(
 
   // Attempt static execution in iteratively smaller chunks until it either succeeds or we have reason to believe the revert is not due to out of gas
   let numChunks = 1
-  let staticExecutionReverted = true
-  let latestBatch: Triple[] = [] // for debugging
-  console.log('Predetermining number of chunks to process batch triples...')
-  requestHash
-    ? await pushUpdate(
-        requestHash,
-        'Predetermining number of chunks to process batch triples...',
-      )
-    : null
-  while (staticExecutionReverted && numChunks < triples.length) {
-    try {
-      const chunkSize = Math.ceil(triples.length / numChunks)
-      const chunks = chunk(triples, chunkSize)
-      for (const batch of chunks) {
-        latestBatch = batch // for debugging
-        const request = batchCreateTripleRequest(
-          batch.map((triple) => triple.subjectId),
-          batch.map((triple) => triple.predicateId),
-          batch.map((triple) => triple.objectId),
-        )
-        const gasEstimate = await estimateGas(request)
-        if (gasEstimate > 30000000) {
-          throw new Error(
-            'Gas estimate for batch triples will likely exceed block gas limit',
-          )
-        }
-      }
-      staticExecutionReverted = false
-    } catch (error) {
-      console.log(
-        'Batch failed gas estimation, chunking further: ',
-        latestBatch,
-      )
-      requestHash
-        ? await pushUpdate(requestHash, `Reducing chunks: ${latestBatch}`)
-        : null
-      numChunks++
-    }
-  }
 
-  if (staticExecutionReverted) {
+  if (triples.length > 1) {
+    let staticExecutionReverted = true
+    let latestBatch: Triple[] = [] // for debugging
+    console.log('Predetermining number of chunks to process batch triples...')
     requestHash
       ? await pushUpdate(
           requestHash,
-          'static execution reverted with chunk size of 1',
+          'Predetermining number of chunks to process batch triples...',
         )
       : null
-    throw new Error('static execution reverted with chunk size of 1')
+    while (staticExecutionReverted && numChunks < triples.length) {
+      try {
+        const chunkSize = Math.ceil(triples.length / numChunks)
+        const chunks = chunk(triples, chunkSize)
+        for (const batch of chunks) {
+          latestBatch = batch // for debugging
+          const request = batchCreateTripleRequest(
+            batch.map((triple) => triple.subjectId),
+            batch.map((triple) => triple.predicateId),
+            batch.map((triple) => triple.objectId),
+          )
+          const gasEstimate = await estimateGas(request)
+          if (gasEstimate > 30000000) {
+            throw new Error(
+              'Gas estimate for batch triples will likely exceed block gas limit',
+            )
+          }
+        }
+        staticExecutionReverted = false
+      } catch (error) {
+        console.log(
+          'Batch failed gas estimation, chunking further: ',
+          latestBatch,
+        )
+        requestHash
+          ? await pushUpdate(requestHash, `Reducing chunks: ${latestBatch}`)
+          : null
+        numChunks++
+      }
+    }
+
+    if (staticExecutionReverted) {
+      requestHash
+        ? await pushUpdate(
+            requestHash,
+            'static execution reverted with chunk size of 1',
+          )
+        : null
+      throw new Error('static execution reverted with chunk size of 1')
+    }
   }
 
   const chunkSize = Math.ceil(triples.length / numChunks)
