@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import console from 'console'
 
 import { MIN_DEPOSIT, MULTIVAULT_CONTRACT_ADDRESS } from '@consts/general'
 import { multivaultAbi } from '@lib/abis/multivault'
@@ -534,6 +533,10 @@ export async function logTransactionHashAndVerifyAtoms(
 
   const newAtomIDs = newAtoms.map((atom) => atom.atomId)
   const existingAtomIDs = oldAtoms.map((atom) => atom.atomId)
+
+  if (requestHash) {
+    await updateRequest(requestHash, { status: 'fulfilled' })
+  }
 
   return { newAtomIDs, existingAtomIDs } as PopulateAtomsResponse
 }
