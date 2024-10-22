@@ -1,10 +1,5 @@
 import { multivaultAbi } from '@lib/abis/multivault'
-import { relicsAbi } from '@lib/abis/relics'
-import {
-  CURRENT_ENV,
-  MULTIVAULT_CONTRACT_ADDRESS,
-  RELIC_CONTRACT_ADDRESS,
-} from 'app/consts'
+import { CURRENT_ENV, MULTIVAULT_CONTRACT_ADDRESS } from 'app/consts'
 import {
   createPublicClient,
   getContract,
@@ -12,7 +7,7 @@ import {
   PublicClient,
   type Abi,
 } from 'viem'
-import { base, baseSepolia, mainnet } from 'viem/chains'
+import { base, baseSepolia } from 'viem/chains'
 
 export const publicClient: PublicClient = createPublicClient({
   batch: {
@@ -33,14 +28,6 @@ export const publicClient: PublicClient = createPublicClient({
   ),
 }) as PublicClient
 
-export const mainnetClient = createPublicClient({
-  batch: {
-    multicall: true,
-  },
-  chain: mainnet,
-  transport: http(process.env.ALCHEMY_MAINNET_RPC_URL),
-})
-
 export const getMultivaultContract = getContract({
   address: MULTIVAULT_CONTRACT_ADDRESS as `0x${string}`,
   abi: multivaultAbi as Abi,
@@ -59,18 +46,3 @@ export const multiVaultContract = {
   address: MULTIVAULT_CONTRACT_ADDRESS as `0x${string}`,
   abi: multivaultAbi as Abi,
 } as const
-
-export const createRelicContract = () =>
-  ({
-    address: RELIC_CONTRACT_ADDRESS as `0x${string}`,
-    abi: relicsAbi as Abi,
-  }) as const
-
-export const relicContract = {
-  address: RELIC_CONTRACT_ADDRESS as `0x${string}`,
-  abi: relicsAbi as Abi,
-} as const
-
-export const getEnsName = async (address: `0x${string}`) => {
-  return await mainnetClient.getEnsName({ address })
-}
