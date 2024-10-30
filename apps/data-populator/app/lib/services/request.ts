@@ -5,8 +5,9 @@ import crypto from 'crypto'
 import { getSender } from './evm'
 import { supabase } from './supabase'
 
-const environment = process.env.ENVIRONMENT!
-const requestsTable = environment === 'dev' ? 'requests_dev' : 'requests'
+const environment = import.meta.env.VITE_DEPLOY_ENV
+const requestsTable =
+  environment === 'development' ? 'requests_dev' : 'requests'
 
 /**
  * Interface representing the structure of a request in the database.
@@ -120,7 +121,7 @@ export async function getRequest(
   //   query = query.eq('sender', sender);
   // }
 
-  const { data, error } = await query
+  const { data, error } = (await query) as any // TODO: fix this
 
   if (error || !data) {
     throw new Error(
@@ -159,5 +160,5 @@ export async function getMyRequests(
     throw new Error(`Error fetching requests: ${error.message}`)
   }
 
-  return data as RequestData[]
+  return data as unknown as RequestData[] // TODO: fix this
 }
