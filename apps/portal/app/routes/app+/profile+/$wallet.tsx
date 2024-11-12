@@ -6,13 +6,13 @@ import {
   Icon,
   IconName,
   Identity,
+  IdentityStakeCard,
   PieChartVariant,
   PositionCard,
   PositionCardLastUpdated,
   PositionCardOwnership,
   PositionCardStaked,
   ProfileCard,
-  StakeCard,
   Tag,
   Tags,
   TagsButton,
@@ -389,6 +389,7 @@ export default function Profile() {
                   ...prevState,
                   mode: 'redeem',
                   modalType: 'identity',
+                  identity: userIdentity,
                   isOpen: true,
                 }))
               }
@@ -407,7 +408,7 @@ export default function Profile() {
               <PositionCardLastUpdated timestamp={userIdentity.updated_at} />
             </PositionCard>
           ) : null}
-          <StakeCard
+          <IdentityStakeCard
             tvl={+formatBalance(assets_sum ?? '0')}
             holders={userIdentity.num_positions}
             variant={userIdentity.is_user ? Identity.user : Identity.nonUser}
@@ -418,6 +419,7 @@ export default function Profile() {
                 ...prevState,
                 mode: 'deposit',
                 modalType: 'identity',
+                identity: userIdentity,
                 isOpen: true,
               }))
             }
@@ -469,7 +471,7 @@ export default function Profile() {
             contract={userIdentity.contract}
             open={stakeModalActive.isOpen}
             identity={userIdentity}
-            vaultDetails={vaultDetails}
+            vaultDetailsProp={vaultDetails}
             onClose={() => {
               setStakeModalActive((prevState) => ({
                 ...prevState,
