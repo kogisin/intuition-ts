@@ -24,11 +24,11 @@ import { Address } from 'viem'
 
 // Create a cookie instance to handle the test cookie
 const privySessionCookie = createCookie('privy-session', {
-  httpOnly: true,
+  httpOnly: false,
   secure: true,
   sameSite: 'strict',
   path: '/',
-  domain: 'portal.intuition.systems',
+  domain: '.portal.intuition.systems',
 })
 
 export async function loader({ request }: LoaderFunctionArgs) {
