@@ -1,8 +1,8 @@
 fragment TripleMetadata on triples {
   id
-  subjectId
-  predicateId
-  objectId
+  subject_id
+  predicate_id
+  object_id
   subject {
     data
     id
@@ -40,8 +40,8 @@ fragment TripleMetadata on triples {
     }
   }
   vault {
-    totalShares
-    currentSharePrice
+    total_shares
+    current_share_price
     allPositions: positions_aggregate {
       ...PositionAggregateFields
     }
@@ -49,9 +49,9 @@ fragment TripleMetadata on triples {
       ...PositionFields
     }
   }
-  counterVault {
-    totalShares
-    currentSharePrice
+  counter_vault {
+    total_shares
+    current_share_price
     allPositions: positions_aggregate {
       ...PositionAggregateFields
     }
@@ -62,48 +62,34 @@ fragment TripleMetadata on triples {
 }
 
 fragment TripleTxn on triples {
-  blockNumber
-  blockTimestamp
-  transactionHash
-  creatorId
+  block_number
+  block_timestamp
+  transaction_hash
+  creator_id
 }
 
 fragment TripleVaultDetails on triples {
-  vaultId
-  counterVaultId
+  vault_id
+  counter_vault_id
   vault {
     positions {
-      id
-      vaultId
-      shares
-      account {
-        id
-        label
-        image
-      }
+      ...PositionDetails
     }
   }
-  counterVault {
+  counter_vault {
     positions {
-      id
-      vaultId
-      shares
-      account {
-        id
-        label
-        image
-      }
+      ...PositionDetails
     }
   }
 }
 
 fragment TripleVaultCouterVaultDetailsWithPositions on triples {
-  vaultId
-  counterVaultId
+  vault_id
+  counter_vault_id
   vault {
     ...VaultDetailsWithFilteredPositions
   }
-  counterVault {
+  counter_vault {
     ...VaultDetailsWithFilteredPositions
   }
 }
