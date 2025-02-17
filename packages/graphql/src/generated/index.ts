@@ -2,6 +2,8 @@ import {
   InfiniteData,
   useInfiniteQuery,
   UseInfiniteQueryOptions,
+  useMutation,
+  UseMutationOptions,
   useQuery,
   UseQueryOptions,
 } from '@tanstack/react-query'
@@ -158,8 +160,7 @@ export type Accounts = {
   atoms: Array<Atoms>
   /** An aggregate relationship */
   atoms_aggregate: Atoms_Aggregate
-  /** An object relationship */
-  cached_image?: Maybe<Cached_Images>
+  cached_image?: Maybe<Cached_Images_Cached_Image>
   /** An array relationship */
   claims: Array<Claims>
   /** An aggregate relationship */
@@ -457,7 +458,6 @@ export type Accounts_Bool_Exp = {
   atom_id?: InputMaybe<Numeric_Comparison_Exp>
   atoms?: InputMaybe<Atoms_Bool_Exp>
   atoms_aggregate?: InputMaybe<Atoms_Aggregate_Bool_Exp>
-  cached_image?: InputMaybe<Cached_Images_Bool_Exp>
   claims?: InputMaybe<Claims_Bool_Exp>
   claims_aggregate?: InputMaybe<Claims_Aggregate_Bool_Exp>
   deposits_received?: InputMaybe<Deposits_Bool_Exp>
@@ -525,7 +525,6 @@ export type Accounts_Order_By = {
   atom?: InputMaybe<Atoms_Order_By>
   atom_id?: InputMaybe<Order_By>
   atoms_aggregate?: InputMaybe<Atoms_Aggregate_Order_By>
-  cached_image?: InputMaybe<Cached_Images_Order_By>
   claims_aggregate?: InputMaybe<Claims_Aggregate_Order_By>
   deposits_received_aggregate?: InputMaybe<Deposits_Aggregate_Order_By>
   deposits_sent_aggregate?: InputMaybe<Deposits_Aggregate_Order_By>
@@ -986,8 +985,7 @@ export type Atoms = {
   as_subject_triples_aggregate: Triples_Aggregate
   block_number: Scalars['numeric']['output']
   block_timestamp: Scalars['bigint']['output']
-  /** An object relationship */
-  cached_image?: Maybe<Cached_Images>
+  cached_image?: Maybe<Cached_Images_Cached_Image>
   /** An object relationship */
   controler?: Maybe<Accounts>
   /** An object relationship */
@@ -1252,7 +1250,6 @@ export type Atoms_Bool_Exp = {
   as_subject_triples_aggregate?: InputMaybe<Triples_Aggregate_Bool_Exp>
   block_number?: InputMaybe<Numeric_Comparison_Exp>
   block_timestamp?: InputMaybe<Bigint_Comparison_Exp>
-  cached_image?: InputMaybe<Cached_Images_Bool_Exp>
   controler?: InputMaybe<Accounts_Bool_Exp>
   creator?: InputMaybe<Accounts_Bool_Exp>
   creator_id?: InputMaybe<String_Comparison_Exp>
@@ -1353,7 +1350,6 @@ export type Atoms_Order_By = {
   as_subject_triples_aggregate?: InputMaybe<Triples_Aggregate_Order_By>
   block_number?: InputMaybe<Order_By>
   block_timestamp?: InputMaybe<Order_By>
-  cached_image?: InputMaybe<Cached_Images_Order_By>
   controler?: InputMaybe<Accounts_Order_By>
   creator?: InputMaybe<Accounts_Order_By>
   creator_id?: InputMaybe<Order_By>
@@ -1879,9 +1875,9 @@ export type Bytea_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['bytea']['input']>>
 }
 
-/** columns and relationships of "cached_image" */
-export type Cached_Images = {
-  __typename?: 'cached_images'
+/** columns and relationships of "cached_images.cached_image" */
+export type Cached_Images_Cached_Image = {
+  __typename?: 'cached_images_cached_image'
   created_at: Scalars['timestamptz']['output']
   model?: Maybe<Scalars['String']['output']>
   original_url: Scalars['String']['output']
@@ -1890,16 +1886,16 @@ export type Cached_Images = {
   url: Scalars['String']['output']
 }
 
-/** columns and relationships of "cached_image" */
-export type Cached_ImagesScoreArgs = {
+/** columns and relationships of "cached_images.cached_image" */
+export type Cached_Images_Cached_ImageScoreArgs = {
   path?: InputMaybe<Scalars['String']['input']>
 }
 
-/** Boolean expression to filter rows from the table "cached_image". All fields are combined with a logical 'AND'. */
-export type Cached_Images_Bool_Exp = {
-  _and?: InputMaybe<Array<Cached_Images_Bool_Exp>>
-  _not?: InputMaybe<Cached_Images_Bool_Exp>
-  _or?: InputMaybe<Array<Cached_Images_Bool_Exp>>
+/** Boolean expression to filter rows from the table "cached_images.cached_image". All fields are combined with a logical 'AND'. */
+export type Cached_Images_Cached_Image_Bool_Exp = {
+  _and?: InputMaybe<Array<Cached_Images_Cached_Image_Bool_Exp>>
+  _not?: InputMaybe<Cached_Images_Cached_Image_Bool_Exp>
+  _or?: InputMaybe<Array<Cached_Images_Cached_Image_Bool_Exp>>
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>
   model?: InputMaybe<String_Comparison_Exp>
   original_url?: InputMaybe<String_Comparison_Exp>
@@ -1908,8 +1904,8 @@ export type Cached_Images_Bool_Exp = {
   url?: InputMaybe<String_Comparison_Exp>
 }
 
-/** Ordering options when selecting data from "cached_image". */
-export type Cached_Images_Order_By = {
+/** Ordering options when selecting data from "cached_images.cached_image". */
+export type Cached_Images_Cached_Image_Order_By = {
   created_at?: InputMaybe<Order_By>
   model?: InputMaybe<Order_By>
   original_url?: InputMaybe<Order_By>
@@ -1918,8 +1914,8 @@ export type Cached_Images_Order_By = {
   url?: InputMaybe<Order_By>
 }
 
-/** select columns of table "cached_image" */
-export type Cached_Images_Select_Column =
+/** select columns of table "cached_images.cached_image" */
+export type Cached_Images_Cached_Image_Select_Column =
   /** column name */
   | 'created_at'
   /** column name */
@@ -1933,16 +1929,16 @@ export type Cached_Images_Select_Column =
   /** column name */
   | 'url'
 
-/** Streaming cursor of the table "cached_images" */
-export type Cached_Images_Stream_Cursor_Input = {
+/** Streaming cursor of the table "cached_images_cached_image" */
+export type Cached_Images_Cached_Image_Stream_Cursor_Input = {
   /** Stream column input with initial value */
-  initial_value: Cached_Images_Stream_Cursor_Value_Input
+  initial_value: Cached_Images_Cached_Image_Stream_Cursor_Value_Input
   /** cursor ordering */
   ordering?: InputMaybe<Cursor_Ordering>
 }
 
 /** Initial value of the column from where the streaming should start */
-export type Cached_Images_Stream_Cursor_Value_Input = {
+export type Cached_Images_Cached_Image_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>
   model?: InputMaybe<Scalars['String']['input']>
   original_url?: InputMaybe<Scalars['String']['input']>
@@ -4038,8 +4034,6 @@ export type Organizations = {
   __typename?: 'organizations'
   /** An object relationship */
   atom?: Maybe<Atoms>
-  /** An object relationship */
-  cached_image?: Maybe<Cached_Images>
   description?: Maybe<Scalars['String']['output']>
   email?: Maybe<Scalars['String']['output']>
   id: Scalars['numeric']['output']
@@ -4089,7 +4083,6 @@ export type Organizations_Bool_Exp = {
   _not?: InputMaybe<Organizations_Bool_Exp>
   _or?: InputMaybe<Array<Organizations_Bool_Exp>>
   atom?: InputMaybe<Atoms_Bool_Exp>
-  cached_image?: InputMaybe<Cached_Images_Bool_Exp>
   description?: InputMaybe<String_Comparison_Exp>
   email?: InputMaybe<String_Comparison_Exp>
   id?: InputMaybe<Numeric_Comparison_Exp>
@@ -4123,7 +4116,6 @@ export type Organizations_Min_Fields = {
 /** Ordering options when selecting data from "organization". */
 export type Organizations_Order_By = {
   atom?: InputMaybe<Atoms_Order_By>
-  cached_image?: InputMaybe<Cached_Images_Order_By>
   description?: InputMaybe<Order_By>
   email?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
@@ -4212,8 +4204,7 @@ export type Persons = {
   __typename?: 'persons'
   /** An object relationship */
   atom?: Maybe<Atoms>
-  /** An object relationship */
-  cached_image?: Maybe<Cached_Images>
+  cached_image?: Maybe<Cached_Images_Cached_Image>
   description?: Maybe<Scalars['String']['output']>
   email?: Maybe<Scalars['String']['output']>
   id: Scalars['numeric']['output']
@@ -4264,7 +4255,6 @@ export type Persons_Bool_Exp = {
   _not?: InputMaybe<Persons_Bool_Exp>
   _or?: InputMaybe<Array<Persons_Bool_Exp>>
   atom?: InputMaybe<Atoms_Bool_Exp>
-  cached_image?: InputMaybe<Cached_Images_Bool_Exp>
   description?: InputMaybe<String_Comparison_Exp>
   email?: InputMaybe<String_Comparison_Exp>
   id?: InputMaybe<Numeric_Comparison_Exp>
@@ -4301,7 +4291,6 @@ export type Persons_Min_Fields = {
 /** Ordering options when selecting data from "person". */
 export type Persons_Order_By = {
   atom?: InputMaybe<Atoms_Order_By>
-  cached_image?: InputMaybe<Cached_Images_Order_By>
   description?: InputMaybe<Order_By>
   email?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
@@ -4871,10 +4860,10 @@ export type Query_Root = {
   byte_object_aggregate: Byte_Object_Aggregate
   /** fetch data from the table: "byte_object" using primary key columns */
   byte_object_by_pk?: Maybe<Byte_Object>
-  /** fetch data from the table: "cached_image" using primary key columns */
-  cached_image?: Maybe<Cached_Images>
-  /** fetch data from the table: "cached_image" */
-  cached_images: Array<Cached_Images>
+  /** fetch data from the table: "cached_images.cached_image" */
+  cached_images_cached_image: Array<Cached_Images_Cached_Image>
+  /** fetch data from the table: "cached_images.cached_image" using primary key columns */
+  cached_images_cached_image_by_pk?: Maybe<Cached_Images_Cached_Image>
   /** fetch data from the table: "caip10" using primary key columns */
   caip10?: Maybe<Caip10>
   /** fetch aggregated fields from the table: "caip10" */
@@ -4965,6 +4954,12 @@ export type Query_Root = {
   signals_from_following_aggregate: Signals_Aggregate
   /** fetch data from the table: "stats" using primary key columns */
   stat?: Maybe<Stats>
+  /** fetch data from the table: "stats_hour" using primary key columns */
+  stat_hour?: Maybe<Stat_Hours>
+  /** fetch data from the table: "stats_hour" */
+  stat_hours: Array<Stat_Hours>
+  /** fetch aggregated fields from the table: "stats_hour" */
+  stat_hours_aggregate: Stat_Hours_Aggregate
   /** fetch data from the table: "stats" */
   stats: Array<Stats>
   /** fetch aggregated fields from the table: "stats" */
@@ -5113,16 +5108,16 @@ export type Query_RootByte_Object_By_PkArgs = {
   id: Scalars['numeric']['input']
 }
 
-export type Query_RootCached_ImageArgs = {
-  url: Scalars['String']['input']
-}
-
-export type Query_RootCached_ImagesArgs = {
-  distinct_on?: InputMaybe<Array<Cached_Images_Select_Column>>
+export type Query_RootCached_Images_Cached_ImageArgs = {
+  distinct_on?: InputMaybe<Array<Cached_Images_Cached_Image_Select_Column>>
   limit?: InputMaybe<Scalars['Int']['input']>
   offset?: InputMaybe<Scalars['Int']['input']>
-  order_by?: InputMaybe<Array<Cached_Images_Order_By>>
-  where?: InputMaybe<Cached_Images_Bool_Exp>
+  order_by?: InputMaybe<Array<Cached_Images_Cached_Image_Order_By>>
+  where?: InputMaybe<Cached_Images_Cached_Image_Bool_Exp>
+}
+
+export type Query_RootCached_Images_Cached_Image_By_PkArgs = {
+  url: Scalars['String']['input']
 }
 
 export type Query_RootCaip10Args = {
@@ -5433,6 +5428,26 @@ export type Query_RootSignals_From_Following_AggregateArgs = {
 
 export type Query_RootStatArgs = {
   id: Scalars['Int']['input']
+}
+
+export type Query_RootStat_HourArgs = {
+  id: Scalars['Int']['input']
+}
+
+export type Query_RootStat_HoursArgs = {
+  distinct_on?: InputMaybe<Array<Stat_Hours_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Stat_Hours_Order_By>>
+  where?: InputMaybe<Stat_Hours_Bool_Exp>
+}
+
+export type Query_RootStat_Hours_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Stat_Hours_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Stat_Hours_Order_By>>
+  where?: InputMaybe<Stat_Hours_Bool_Exp>
 }
 
 export type Query_RootStatsArgs = {
@@ -6371,11 +6386,260 @@ export type Signals_Variance_Order_By = {
   triple_id?: InputMaybe<Order_By>
 }
 
+/** columns and relationships of "stats_hour" */
+export type Stat_Hours = {
+  __typename?: 'stat_hours'
+  contract_balance?: Maybe<Scalars['numeric']['output']>
+  created_at: Scalars['timestamptz']['output']
+  id: Scalars['Int']['output']
+  total_accounts?: Maybe<Scalars['Int']['output']>
+  total_atoms?: Maybe<Scalars['Int']['output']>
+  total_fees?: Maybe<Scalars['numeric']['output']>
+  total_positions?: Maybe<Scalars['Int']['output']>
+  total_signals?: Maybe<Scalars['Int']['output']>
+  total_triples?: Maybe<Scalars['Int']['output']>
+}
+
+/** aggregated selection of "stats_hour" */
+export type Stat_Hours_Aggregate = {
+  __typename?: 'stat_hours_aggregate'
+  aggregate?: Maybe<Stat_Hours_Aggregate_Fields>
+  nodes: Array<Stat_Hours>
+}
+
+/** aggregate fields of "stats_hour" */
+export type Stat_Hours_Aggregate_Fields = {
+  __typename?: 'stat_hours_aggregate_fields'
+  avg?: Maybe<Stat_Hours_Avg_Fields>
+  count: Scalars['Int']['output']
+  max?: Maybe<Stat_Hours_Max_Fields>
+  min?: Maybe<Stat_Hours_Min_Fields>
+  stddev?: Maybe<Stat_Hours_Stddev_Fields>
+  stddev_pop?: Maybe<Stat_Hours_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Stat_Hours_Stddev_Samp_Fields>
+  sum?: Maybe<Stat_Hours_Sum_Fields>
+  var_pop?: Maybe<Stat_Hours_Var_Pop_Fields>
+  var_samp?: Maybe<Stat_Hours_Var_Samp_Fields>
+  variance?: Maybe<Stat_Hours_Variance_Fields>
+}
+
+/** aggregate fields of "stats_hour" */
+export type Stat_Hours_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Stat_Hours_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+/** aggregate avg on columns */
+export type Stat_Hours_Avg_Fields = {
+  __typename?: 'stat_hours_avg_fields'
+  contract_balance?: Maybe<Scalars['Float']['output']>
+  id?: Maybe<Scalars['Float']['output']>
+  total_accounts?: Maybe<Scalars['Float']['output']>
+  total_atoms?: Maybe<Scalars['Float']['output']>
+  total_fees?: Maybe<Scalars['Float']['output']>
+  total_positions?: Maybe<Scalars['Float']['output']>
+  total_signals?: Maybe<Scalars['Float']['output']>
+  total_triples?: Maybe<Scalars['Float']['output']>
+}
+
+/** Boolean expression to filter rows from the table "stats_hour". All fields are combined with a logical 'AND'. */
+export type Stat_Hours_Bool_Exp = {
+  _and?: InputMaybe<Array<Stat_Hours_Bool_Exp>>
+  _not?: InputMaybe<Stat_Hours_Bool_Exp>
+  _or?: InputMaybe<Array<Stat_Hours_Bool_Exp>>
+  contract_balance?: InputMaybe<Numeric_Comparison_Exp>
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>
+  id?: InputMaybe<Int_Comparison_Exp>
+  total_accounts?: InputMaybe<Int_Comparison_Exp>
+  total_atoms?: InputMaybe<Int_Comparison_Exp>
+  total_fees?: InputMaybe<Numeric_Comparison_Exp>
+  total_positions?: InputMaybe<Int_Comparison_Exp>
+  total_signals?: InputMaybe<Int_Comparison_Exp>
+  total_triples?: InputMaybe<Int_Comparison_Exp>
+}
+
+/** aggregate max on columns */
+export type Stat_Hours_Max_Fields = {
+  __typename?: 'stat_hours_max_fields'
+  contract_balance?: Maybe<Scalars['numeric']['output']>
+  created_at?: Maybe<Scalars['timestamptz']['output']>
+  id?: Maybe<Scalars['Int']['output']>
+  total_accounts?: Maybe<Scalars['Int']['output']>
+  total_atoms?: Maybe<Scalars['Int']['output']>
+  total_fees?: Maybe<Scalars['numeric']['output']>
+  total_positions?: Maybe<Scalars['Int']['output']>
+  total_signals?: Maybe<Scalars['Int']['output']>
+  total_triples?: Maybe<Scalars['Int']['output']>
+}
+
+/** aggregate min on columns */
+export type Stat_Hours_Min_Fields = {
+  __typename?: 'stat_hours_min_fields'
+  contract_balance?: Maybe<Scalars['numeric']['output']>
+  created_at?: Maybe<Scalars['timestamptz']['output']>
+  id?: Maybe<Scalars['Int']['output']>
+  total_accounts?: Maybe<Scalars['Int']['output']>
+  total_atoms?: Maybe<Scalars['Int']['output']>
+  total_fees?: Maybe<Scalars['numeric']['output']>
+  total_positions?: Maybe<Scalars['Int']['output']>
+  total_signals?: Maybe<Scalars['Int']['output']>
+  total_triples?: Maybe<Scalars['Int']['output']>
+}
+
+/** Ordering options when selecting data from "stats_hour". */
+export type Stat_Hours_Order_By = {
+  contract_balance?: InputMaybe<Order_By>
+  created_at?: InputMaybe<Order_By>
+  id?: InputMaybe<Order_By>
+  total_accounts?: InputMaybe<Order_By>
+  total_atoms?: InputMaybe<Order_By>
+  total_fees?: InputMaybe<Order_By>
+  total_positions?: InputMaybe<Order_By>
+  total_signals?: InputMaybe<Order_By>
+  total_triples?: InputMaybe<Order_By>
+}
+
+/** select columns of table "stats_hour" */
+export type Stat_Hours_Select_Column =
+  /** column name */
+  | 'contract_balance'
+  /** column name */
+  | 'created_at'
+  /** column name */
+  | 'id'
+  /** column name */
+  | 'total_accounts'
+  /** column name */
+  | 'total_atoms'
+  /** column name */
+  | 'total_fees'
+  /** column name */
+  | 'total_positions'
+  /** column name */
+  | 'total_signals'
+  /** column name */
+  | 'total_triples'
+
+/** aggregate stddev on columns */
+export type Stat_Hours_Stddev_Fields = {
+  __typename?: 'stat_hours_stddev_fields'
+  contract_balance?: Maybe<Scalars['Float']['output']>
+  id?: Maybe<Scalars['Float']['output']>
+  total_accounts?: Maybe<Scalars['Float']['output']>
+  total_atoms?: Maybe<Scalars['Float']['output']>
+  total_fees?: Maybe<Scalars['Float']['output']>
+  total_positions?: Maybe<Scalars['Float']['output']>
+  total_signals?: Maybe<Scalars['Float']['output']>
+  total_triples?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate stddev_pop on columns */
+export type Stat_Hours_Stddev_Pop_Fields = {
+  __typename?: 'stat_hours_stddev_pop_fields'
+  contract_balance?: Maybe<Scalars['Float']['output']>
+  id?: Maybe<Scalars['Float']['output']>
+  total_accounts?: Maybe<Scalars['Float']['output']>
+  total_atoms?: Maybe<Scalars['Float']['output']>
+  total_fees?: Maybe<Scalars['Float']['output']>
+  total_positions?: Maybe<Scalars['Float']['output']>
+  total_signals?: Maybe<Scalars['Float']['output']>
+  total_triples?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate stddev_samp on columns */
+export type Stat_Hours_Stddev_Samp_Fields = {
+  __typename?: 'stat_hours_stddev_samp_fields'
+  contract_balance?: Maybe<Scalars['Float']['output']>
+  id?: Maybe<Scalars['Float']['output']>
+  total_accounts?: Maybe<Scalars['Float']['output']>
+  total_atoms?: Maybe<Scalars['Float']['output']>
+  total_fees?: Maybe<Scalars['Float']['output']>
+  total_positions?: Maybe<Scalars['Float']['output']>
+  total_signals?: Maybe<Scalars['Float']['output']>
+  total_triples?: Maybe<Scalars['Float']['output']>
+}
+
+/** Streaming cursor of the table "stat_hours" */
+export type Stat_Hours_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Stat_Hours_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type Stat_Hours_Stream_Cursor_Value_Input = {
+  contract_balance?: InputMaybe<Scalars['numeric']['input']>
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>
+  id?: InputMaybe<Scalars['Int']['input']>
+  total_accounts?: InputMaybe<Scalars['Int']['input']>
+  total_atoms?: InputMaybe<Scalars['Int']['input']>
+  total_fees?: InputMaybe<Scalars['numeric']['input']>
+  total_positions?: InputMaybe<Scalars['Int']['input']>
+  total_signals?: InputMaybe<Scalars['Int']['input']>
+  total_triples?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** aggregate sum on columns */
+export type Stat_Hours_Sum_Fields = {
+  __typename?: 'stat_hours_sum_fields'
+  contract_balance?: Maybe<Scalars['numeric']['output']>
+  id?: Maybe<Scalars['Int']['output']>
+  total_accounts?: Maybe<Scalars['Int']['output']>
+  total_atoms?: Maybe<Scalars['Int']['output']>
+  total_fees?: Maybe<Scalars['numeric']['output']>
+  total_positions?: Maybe<Scalars['Int']['output']>
+  total_signals?: Maybe<Scalars['Int']['output']>
+  total_triples?: Maybe<Scalars['Int']['output']>
+}
+
+/** aggregate var_pop on columns */
+export type Stat_Hours_Var_Pop_Fields = {
+  __typename?: 'stat_hours_var_pop_fields'
+  contract_balance?: Maybe<Scalars['Float']['output']>
+  id?: Maybe<Scalars['Float']['output']>
+  total_accounts?: Maybe<Scalars['Float']['output']>
+  total_atoms?: Maybe<Scalars['Float']['output']>
+  total_fees?: Maybe<Scalars['Float']['output']>
+  total_positions?: Maybe<Scalars['Float']['output']>
+  total_signals?: Maybe<Scalars['Float']['output']>
+  total_triples?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate var_samp on columns */
+export type Stat_Hours_Var_Samp_Fields = {
+  __typename?: 'stat_hours_var_samp_fields'
+  contract_balance?: Maybe<Scalars['Float']['output']>
+  id?: Maybe<Scalars['Float']['output']>
+  total_accounts?: Maybe<Scalars['Float']['output']>
+  total_atoms?: Maybe<Scalars['Float']['output']>
+  total_fees?: Maybe<Scalars['Float']['output']>
+  total_positions?: Maybe<Scalars['Float']['output']>
+  total_signals?: Maybe<Scalars['Float']['output']>
+  total_triples?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate variance on columns */
+export type Stat_Hours_Variance_Fields = {
+  __typename?: 'stat_hours_variance_fields'
+  contract_balance?: Maybe<Scalars['Float']['output']>
+  id?: Maybe<Scalars['Float']['output']>
+  total_accounts?: Maybe<Scalars['Float']['output']>
+  total_atoms?: Maybe<Scalars['Float']['output']>
+  total_fees?: Maybe<Scalars['Float']['output']>
+  total_positions?: Maybe<Scalars['Float']['output']>
+  total_signals?: Maybe<Scalars['Float']['output']>
+  total_triples?: Maybe<Scalars['Float']['output']>
+}
+
 /** columns and relationships of "stats" */
 export type Stats = {
   __typename?: 'stats'
   contract_balance?: Maybe<Scalars['numeric']['output']>
   id: Scalars['Int']['output']
+  last_processed_block_number?: Maybe<Scalars['numeric']['output']>
+  last_processed_block_timestamp?: Maybe<Scalars['bigint']['output']>
+  last_updated: Scalars['timestamptz']['output']
   total_accounts?: Maybe<Scalars['Int']['output']>
   total_atoms?: Maybe<Scalars['Int']['output']>
   total_fees?: Maybe<Scalars['numeric']['output']>
@@ -6418,6 +6682,8 @@ export type Stats_Avg_Fields = {
   __typename?: 'stats_avg_fields'
   contract_balance?: Maybe<Scalars['Float']['output']>
   id?: Maybe<Scalars['Float']['output']>
+  last_processed_block_number?: Maybe<Scalars['Float']['output']>
+  last_processed_block_timestamp?: Maybe<Scalars['Float']['output']>
   total_accounts?: Maybe<Scalars['Float']['output']>
   total_atoms?: Maybe<Scalars['Float']['output']>
   total_fees?: Maybe<Scalars['Float']['output']>
@@ -6433,6 +6699,9 @@ export type Stats_Bool_Exp = {
   _or?: InputMaybe<Array<Stats_Bool_Exp>>
   contract_balance?: InputMaybe<Numeric_Comparison_Exp>
   id?: InputMaybe<Int_Comparison_Exp>
+  last_processed_block_number?: InputMaybe<Numeric_Comparison_Exp>
+  last_processed_block_timestamp?: InputMaybe<Bigint_Comparison_Exp>
+  last_updated?: InputMaybe<Timestamptz_Comparison_Exp>
   total_accounts?: InputMaybe<Int_Comparison_Exp>
   total_atoms?: InputMaybe<Int_Comparison_Exp>
   total_fees?: InputMaybe<Numeric_Comparison_Exp>
@@ -6446,6 +6715,9 @@ export type Stats_Max_Fields = {
   __typename?: 'stats_max_fields'
   contract_balance?: Maybe<Scalars['numeric']['output']>
   id?: Maybe<Scalars['Int']['output']>
+  last_processed_block_number?: Maybe<Scalars['numeric']['output']>
+  last_processed_block_timestamp?: Maybe<Scalars['bigint']['output']>
+  last_updated?: Maybe<Scalars['timestamptz']['output']>
   total_accounts?: Maybe<Scalars['Int']['output']>
   total_atoms?: Maybe<Scalars['Int']['output']>
   total_fees?: Maybe<Scalars['numeric']['output']>
@@ -6459,6 +6731,9 @@ export type Stats_Min_Fields = {
   __typename?: 'stats_min_fields'
   contract_balance?: Maybe<Scalars['numeric']['output']>
   id?: Maybe<Scalars['Int']['output']>
+  last_processed_block_number?: Maybe<Scalars['numeric']['output']>
+  last_processed_block_timestamp?: Maybe<Scalars['bigint']['output']>
+  last_updated?: Maybe<Scalars['timestamptz']['output']>
   total_accounts?: Maybe<Scalars['Int']['output']>
   total_atoms?: Maybe<Scalars['Int']['output']>
   total_fees?: Maybe<Scalars['numeric']['output']>
@@ -6471,6 +6746,9 @@ export type Stats_Min_Fields = {
 export type Stats_Order_By = {
   contract_balance?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
+  last_processed_block_number?: InputMaybe<Order_By>
+  last_processed_block_timestamp?: InputMaybe<Order_By>
+  last_updated?: InputMaybe<Order_By>
   total_accounts?: InputMaybe<Order_By>
   total_atoms?: InputMaybe<Order_By>
   total_fees?: InputMaybe<Order_By>
@@ -6485,6 +6763,12 @@ export type Stats_Select_Column =
   | 'contract_balance'
   /** column name */
   | 'id'
+  /** column name */
+  | 'last_processed_block_number'
+  /** column name */
+  | 'last_processed_block_timestamp'
+  /** column name */
+  | 'last_updated'
   /** column name */
   | 'total_accounts'
   /** column name */
@@ -6503,6 +6787,8 @@ export type Stats_Stddev_Fields = {
   __typename?: 'stats_stddev_fields'
   contract_balance?: Maybe<Scalars['Float']['output']>
   id?: Maybe<Scalars['Float']['output']>
+  last_processed_block_number?: Maybe<Scalars['Float']['output']>
+  last_processed_block_timestamp?: Maybe<Scalars['Float']['output']>
   total_accounts?: Maybe<Scalars['Float']['output']>
   total_atoms?: Maybe<Scalars['Float']['output']>
   total_fees?: Maybe<Scalars['Float']['output']>
@@ -6516,6 +6802,8 @@ export type Stats_Stddev_Pop_Fields = {
   __typename?: 'stats_stddev_pop_fields'
   contract_balance?: Maybe<Scalars['Float']['output']>
   id?: Maybe<Scalars['Float']['output']>
+  last_processed_block_number?: Maybe<Scalars['Float']['output']>
+  last_processed_block_timestamp?: Maybe<Scalars['Float']['output']>
   total_accounts?: Maybe<Scalars['Float']['output']>
   total_atoms?: Maybe<Scalars['Float']['output']>
   total_fees?: Maybe<Scalars['Float']['output']>
@@ -6529,6 +6817,8 @@ export type Stats_Stddev_Samp_Fields = {
   __typename?: 'stats_stddev_samp_fields'
   contract_balance?: Maybe<Scalars['Float']['output']>
   id?: Maybe<Scalars['Float']['output']>
+  last_processed_block_number?: Maybe<Scalars['Float']['output']>
+  last_processed_block_timestamp?: Maybe<Scalars['Float']['output']>
   total_accounts?: Maybe<Scalars['Float']['output']>
   total_atoms?: Maybe<Scalars['Float']['output']>
   total_fees?: Maybe<Scalars['Float']['output']>
@@ -6549,6 +6839,9 @@ export type Stats_Stream_Cursor_Input = {
 export type Stats_Stream_Cursor_Value_Input = {
   contract_balance?: InputMaybe<Scalars['numeric']['input']>
   id?: InputMaybe<Scalars['Int']['input']>
+  last_processed_block_number?: InputMaybe<Scalars['numeric']['input']>
+  last_processed_block_timestamp?: InputMaybe<Scalars['bigint']['input']>
+  last_updated?: InputMaybe<Scalars['timestamptz']['input']>
   total_accounts?: InputMaybe<Scalars['Int']['input']>
   total_atoms?: InputMaybe<Scalars['Int']['input']>
   total_fees?: InputMaybe<Scalars['numeric']['input']>
@@ -6562,6 +6855,8 @@ export type Stats_Sum_Fields = {
   __typename?: 'stats_sum_fields'
   contract_balance?: Maybe<Scalars['numeric']['output']>
   id?: Maybe<Scalars['Int']['output']>
+  last_processed_block_number?: Maybe<Scalars['numeric']['output']>
+  last_processed_block_timestamp?: Maybe<Scalars['bigint']['output']>
   total_accounts?: Maybe<Scalars['Int']['output']>
   total_atoms?: Maybe<Scalars['Int']['output']>
   total_fees?: Maybe<Scalars['numeric']['output']>
@@ -6575,6 +6870,8 @@ export type Stats_Var_Pop_Fields = {
   __typename?: 'stats_var_pop_fields'
   contract_balance?: Maybe<Scalars['Float']['output']>
   id?: Maybe<Scalars['Float']['output']>
+  last_processed_block_number?: Maybe<Scalars['Float']['output']>
+  last_processed_block_timestamp?: Maybe<Scalars['Float']['output']>
   total_accounts?: Maybe<Scalars['Float']['output']>
   total_atoms?: Maybe<Scalars['Float']['output']>
   total_fees?: Maybe<Scalars['Float']['output']>
@@ -6588,6 +6885,8 @@ export type Stats_Var_Samp_Fields = {
   __typename?: 'stats_var_samp_fields'
   contract_balance?: Maybe<Scalars['Float']['output']>
   id?: Maybe<Scalars['Float']['output']>
+  last_processed_block_number?: Maybe<Scalars['Float']['output']>
+  last_processed_block_timestamp?: Maybe<Scalars['Float']['output']>
   total_accounts?: Maybe<Scalars['Float']['output']>
   total_atoms?: Maybe<Scalars['Float']['output']>
   total_fees?: Maybe<Scalars['Float']['output']>
@@ -6601,6 +6900,8 @@ export type Stats_Variance_Fields = {
   __typename?: 'stats_variance_fields'
   contract_balance?: Maybe<Scalars['Float']['output']>
   id?: Maybe<Scalars['Float']['output']>
+  last_processed_block_number?: Maybe<Scalars['Float']['output']>
+  last_processed_block_timestamp?: Maybe<Scalars['Float']['output']>
   total_accounts?: Maybe<Scalars['Float']['output']>
   total_atoms?: Maybe<Scalars['Float']['output']>
   total_fees?: Maybe<Scalars['Float']['output']>
@@ -6655,12 +6956,12 @@ export type Subscription_Root = {
   byte_object_by_pk?: Maybe<Byte_Object>
   /** fetch data from the table in a streaming manner: "byte_object" */
   byte_object_stream: Array<Byte_Object>
-  /** fetch data from the table: "cached_image" using primary key columns */
-  cached_image?: Maybe<Cached_Images>
-  /** fetch data from the table: "cached_image" */
-  cached_images: Array<Cached_Images>
-  /** fetch data from the table in a streaming manner: "cached_image" */
-  cached_images_stream: Array<Cached_Images>
+  /** fetch data from the table: "cached_images.cached_image" */
+  cached_images_cached_image: Array<Cached_Images_Cached_Image>
+  /** fetch data from the table: "cached_images.cached_image" using primary key columns */
+  cached_images_cached_image_by_pk?: Maybe<Cached_Images_Cached_Image>
+  /** fetch data from the table in a streaming manner: "cached_images.cached_image" */
+  cached_images_cached_image_stream: Array<Cached_Images_Cached_Image>
   /** fetch data from the table: "caip10" using primary key columns */
   caip10?: Maybe<Caip10>
   /** fetch aggregated fields from the table: "caip10" */
@@ -6777,6 +7078,14 @@ export type Subscription_Root = {
   signals_stream: Array<Signals>
   /** fetch data from the table: "stats" using primary key columns */
   stat?: Maybe<Stats>
+  /** fetch data from the table: "stats_hour" using primary key columns */
+  stat_hour?: Maybe<Stat_Hours>
+  /** fetch data from the table: "stats_hour" */
+  stat_hours: Array<Stat_Hours>
+  /** fetch aggregated fields from the table: "stats_hour" */
+  stat_hours_aggregate: Stat_Hours_Aggregate
+  /** fetch data from the table in a streaming manner: "stats_hour" */
+  stat_hours_stream: Array<Stat_Hours>
   /** fetch data from the table: "stats" */
   stats: Array<Stats>
   /** fetch aggregated fields from the table: "stats" */
@@ -6965,22 +7274,22 @@ export type Subscription_RootByte_Object_StreamArgs = {
   where?: InputMaybe<Byte_Object_Bool_Exp>
 }
 
-export type Subscription_RootCached_ImageArgs = {
+export type Subscription_RootCached_Images_Cached_ImageArgs = {
+  distinct_on?: InputMaybe<Array<Cached_Images_Cached_Image_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Cached_Images_Cached_Image_Order_By>>
+  where?: InputMaybe<Cached_Images_Cached_Image_Bool_Exp>
+}
+
+export type Subscription_RootCached_Images_Cached_Image_By_PkArgs = {
   url: Scalars['String']['input']
 }
 
-export type Subscription_RootCached_ImagesArgs = {
-  distinct_on?: InputMaybe<Array<Cached_Images_Select_Column>>
-  limit?: InputMaybe<Scalars['Int']['input']>
-  offset?: InputMaybe<Scalars['Int']['input']>
-  order_by?: InputMaybe<Array<Cached_Images_Order_By>>
-  where?: InputMaybe<Cached_Images_Bool_Exp>
-}
-
-export type Subscription_RootCached_Images_StreamArgs = {
+export type Subscription_RootCached_Images_Cached_Image_StreamArgs = {
   batch_size: Scalars['Int']['input']
-  cursor: Array<InputMaybe<Cached_Images_Stream_Cursor_Input>>
-  where?: InputMaybe<Cached_Images_Bool_Exp>
+  cursor: Array<InputMaybe<Cached_Images_Cached_Image_Stream_Cursor_Input>>
+  where?: InputMaybe<Cached_Images_Cached_Image_Bool_Exp>
 }
 
 export type Subscription_RootCaip10Args = {
@@ -7371,6 +7680,32 @@ export type Subscription_RootStatArgs = {
   id: Scalars['Int']['input']
 }
 
+export type Subscription_RootStat_HourArgs = {
+  id: Scalars['Int']['input']
+}
+
+export type Subscription_RootStat_HoursArgs = {
+  distinct_on?: InputMaybe<Array<Stat_Hours_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Stat_Hours_Order_By>>
+  where?: InputMaybe<Stat_Hours_Bool_Exp>
+}
+
+export type Subscription_RootStat_Hours_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Stat_Hours_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Stat_Hours_Order_By>>
+  where?: InputMaybe<Stat_Hours_Bool_Exp>
+}
+
+export type Subscription_RootStat_Hours_StreamArgs = {
+  batch_size: Scalars['Int']['input']
+  cursor: Array<InputMaybe<Stat_Hours_Stream_Cursor_Input>>
+  where?: InputMaybe<Stat_Hours_Bool_Exp>
+}
+
 export type Subscription_RootStatsArgs = {
   distinct_on?: InputMaybe<Array<Stats_Select_Column>>
   limit?: InputMaybe<Scalars['Int']['input']>
@@ -7636,8 +7971,7 @@ export type Things = {
   __typename?: 'things'
   /** An object relationship */
   atom?: Maybe<Atoms>
-  /** An object relationship */
-  cached_image?: Maybe<Cached_Images>
+  cached_image?: Maybe<Cached_Images_Cached_Image>
   description?: Maybe<Scalars['String']['output']>
   id: Scalars['numeric']['output']
   image?: Maybe<Scalars['String']['output']>
@@ -7686,7 +8020,6 @@ export type Things_Bool_Exp = {
   _not?: InputMaybe<Things_Bool_Exp>
   _or?: InputMaybe<Array<Things_Bool_Exp>>
   atom?: InputMaybe<Atoms_Bool_Exp>
-  cached_image?: InputMaybe<Cached_Images_Bool_Exp>
   description?: InputMaybe<String_Comparison_Exp>
   id?: InputMaybe<Numeric_Comparison_Exp>
   image?: InputMaybe<String_Comparison_Exp>
@@ -7717,7 +8050,6 @@ export type Things_Min_Fields = {
 /** Ordering options when selecting data from "thing". */
 export type Things_Order_By = {
   atom?: InputMaybe<Atoms_Order_By>
-  cached_image?: InputMaybe<Cached_Images_Order_By>
   description?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
   image?: InputMaybe<Order_By>
@@ -10330,6 +10662,18 @@ export type VaultFieldsForTripleFragment = {
   }>
 }
 
+export type PinThingMutationVariables = Exact<{
+  name: Scalars['String']['input']
+  description?: InputMaybe<Scalars['String']['input']>
+  image?: InputMaybe<Scalars['String']['input']>
+  url?: InputMaybe<Scalars['String']['input']>
+}>
+
+export type PinThingMutation = {
+  __typename?: 'mutation_root'
+  pinThing?: { __typename?: 'PinOutput'; uri?: string | null } | null
+}
+
 export type GetAccountsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>
   offset?: InputMaybe<Scalars['Int']['input']>
@@ -11386,6 +11730,198 @@ export type GetAtomQuery = {
   } | null
 }
 
+export type GetAtomByDataQueryVariables = Exact<{
+  data: Scalars['String']['input']
+}>
+
+export type GetAtomByDataQuery = {
+  __typename?: 'query_root'
+  atoms: Array<{
+    __typename?: 'atoms'
+    id: any
+    data?: string | null
+    image?: string | null
+    label?: string | null
+    emoji?: string | null
+    type: any
+    wallet_id: string
+    block_number: any
+    block_timestamp: any
+    transaction_hash: string
+    creator_id: string
+    vault_id: any
+    creator?: {
+      __typename?: 'accounts'
+      id: string
+      label: string
+      image?: string | null
+      atom_id?: any | null
+      type: any
+    } | null
+    vault?: {
+      __typename?: 'vaults'
+      position_count: number
+      total_shares: any
+      current_share_price: any
+      positions_aggregate: {
+        __typename?: 'positions_aggregate'
+        aggregate?: {
+          __typename?: 'positions_aggregate_fields'
+          count: number
+          sum?: {
+            __typename?: 'positions_sum_fields'
+            shares?: any | null
+          } | null
+        } | null
+      }
+      positions: Array<{
+        __typename?: 'positions'
+        id: string
+        shares: any
+        account?: { __typename?: 'accounts'; label: string; id: string } | null
+      }>
+    } | null
+    as_subject_triples: Array<{
+      __typename?: 'triples'
+      id: any
+      object: {
+        __typename?: 'atoms'
+        data?: string | null
+        id: any
+        image?: string | null
+        label?: string | null
+        emoji?: string | null
+        type: any
+        creator?: {
+          __typename?: 'accounts'
+          label: string
+          image?: string | null
+          id: string
+          atom_id?: any | null
+          type: any
+        } | null
+      }
+      predicate: {
+        __typename?: 'atoms'
+        data?: string | null
+        id: any
+        image?: string | null
+        label?: string | null
+        emoji?: string | null
+        type: any
+        creator?: {
+          __typename?: 'accounts'
+          label: string
+          image?: string | null
+          id: string
+          atom_id?: any | null
+          type: any
+        } | null
+      }
+    }>
+    as_predicate_triples: Array<{
+      __typename?: 'triples'
+      id: any
+      subject: {
+        __typename?: 'atoms'
+        data?: string | null
+        id: any
+        image?: string | null
+        label?: string | null
+        emoji?: string | null
+        type: any
+        creator?: {
+          __typename?: 'accounts'
+          label: string
+          image?: string | null
+          id: string
+          atom_id?: any | null
+          type: any
+        } | null
+      }
+      object: {
+        __typename?: 'atoms'
+        data?: string | null
+        id: any
+        image?: string | null
+        label?: string | null
+        emoji?: string | null
+        type: any
+        creator?: {
+          __typename?: 'accounts'
+          label: string
+          image?: string | null
+          id: string
+          atom_id?: any | null
+          type: any
+        } | null
+      }
+    }>
+    as_object_triples: Array<{
+      __typename?: 'triples'
+      id: any
+      subject: {
+        __typename?: 'atoms'
+        data?: string | null
+        id: any
+        image?: string | null
+        label?: string | null
+        emoji?: string | null
+        type: any
+        creator?: {
+          __typename?: 'accounts'
+          label: string
+          image?: string | null
+          id: string
+          atom_id?: any | null
+          type: any
+        } | null
+      }
+      predicate: {
+        __typename?: 'atoms'
+        data?: string | null
+        id: any
+        image?: string | null
+        label?: string | null
+        emoji?: string | null
+        type: any
+        creator?: {
+          __typename?: 'accounts'
+          label: string
+          image?: string | null
+          id: string
+          atom_id?: any | null
+          type: any
+        } | null
+      }
+    }>
+    value?: {
+      __typename?: 'atom_values'
+      person?: {
+        __typename?: 'persons'
+        name?: string | null
+        image?: string | null
+        description?: string | null
+        url?: string | null
+      } | null
+      thing?: {
+        __typename?: 'things'
+        name?: string | null
+        image?: string | null
+        description?: string | null
+        url?: string | null
+      } | null
+      organization?: {
+        __typename?: 'organizations'
+        name?: string | null
+        image?: string | null
+        description?: string | null
+        url?: string | null
+      } | null
+    } | null
+  }>
+}
+
 export type GetClaimsByAddressQueryVariables = Exact<{
   address?: InputMaybe<Scalars['String']['input']>
 }>
@@ -11411,6 +11947,664 @@ export type GetClaimsByAddressQuery = {
       }
     }>
   }
+}
+
+export type GetEventsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  orderBy?: InputMaybe<Array<Events_Order_By> | Events_Order_By>
+  where?: InputMaybe<Events_Bool_Exp>
+  addresses?: InputMaybe<
+    Array<Scalars['String']['input']> | Scalars['String']['input']
+  >
+}>
+
+export type GetEventsQuery = {
+  __typename?: 'query_root'
+  total: {
+    __typename?: 'events_aggregate'
+    aggregate?: { __typename?: 'events_aggregate_fields'; count: number } | null
+  }
+  events: Array<{
+    __typename?: 'events'
+    id: string
+    block_number: any
+    block_timestamp: any
+    type: any
+    transaction_hash: string
+    atom_id?: any | null
+    triple_id?: any | null
+    deposit_id?: string | null
+    redemption_id?: string | null
+    atom?: {
+      __typename?: 'atoms'
+      id: any
+      data?: string | null
+      image?: string | null
+      label?: string | null
+      emoji?: string | null
+      type: any
+      wallet_id: string
+      vault?: {
+        __typename?: 'vaults'
+        total_shares: any
+        position_count: number
+        positions: Array<{
+          __typename?: 'positions'
+          account_id: string
+          shares: any
+          account?: {
+            __typename?: 'accounts'
+            id: string
+            label: string
+            image?: string | null
+          } | null
+        }>
+      } | null
+      creator?: {
+        __typename?: 'accounts'
+        id: string
+        label: string
+        image?: string | null
+      } | null
+      value?: {
+        __typename?: 'atom_values'
+        person?: {
+          __typename?: 'persons'
+          name?: string | null
+          image?: string | null
+          description?: string | null
+          url?: string | null
+        } | null
+        thing?: {
+          __typename?: 'things'
+          name?: string | null
+          image?: string | null
+          description?: string | null
+          url?: string | null
+        } | null
+        organization?: {
+          __typename?: 'organizations'
+          name?: string | null
+          image?: string | null
+          description?: string | null
+          url?: string | null
+        } | null
+      } | null
+    } | null
+    triple?: {
+      __typename?: 'triples'
+      id: any
+      creator?: {
+        __typename?: 'accounts'
+        label: string
+        image?: string | null
+        id: string
+        atom_id?: any | null
+        type: any
+      } | null
+      subject: {
+        __typename?: 'atoms'
+        data?: string | null
+        id: any
+        image?: string | null
+        label?: string | null
+        emoji?: string | null
+        type: any
+        creator?: {
+          __typename?: 'accounts'
+          label: string
+          image?: string | null
+          id: string
+          atom_id?: any | null
+          type: any
+        } | null
+        value?: {
+          __typename?: 'atom_values'
+          person?: {
+            __typename?: 'persons'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+          thing?: {
+            __typename?: 'things'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+          organization?: {
+            __typename?: 'organizations'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+        } | null
+      }
+      predicate: {
+        __typename?: 'atoms'
+        data?: string | null
+        id: any
+        image?: string | null
+        label?: string | null
+        emoji?: string | null
+        type: any
+        creator?: {
+          __typename?: 'accounts'
+          label: string
+          image?: string | null
+          id: string
+          atom_id?: any | null
+          type: any
+        } | null
+        value?: {
+          __typename?: 'atom_values'
+          person?: {
+            __typename?: 'persons'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+          thing?: {
+            __typename?: 'things'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+          organization?: {
+            __typename?: 'organizations'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+        } | null
+      }
+      object: {
+        __typename?: 'atoms'
+        data?: string | null
+        id: any
+        image?: string | null
+        label?: string | null
+        emoji?: string | null
+        type: any
+        creator?: {
+          __typename?: 'accounts'
+          label: string
+          image?: string | null
+          id: string
+          atom_id?: any | null
+          type: any
+        } | null
+        value?: {
+          __typename?: 'atom_values'
+          person?: {
+            __typename?: 'persons'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+          thing?: {
+            __typename?: 'things'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+          organization?: {
+            __typename?: 'organizations'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+        } | null
+      }
+      vault?: {
+        __typename?: 'vaults'
+        total_shares: any
+        position_count: number
+        positions: Array<{
+          __typename?: 'positions'
+          account_id: string
+          shares: any
+          account?: {
+            __typename?: 'accounts'
+            id: string
+            label: string
+            image?: string | null
+          } | null
+        }>
+      } | null
+      counter_vault?: {
+        __typename?: 'vaults'
+        total_shares: any
+        position_count: number
+        positions: Array<{
+          __typename?: 'positions'
+          account_id: string
+          shares: any
+          account?: {
+            __typename?: 'accounts'
+            id: string
+            label: string
+            image?: string | null
+          } | null
+        }>
+      } | null
+    } | null
+    deposit?: {
+      __typename?: 'deposits'
+      sender_id: string
+      shares_for_receiver: any
+      sender_assets_after_total_fees: any
+      sender?: { __typename?: 'accounts'; id: string } | null
+      vault: {
+        __typename?: 'vaults'
+        total_shares: any
+        position_count: number
+        positions: Array<{
+          __typename?: 'positions'
+          account_id: string
+          shares: any
+          account?: {
+            __typename?: 'accounts'
+            id: string
+            label: string
+            image?: string | null
+          } | null
+        }>
+      }
+    } | null
+    redemption?: {
+      __typename?: 'redemptions'
+      sender_id: string
+      sender?: { __typename?: 'accounts'; id: string } | null
+    } | null
+  }>
+}
+
+export type GetEventsWithAggregatesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  orderBy?: InputMaybe<Array<Events_Order_By> | Events_Order_By>
+  where?: InputMaybe<Events_Bool_Exp>
+  addresses?: InputMaybe<
+    Array<Scalars['String']['input']> | Scalars['String']['input']
+  >
+}>
+
+export type GetEventsWithAggregatesQuery = {
+  __typename?: 'query_root'
+  events_aggregate: {
+    __typename?: 'events_aggregate'
+    aggregate?: {
+      __typename?: 'events_aggregate_fields'
+      count: number
+      max?: {
+        __typename?: 'events_max_fields'
+        block_timestamp?: any | null
+        block_number?: any | null
+      } | null
+      min?: {
+        __typename?: 'events_min_fields'
+        block_timestamp?: any | null
+        block_number?: any | null
+      } | null
+    } | null
+    nodes: Array<{
+      __typename?: 'events'
+      block_number: any
+      block_timestamp: any
+      type: any
+      transaction_hash: string
+      atom_id?: any | null
+      triple_id?: any | null
+      deposit_id?: string | null
+      redemption_id?: string | null
+      atom?: {
+        __typename?: 'atoms'
+        id: any
+        data?: string | null
+        image?: string | null
+        label?: string | null
+        emoji?: string | null
+        type: any
+        wallet_id: string
+        vault?: {
+          __typename?: 'vaults'
+          total_shares: any
+          position_count: number
+          positions: Array<{
+            __typename?: 'positions'
+            account_id: string
+            shares: any
+            account?: {
+              __typename?: 'accounts'
+              id: string
+              label: string
+              image?: string | null
+            } | null
+          }>
+        } | null
+        creator?: {
+          __typename?: 'accounts'
+          id: string
+          label: string
+          image?: string | null
+        } | null
+        value?: {
+          __typename?: 'atom_values'
+          person?: {
+            __typename?: 'persons'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+          thing?: {
+            __typename?: 'things'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+          organization?: {
+            __typename?: 'organizations'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+        } | null
+      } | null
+      triple?: {
+        __typename?: 'triples'
+        id: any
+        subject_id: any
+        predicate_id: any
+        object_id: any
+        vault?: {
+          __typename?: 'vaults'
+          total_shares: any
+          position_count: number
+          current_share_price: any
+          positions: Array<{
+            __typename?: 'positions'
+            account_id: string
+            shares: any
+            account?: {
+              __typename?: 'accounts'
+              id: string
+              label: string
+              image?: string | null
+            } | null
+            vault: {
+              __typename?: 'vaults'
+              id: any
+              total_shares: any
+              current_share_price: any
+            }
+          }>
+          allPositions: {
+            __typename?: 'positions_aggregate'
+            aggregate?: {
+              __typename?: 'positions_aggregate_fields'
+              count: number
+              sum?: {
+                __typename?: 'positions_sum_fields'
+                shares?: any | null
+              } | null
+            } | null
+          }
+        } | null
+        counter_vault?: {
+          __typename?: 'vaults'
+          total_shares: any
+          position_count: number
+          current_share_price: any
+          positions: Array<{
+            __typename?: 'positions'
+            account_id: string
+            shares: any
+            account?: {
+              __typename?: 'accounts'
+              id: string
+              label: string
+              image?: string | null
+            } | null
+            vault: {
+              __typename?: 'vaults'
+              id: any
+              total_shares: any
+              current_share_price: any
+            }
+          }>
+          allPositions: {
+            __typename?: 'positions_aggregate'
+            aggregate?: {
+              __typename?: 'positions_aggregate_fields'
+              count: number
+              sum?: {
+                __typename?: 'positions_sum_fields'
+                shares?: any | null
+              } | null
+            } | null
+          }
+        } | null
+        subject: {
+          __typename?: 'atoms'
+          data?: string | null
+          id: any
+          image?: string | null
+          label?: string | null
+          emoji?: string | null
+          type: any
+          creator?: {
+            __typename?: 'accounts'
+            label: string
+            image?: string | null
+            id: string
+            atom_id?: any | null
+            type: any
+          } | null
+          value?: {
+            __typename?: 'atom_values'
+            person?: {
+              __typename?: 'persons'
+              name?: string | null
+              image?: string | null
+              description?: string | null
+              url?: string | null
+            } | null
+            thing?: {
+              __typename?: 'things'
+              name?: string | null
+              image?: string | null
+              description?: string | null
+              url?: string | null
+            } | null
+            organization?: {
+              __typename?: 'organizations'
+              name?: string | null
+              image?: string | null
+              description?: string | null
+              url?: string | null
+            } | null
+          } | null
+        }
+        predicate: {
+          __typename?: 'atoms'
+          data?: string | null
+          id: any
+          image?: string | null
+          label?: string | null
+          emoji?: string | null
+          type: any
+          creator?: {
+            __typename?: 'accounts'
+            label: string
+            image?: string | null
+            id: string
+            atom_id?: any | null
+            type: any
+          } | null
+          value?: {
+            __typename?: 'atom_values'
+            person?: {
+              __typename?: 'persons'
+              name?: string | null
+              image?: string | null
+              description?: string | null
+              url?: string | null
+            } | null
+            thing?: {
+              __typename?: 'things'
+              name?: string | null
+              image?: string | null
+              description?: string | null
+              url?: string | null
+            } | null
+            organization?: {
+              __typename?: 'organizations'
+              name?: string | null
+              image?: string | null
+              description?: string | null
+              url?: string | null
+            } | null
+          } | null
+        }
+        object: {
+          __typename?: 'atoms'
+          data?: string | null
+          id: any
+          image?: string | null
+          label?: string | null
+          emoji?: string | null
+          type: any
+          creator?: {
+            __typename?: 'accounts'
+            label: string
+            image?: string | null
+            id: string
+            atom_id?: any | null
+            type: any
+          } | null
+          value?: {
+            __typename?: 'atom_values'
+            person?: {
+              __typename?: 'persons'
+              name?: string | null
+              image?: string | null
+              description?: string | null
+              url?: string | null
+            } | null
+            thing?: {
+              __typename?: 'things'
+              name?: string | null
+              image?: string | null
+              description?: string | null
+              url?: string | null
+            } | null
+            organization?: {
+              __typename?: 'organizations'
+              name?: string | null
+              image?: string | null
+              description?: string | null
+              url?: string | null
+            } | null
+          } | null
+        }
+      } | null
+      deposit?: {
+        __typename?: 'deposits'
+        vault_id: any
+        sender_assets_after_total_fees: any
+        shares_for_receiver: any
+        receiver: { __typename?: 'accounts'; id: string }
+        sender?: { __typename?: 'accounts'; id: string } | null
+      } | null
+      redemption?: {
+        __typename?: 'redemptions'
+        vault_id: any
+        receiver_id: string
+        shares_redeemed_by_sender: any
+        assets_for_receiver: any
+      } | null
+    }>
+  }
+}
+
+export type GetEventsCountQueryVariables = Exact<{
+  where?: InputMaybe<Events_Bool_Exp>
+}>
+
+export type GetEventsCountQuery = {
+  __typename?: 'query_root'
+  events_aggregate: {
+    __typename?: 'events_aggregate'
+    aggregate?: { __typename?: 'events_aggregate_fields'; count: number } | null
+  }
+}
+
+export type GetEventsDataQueryVariables = Exact<{
+  where?: InputMaybe<Events_Bool_Exp>
+}>
+
+export type GetEventsDataQuery = {
+  __typename?: 'query_root'
+  events_aggregate: {
+    __typename?: 'events_aggregate'
+    aggregate?: {
+      __typename?: 'events_aggregate_fields'
+      count: number
+      max?: {
+        __typename?: 'events_max_fields'
+        block_timestamp?: any | null
+        block_number?: any | null
+      } | null
+      min?: {
+        __typename?: 'events_min_fields'
+        block_timestamp?: any | null
+        block_number?: any | null
+      } | null
+      avg?: {
+        __typename?: 'events_avg_fields'
+        block_number?: number | null
+      } | null
+    } | null
+  }
+}
+
+export type GetDebugEventsQueryVariables = Exact<{
+  addresses?: InputMaybe<
+    Array<Scalars['String']['input']> | Scalars['String']['input']
+  >
+}>
+
+export type GetDebugEventsQuery = {
+  __typename?: 'query_root'
+  debug_events: Array<{
+    __typename?: 'events'
+    id: string
+    atom?: {
+      __typename?: 'atoms'
+      vault?: {
+        __typename?: 'vaults'
+        positions: Array<{
+          __typename?: 'positions'
+          account_id: string
+          shares: any
+        }>
+      } | null
+    } | null
+  }>
 }
 
 export type GetFollowingPositionsQueryVariables = Exact<{
@@ -12281,8 +13475,10 @@ export type GetListItemsQuery = {
 
 export type GetListDetailsQueryVariables = Exact<{
   globalWhere?: InputMaybe<Triples_Bool_Exp>
-  userWhere?: InputMaybe<Triples_Bool_Exp>
   tagPredicateId?: InputMaybe<Scalars['numeric']['input']>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  orderBy?: InputMaybe<Array<Triples_Order_By> | Triples_Order_By>
 }>
 
 export type GetListDetailsQuery = {
@@ -12359,6 +13555,7 @@ export type GetListDetailsQuery = {
     }
     vault?: {
       __typename?: 'vaults'
+      current_share_price: any
       positions_aggregate: {
         __typename?: 'positions_aggregate'
         aggregate?: {
@@ -12370,6 +13567,290 @@ export type GetListDetailsQuery = {
           } | null
         } | null
       }
+    } | null
+    counter_vault?: {
+      __typename?: 'vaults'
+      current_share_price: any
+      positions_aggregate: {
+        __typename?: 'positions_aggregate'
+        aggregate?: {
+          __typename?: 'positions_aggregate_fields'
+          count: number
+          sum?: {
+            __typename?: 'positions_sum_fields'
+            shares?: any | null
+          } | null
+        } | null
+      }
+    } | null
+  }>
+}
+
+export type GetListDetailsWithPositionQueryVariables = Exact<{
+  globalWhere?: InputMaybe<Triples_Bool_Exp>
+  tagPredicateId?: InputMaybe<Scalars['numeric']['input']>
+  address?: InputMaybe<Scalars['String']['input']>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  orderBy?: InputMaybe<Array<Triples_Order_By> | Triples_Order_By>
+}>
+
+export type GetListDetailsWithPositionQuery = {
+  __typename?: 'query_root'
+  globalTriplesAggregate: {
+    __typename?: 'triples_aggregate'
+    aggregate?: {
+      __typename?: 'triples_aggregate_fields'
+      count: number
+    } | null
+  }
+  globalTriples: Array<{
+    __typename?: 'triples'
+    id: any
+    vault_id: any
+    counter_vault_id: any
+    subject: {
+      __typename?: 'atoms'
+      id: any
+      vault_id: any
+      label?: string | null
+      wallet_id: string
+      image?: string | null
+      type: any
+      tags: {
+        __typename?: 'triples_aggregate'
+        nodes: Array<{
+          __typename?: 'triples'
+          object: {
+            __typename?: 'atoms'
+            label?: string | null
+            vault_id: any
+            taggedIdentities: {
+              __typename?: 'triples_aggregate'
+              nodes: Array<{
+                __typename?: 'triples'
+                vault_id: any
+                subject: {
+                  __typename?: 'atoms'
+                  label?: string | null
+                  vault_id: any
+                }
+              }>
+              aggregate?: {
+                __typename?: 'triples_aggregate_fields'
+                count: number
+              } | null
+            }
+          }
+        }>
+        aggregate?: {
+          __typename?: 'triples_aggregate_fields'
+          count: number
+        } | null
+      }
+    }
+    object: {
+      __typename?: 'atoms'
+      id: any
+      vault_id: any
+      label?: string | null
+      wallet_id: string
+      image?: string | null
+      type: any
+    }
+    predicate: {
+      __typename?: 'atoms'
+      id: any
+      vault_id: any
+      label?: string | null
+      wallet_id: string
+      image?: string | null
+      type: any
+    }
+    vault?: {
+      __typename?: 'vaults'
+      current_share_price: any
+      positions_aggregate: {
+        __typename?: 'positions_aggregate'
+        aggregate?: {
+          __typename?: 'positions_aggregate_fields'
+          count: number
+          sum?: {
+            __typename?: 'positions_sum_fields'
+            shares?: any | null
+          } | null
+        } | null
+      }
+      positions: Array<{
+        __typename?: 'positions'
+        shares: any
+        account?: {
+          __typename?: 'accounts'
+          id: string
+          label: string
+          image?: string | null
+        } | null
+      }>
+    } | null
+    counter_vault?: {
+      __typename?: 'vaults'
+      current_share_price: any
+      positions_aggregate: {
+        __typename?: 'positions_aggregate'
+        aggregate?: {
+          __typename?: 'positions_aggregate_fields'
+          count: number
+          sum?: {
+            __typename?: 'positions_sum_fields'
+            shares?: any | null
+          } | null
+        } | null
+      }
+      positions: Array<{
+        __typename?: 'positions'
+        shares: any
+        account?: {
+          __typename?: 'accounts'
+          id: string
+          label: string
+          image?: string | null
+        } | null
+      }>
+    } | null
+  }>
+}
+
+export type GetListDetailsWithUserQueryVariables = Exact<{
+  globalWhere?: InputMaybe<Triples_Bool_Exp>
+  userWhere?: InputMaybe<Triples_Bool_Exp>
+  tagPredicateId?: InputMaybe<Scalars['numeric']['input']>
+  address?: InputMaybe<Scalars['String']['input']>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  orderBy?: InputMaybe<Array<Triples_Order_By> | Triples_Order_By>
+}>
+
+export type GetListDetailsWithUserQuery = {
+  __typename?: 'query_root'
+  globalTriplesAggregate: {
+    __typename?: 'triples_aggregate'
+    aggregate?: {
+      __typename?: 'triples_aggregate_fields'
+      count: number
+    } | null
+  }
+  globalTriples: Array<{
+    __typename?: 'triples'
+    id: any
+    vault_id: any
+    counter_vault_id: any
+    subject: {
+      __typename?: 'atoms'
+      id: any
+      vault_id: any
+      label?: string | null
+      wallet_id: string
+      image?: string | null
+      type: any
+      tags: {
+        __typename?: 'triples_aggregate'
+        nodes: Array<{
+          __typename?: 'triples'
+          object: {
+            __typename?: 'atoms'
+            label?: string | null
+            vault_id: any
+            taggedIdentities: {
+              __typename?: 'triples_aggregate'
+              nodes: Array<{
+                __typename?: 'triples'
+                vault_id: any
+                subject: {
+                  __typename?: 'atoms'
+                  label?: string | null
+                  vault_id: any
+                }
+              }>
+              aggregate?: {
+                __typename?: 'triples_aggregate_fields'
+                count: number
+              } | null
+            }
+          }
+        }>
+        aggregate?: {
+          __typename?: 'triples_aggregate_fields'
+          count: number
+        } | null
+      }
+    }
+    object: {
+      __typename?: 'atoms'
+      id: any
+      vault_id: any
+      label?: string | null
+      wallet_id: string
+      image?: string | null
+      type: any
+    }
+    predicate: {
+      __typename?: 'atoms'
+      id: any
+      vault_id: any
+      label?: string | null
+      wallet_id: string
+      image?: string | null
+      type: any
+    }
+    vault?: {
+      __typename?: 'vaults'
+      current_share_price: any
+      positions_aggregate: {
+        __typename?: 'positions_aggregate'
+        aggregate?: {
+          __typename?: 'positions_aggregate_fields'
+          count: number
+          sum?: {
+            __typename?: 'positions_sum_fields'
+            shares?: any | null
+          } | null
+        } | null
+      }
+      positions: Array<{
+        __typename?: 'positions'
+        shares: any
+        account?: {
+          __typename?: 'accounts'
+          id: string
+          label: string
+          image?: string | null
+        } | null
+      }>
+    } | null
+    counter_vault?: {
+      __typename?: 'vaults'
+      current_share_price: any
+      positions_aggregate: {
+        __typename?: 'positions_aggregate'
+        aggregate?: {
+          __typename?: 'positions_aggregate_fields'
+          count: number
+          sum?: {
+            __typename?: 'positions_sum_fields'
+            shares?: any | null
+          } | null
+        } | null
+      }
+      positions: Array<{
+        __typename?: 'positions'
+        shares: any
+        account?: {
+          __typename?: 'accounts'
+          id: string
+          label: string
+          image?: string | null
+        } | null
+      }>
     } | null
   }>
   userTriplesAggregate: {
@@ -12444,6 +13925,7 @@ export type GetListDetailsQuery = {
     }
     vault?: {
       __typename?: 'vaults'
+      current_share_price: any
       positions_aggregate: {
         __typename?: 'positions_aggregate'
         aggregate?: {
@@ -12455,8 +13937,72 @@ export type GetListDetailsQuery = {
           } | null
         } | null
       }
+      positions: Array<{
+        __typename?: 'positions'
+        shares: any
+        account?: {
+          __typename?: 'accounts'
+          id: string
+          label: string
+          image?: string | null
+        } | null
+      }>
+    } | null
+    counter_vault?: {
+      __typename?: 'vaults'
+      current_share_price: any
+      positions_aggregate: {
+        __typename?: 'positions_aggregate'
+        aggregate?: {
+          __typename?: 'positions_aggregate_fields'
+          count: number
+          sum?: {
+            __typename?: 'positions_sum_fields'
+            shares?: any | null
+          } | null
+        } | null
+      }
+      positions: Array<{
+        __typename?: 'positions'
+        shares: any
+        account?: {
+          __typename?: 'accounts'
+          id: string
+          label: string
+          image?: string | null
+        } | null
+      }>
     } | null
   }>
+}
+
+export type GetFeeTransfersQueryVariables = Exact<{
+  address: Scalars['String']['input']
+  cutoff_timestamp?: InputMaybe<Scalars['bigint']['input']>
+}>
+
+export type GetFeeTransfersQuery = {
+  __typename?: 'query_root'
+  before_cutoff: {
+    __typename?: 'fee_transfers_aggregate'
+    aggregate?: {
+      __typename?: 'fee_transfers_aggregate_fields'
+      sum?: {
+        __typename?: 'fee_transfers_sum_fields'
+        amount?: any | null
+      } | null
+    } | null
+  }
+  after_cutoff: {
+    __typename?: 'fee_transfers_aggregate'
+    aggregate?: {
+      __typename?: 'fee_transfers_aggregate_fields'
+      sum?: {
+        __typename?: 'fee_transfers_sum_fields'
+        amount?: any | null
+      } | null
+    } | null
+  }
 }
 
 export type GetPositionsQueryVariables = Exact<{
@@ -13299,6 +14845,311 @@ export type GetPositionsCountByTypeQuery = {
       atom_id?: any | null
       triple_id?: any | null
     }
+  }>
+}
+
+export type GetSignalsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  orderBy?: InputMaybe<Array<Signals_Order_By> | Signals_Order_By>
+  addresses?: InputMaybe<
+    Array<Scalars['String']['input']> | Scalars['String']['input']
+  >
+}>
+
+export type GetSignalsQuery = {
+  __typename?: 'query_root'
+  total: {
+    __typename?: 'events_aggregate'
+    aggregate?: { __typename?: 'events_aggregate_fields'; count: number } | null
+  }
+  signals: Array<{
+    __typename?: 'signals'
+    id: string
+    block_number: any
+    block_timestamp: any
+    transaction_hash: string
+    atom_id?: any | null
+    triple_id?: any | null
+    deposit_id?: string | null
+    redemption_id?: string | null
+    atom?: {
+      __typename?: 'atoms'
+      id: any
+      data?: string | null
+      image?: string | null
+      label?: string | null
+      emoji?: string | null
+      type: any
+      wallet_id: string
+      vault?: {
+        __typename?: 'vaults'
+        total_shares: any
+        position_count: number
+        positions: Array<{
+          __typename?: 'positions'
+          account_id: string
+          shares: any
+          account?: {
+            __typename?: 'accounts'
+            id: string
+            label: string
+            image?: string | null
+          } | null
+        }>
+      } | null
+      creator?: {
+        __typename?: 'accounts'
+        id: string
+        label: string
+        image?: string | null
+      } | null
+      value?: {
+        __typename?: 'atom_values'
+        person?: {
+          __typename?: 'persons'
+          name?: string | null
+          image?: string | null
+          description?: string | null
+          url?: string | null
+        } | null
+        thing?: {
+          __typename?: 'things'
+          name?: string | null
+          image?: string | null
+          description?: string | null
+          url?: string | null
+        } | null
+        organization?: {
+          __typename?: 'organizations'
+          name?: string | null
+          image?: string | null
+          description?: string | null
+          url?: string | null
+        } | null
+      } | null
+    } | null
+    triple?: {
+      __typename?: 'triples'
+      id: any
+      creator?: {
+        __typename?: 'accounts'
+        label: string
+        image?: string | null
+        id: string
+        atom_id?: any | null
+        type: any
+      } | null
+      subject: {
+        __typename?: 'atoms'
+        data?: string | null
+        id: any
+        image?: string | null
+        label?: string | null
+        emoji?: string | null
+        type: any
+        creator?: {
+          __typename?: 'accounts'
+          label: string
+          image?: string | null
+          id: string
+          atom_id?: any | null
+          type: any
+        } | null
+        value?: {
+          __typename?: 'atom_values'
+          person?: {
+            __typename?: 'persons'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+          thing?: {
+            __typename?: 'things'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+          organization?: {
+            __typename?: 'organizations'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+        } | null
+      }
+      predicate: {
+        __typename?: 'atoms'
+        data?: string | null
+        id: any
+        image?: string | null
+        label?: string | null
+        emoji?: string | null
+        type: any
+        creator?: {
+          __typename?: 'accounts'
+          label: string
+          image?: string | null
+          id: string
+          atom_id?: any | null
+          type: any
+        } | null
+        value?: {
+          __typename?: 'atom_values'
+          person?: {
+            __typename?: 'persons'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+          thing?: {
+            __typename?: 'things'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+          organization?: {
+            __typename?: 'organizations'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+        } | null
+      }
+      object: {
+        __typename?: 'atoms'
+        data?: string | null
+        id: any
+        image?: string | null
+        label?: string | null
+        emoji?: string | null
+        type: any
+        creator?: {
+          __typename?: 'accounts'
+          label: string
+          image?: string | null
+          id: string
+          atom_id?: any | null
+          type: any
+        } | null
+        value?: {
+          __typename?: 'atom_values'
+          person?: {
+            __typename?: 'persons'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+          thing?: {
+            __typename?: 'things'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+          organization?: {
+            __typename?: 'organizations'
+            name?: string | null
+            image?: string | null
+            description?: string | null
+            url?: string | null
+          } | null
+        } | null
+      }
+      vault?: {
+        __typename?: 'vaults'
+        total_shares: any
+        position_count: number
+        positions: Array<{
+          __typename?: 'positions'
+          account_id: string
+          shares: any
+          account?: {
+            __typename?: 'accounts'
+            id: string
+            label: string
+            image?: string | null
+          } | null
+        }>
+      } | null
+      counter_vault?: {
+        __typename?: 'vaults'
+        total_shares: any
+        position_count: number
+        positions: Array<{
+          __typename?: 'positions'
+          account_id: string
+          shares: any
+          account?: {
+            __typename?: 'accounts'
+            id: string
+            label: string
+            image?: string | null
+          } | null
+        }>
+      } | null
+    } | null
+    deposit?: {
+      __typename?: 'deposits'
+      sender_id: string
+      receiver_id: string
+      shares_for_receiver: any
+      sender_assets_after_total_fees: any
+      sender?: {
+        __typename?: 'accounts'
+        id: string
+        label: string
+        image?: string | null
+      } | null
+      receiver: {
+        __typename?: 'accounts'
+        id: string
+        label: string
+        image?: string | null
+      }
+      vault: {
+        __typename?: 'vaults'
+        total_shares: any
+        position_count: number
+        positions: Array<{
+          __typename?: 'positions'
+          account_id: string
+          shares: any
+          account?: {
+            __typename?: 'accounts'
+            id: string
+            label: string
+            image?: string | null
+          } | null
+        }>
+      }
+    } | null
+    redemption?: {
+      __typename?: 'redemptions'
+      sender_id: string
+      receiver_id: string
+      assets_for_receiver: any
+      shares_redeemed_by_sender: any
+      sender?: {
+        __typename?: 'accounts'
+        id: string
+        label: string
+        image?: string | null
+      } | null
+      receiver: {
+        __typename?: 'accounts'
+        id: string
+        label: string
+        image?: string | null
+      }
+    } | null
   }>
 }
 
@@ -16325,6 +18176,52 @@ export const VaultFieldsForTripleFragmentDoc = `
   ...VaultFilteredPositions
 }
     `
+export const PinThingDocument = `
+    mutation pinThing($name: String!, $description: String, $image: String, $url: String) {
+  pinThing(
+    thing: {description: $description, image: $image, name: $name, url: $url}
+  ) {
+    uri
+  }
+}
+    `
+
+export const usePinThingMutation = <TError = unknown, TContext = unknown>(
+  options?: UseMutationOptions<
+    PinThingMutation,
+    TError,
+    PinThingMutationVariables,
+    TContext
+  >,
+) => {
+  return useMutation<
+    PinThingMutation,
+    TError,
+    PinThingMutationVariables,
+    TContext
+  >({
+    mutationKey: ['pinThing'],
+    mutationFn: (variables?: PinThingMutationVariables) =>
+      fetcher<PinThingMutation, PinThingMutationVariables>(
+        PinThingDocument,
+        variables,
+      )(),
+    ...options,
+  })
+}
+
+usePinThingMutation.getKey = () => ['pinThing']
+
+usePinThingMutation.fetcher = (
+  variables: PinThingMutationVariables,
+  options?: RequestInit['headers'],
+) =>
+  fetcher<PinThingMutation, PinThingMutationVariables>(
+    PinThingDocument,
+    variables,
+    options,
+  )
+
 export const GetAccountsDocument = `
     query GetAccounts($limit: Int, $offset: Int, $orderBy: [accounts_order_by!], $where: accounts_bool_exp, $claimsLimit: Int, $claimsOffset: Int, $claimsWhere: claims_bool_exp, $positionsLimit: Int, $positionsOffset: Int, $positionsWhere: positions_bool_exp) {
   accounts(limit: $limit, offset: $offset, order_by: $orderBy, where: $where) {
@@ -17470,6 +19367,100 @@ useGetAtomQuery.fetcher = (
     options,
   )
 
+export const GetAtomByDataDocument = `
+    query GetAtomByData($data: String!) {
+  atoms(where: {data: {_eq: $data}}) {
+    ...AtomMetadata
+    ...AtomTxn
+    ...AtomVaultDetails
+    creator {
+      ...AccountMetadata
+    }
+    ...AtomTriple
+  }
+}
+    ${AtomMetadataFragmentDoc}
+${AtomValueFragmentDoc}
+${AtomTxnFragmentDoc}
+${AtomVaultDetailsFragmentDoc}
+${AccountMetadataFragmentDoc}
+${AtomTripleFragmentDoc}`
+
+export const useGetAtomByDataQuery = <
+  TData = GetAtomByDataQuery,
+  TError = unknown,
+>(
+  variables: GetAtomByDataQueryVariables,
+  options?: Omit<
+    UseQueryOptions<GetAtomByDataQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseQueryOptions<GetAtomByDataQuery, TError, TData>['queryKey']
+  },
+) => {
+  return useQuery<GetAtomByDataQuery, TError, TData>({
+    queryKey: ['GetAtomByData', variables],
+    queryFn: fetcher<GetAtomByDataQuery, GetAtomByDataQueryVariables>(
+      GetAtomByDataDocument,
+      variables,
+    ),
+    ...options,
+  })
+}
+
+useGetAtomByDataQuery.document = GetAtomByDataDocument
+
+useGetAtomByDataQuery.getKey = (variables: GetAtomByDataQueryVariables) => [
+  'GetAtomByData',
+  variables,
+]
+
+export const useInfiniteGetAtomByDataQuery = <
+  TData = InfiniteData<GetAtomByDataQuery>,
+  TError = unknown,
+>(
+  variables: GetAtomByDataQueryVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetAtomByDataQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<
+      GetAtomByDataQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+) => {
+  return useInfiniteQuery<GetAtomByDataQuery, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options
+      return {
+        queryKey: optionsQueryKey ?? ['GetAtomByData.infinite', variables],
+        queryFn: (metaData) =>
+          fetcher<GetAtomByDataQuery, GetAtomByDataQueryVariables>(
+            GetAtomByDataDocument,
+            { ...variables, ...(metaData.pageParam ?? {}) },
+          )(),
+        ...restOptions,
+      }
+    })(),
+  )
+}
+
+useInfiniteGetAtomByDataQuery.getKey = (
+  variables: GetAtomByDataQueryVariables,
+) => ['GetAtomByData.infinite', variables]
+
+useGetAtomByDataQuery.fetcher = (
+  variables: GetAtomByDataQueryVariables,
+  options?: RequestInit['headers'],
+) =>
+  fetcher<GetAtomByDataQuery, GetAtomByDataQueryVariables>(
+    GetAtomByDataDocument,
+    variables,
+    options,
+  )
+
 export const GetClaimsByAddressDocument = `
     query GetClaimsByAddress($address: String) {
   claims_aggregate(where: {account_id: {_eq: $address}}) {
@@ -17587,6 +19578,632 @@ useGetClaimsByAddressQuery.fetcher = (
 ) =>
   fetcher<GetClaimsByAddressQuery, GetClaimsByAddressQueryVariables>(
     GetClaimsByAddressDocument,
+    variables,
+    options,
+  )
+
+export const GetEventsDocument = `
+    query GetEvents($limit: Int, $offset: Int, $orderBy: [events_order_by!], $where: events_bool_exp, $addresses: [String!]) {
+  total: events_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+  events(limit: $limit, offset: $offset, order_by: $orderBy, where: $where) {
+    id
+    block_number
+    block_timestamp
+    type
+    transaction_hash
+    atom_id
+    triple_id
+    deposit_id
+    redemption_id
+    atom {
+      ...AtomMetadata
+      vault {
+        total_shares
+        position_count
+        positions(where: {account: {id: {_in: $addresses}}}) {
+          account_id
+          shares
+          account {
+            id
+            label
+            image
+          }
+        }
+      }
+    }
+    triple {
+      id
+      creator {
+        ...AccountMetadata
+      }
+      subject {
+        data
+        id
+        image
+        label
+        emoji
+        type
+        ...AtomValue
+        creator {
+          ...AccountMetadata
+        }
+      }
+      predicate {
+        data
+        id
+        image
+        label
+        emoji
+        type
+        ...AtomValue
+        creator {
+          ...AccountMetadata
+        }
+      }
+      object {
+        data
+        id
+        image
+        label
+        emoji
+        type
+        ...AtomValue
+        creator {
+          ...AccountMetadata
+        }
+      }
+      vault {
+        total_shares
+        position_count
+        positions(where: {account: {id: {_in: $addresses}}}) {
+          account_id
+          shares
+          account {
+            id
+            label
+            image
+          }
+        }
+      }
+      counter_vault {
+        total_shares
+        position_count
+        positions(where: {account: {id: {_in: $addresses}}}) {
+          account_id
+          shares
+          account {
+            id
+            label
+            image
+          }
+        }
+      }
+    }
+    deposit {
+      sender_id
+      sender {
+        id
+      }
+      shares_for_receiver
+      sender_assets_after_total_fees
+      vault {
+        total_shares
+        position_count
+        positions(where: {account: {id: {_in: $addresses}}}) {
+          account_id
+          shares
+          account {
+            id
+            label
+            image
+          }
+        }
+      }
+    }
+    redemption {
+      sender_id
+      sender {
+        id
+      }
+    }
+  }
+}
+    ${AtomMetadataFragmentDoc}
+${AtomValueFragmentDoc}
+${AccountMetadataFragmentDoc}`
+
+export const useGetEventsQuery = <TData = GetEventsQuery, TError = unknown>(
+  variables?: GetEventsQueryVariables,
+  options?: Omit<UseQueryOptions<GetEventsQuery, TError, TData>, 'queryKey'> & {
+    queryKey?: UseQueryOptions<GetEventsQuery, TError, TData>['queryKey']
+  },
+) => {
+  return useQuery<GetEventsQuery, TError, TData>({
+    queryKey:
+      variables === undefined ? ['GetEvents'] : ['GetEvents', variables],
+    queryFn: fetcher<GetEventsQuery, GetEventsQueryVariables>(
+      GetEventsDocument,
+      variables,
+    ),
+    ...options,
+  })
+}
+
+useGetEventsQuery.document = GetEventsDocument
+
+useGetEventsQuery.getKey = (variables?: GetEventsQueryVariables) =>
+  variables === undefined ? ['GetEvents'] : ['GetEvents', variables]
+
+export const useInfiniteGetEventsQuery = <
+  TData = InfiniteData<GetEventsQuery>,
+  TError = unknown,
+>(
+  variables: GetEventsQueryVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetEventsQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<
+      GetEventsQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+) => {
+  return useInfiniteQuery<GetEventsQuery, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options
+      return {
+        queryKey:
+          optionsQueryKey ?? variables === undefined
+            ? ['GetEvents.infinite']
+            : ['GetEvents.infinite', variables],
+        queryFn: (metaData) =>
+          fetcher<GetEventsQuery, GetEventsQueryVariables>(GetEventsDocument, {
+            ...variables,
+            ...(metaData.pageParam ?? {}),
+          })(),
+        ...restOptions,
+      }
+    })(),
+  )
+}
+
+useInfiniteGetEventsQuery.getKey = (variables?: GetEventsQueryVariables) =>
+  variables === undefined
+    ? ['GetEvents.infinite']
+    : ['GetEvents.infinite', variables]
+
+useGetEventsQuery.fetcher = (
+  variables?: GetEventsQueryVariables,
+  options?: RequestInit['headers'],
+) =>
+  fetcher<GetEventsQuery, GetEventsQueryVariables>(
+    GetEventsDocument,
+    variables,
+    options,
+  )
+
+export const GetEventsWithAggregatesDocument = `
+    query GetEventsWithAggregates($limit: Int, $offset: Int, $orderBy: [events_order_by!], $where: events_bool_exp, $addresses: [String!]) {
+  events_aggregate(
+    where: $where
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
+    aggregate {
+      count
+      max {
+        block_timestamp
+        block_number
+      }
+      min {
+        block_timestamp
+        block_number
+      }
+    }
+    nodes {
+      ...EventDetails
+    }
+  }
+}
+    ${EventDetailsFragmentDoc}
+${DepositEventFragmentFragmentDoc}
+${RedemptionEventFragmentFragmentDoc}
+${AtomMetadataFragmentDoc}
+${AtomValueFragmentDoc}
+${TripleMetadataFragmentDoc}
+${AccountMetadataFragmentDoc}
+${PositionAggregateFieldsFragmentDoc}
+${PositionFieldsFragmentDoc}`
+
+export const useGetEventsWithAggregatesQuery = <
+  TData = GetEventsWithAggregatesQuery,
+  TError = unknown,
+>(
+  variables?: GetEventsWithAggregatesQueryVariables,
+  options?: Omit<
+    UseQueryOptions<GetEventsWithAggregatesQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseQueryOptions<
+      GetEventsWithAggregatesQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+) => {
+  return useQuery<GetEventsWithAggregatesQuery, TError, TData>({
+    queryKey:
+      variables === undefined
+        ? ['GetEventsWithAggregates']
+        : ['GetEventsWithAggregates', variables],
+    queryFn: fetcher<
+      GetEventsWithAggregatesQuery,
+      GetEventsWithAggregatesQueryVariables
+    >(GetEventsWithAggregatesDocument, variables),
+    ...options,
+  })
+}
+
+useGetEventsWithAggregatesQuery.document = GetEventsWithAggregatesDocument
+
+useGetEventsWithAggregatesQuery.getKey = (
+  variables?: GetEventsWithAggregatesQueryVariables,
+) =>
+  variables === undefined
+    ? ['GetEventsWithAggregates']
+    : ['GetEventsWithAggregates', variables]
+
+export const useInfiniteGetEventsWithAggregatesQuery = <
+  TData = InfiniteData<GetEventsWithAggregatesQuery>,
+  TError = unknown,
+>(
+  variables: GetEventsWithAggregatesQueryVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetEventsWithAggregatesQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<
+      GetEventsWithAggregatesQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+) => {
+  return useInfiniteQuery<GetEventsWithAggregatesQuery, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options
+      return {
+        queryKey:
+          optionsQueryKey ?? variables === undefined
+            ? ['GetEventsWithAggregates.infinite']
+            : ['GetEventsWithAggregates.infinite', variables],
+        queryFn: (metaData) =>
+          fetcher<
+            GetEventsWithAggregatesQuery,
+            GetEventsWithAggregatesQueryVariables
+          >(GetEventsWithAggregatesDocument, {
+            ...variables,
+            ...(metaData.pageParam ?? {}),
+          })(),
+        ...restOptions,
+      }
+    })(),
+  )
+}
+
+useInfiniteGetEventsWithAggregatesQuery.getKey = (
+  variables?: GetEventsWithAggregatesQueryVariables,
+) =>
+  variables === undefined
+    ? ['GetEventsWithAggregates.infinite']
+    : ['GetEventsWithAggregates.infinite', variables]
+
+useGetEventsWithAggregatesQuery.fetcher = (
+  variables?: GetEventsWithAggregatesQueryVariables,
+  options?: RequestInit['headers'],
+) =>
+  fetcher<GetEventsWithAggregatesQuery, GetEventsWithAggregatesQueryVariables>(
+    GetEventsWithAggregatesDocument,
+    variables,
+    options,
+  )
+
+export const GetEventsCountDocument = `
+    query GetEventsCount($where: events_bool_exp) {
+  events_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+    `
+
+export const useGetEventsCountQuery = <
+  TData = GetEventsCountQuery,
+  TError = unknown,
+>(
+  variables?: GetEventsCountQueryVariables,
+  options?: Omit<
+    UseQueryOptions<GetEventsCountQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseQueryOptions<GetEventsCountQuery, TError, TData>['queryKey']
+  },
+) => {
+  return useQuery<GetEventsCountQuery, TError, TData>({
+    queryKey:
+      variables === undefined
+        ? ['GetEventsCount']
+        : ['GetEventsCount', variables],
+    queryFn: fetcher<GetEventsCountQuery, GetEventsCountQueryVariables>(
+      GetEventsCountDocument,
+      variables,
+    ),
+    ...options,
+  })
+}
+
+useGetEventsCountQuery.document = GetEventsCountDocument
+
+useGetEventsCountQuery.getKey = (variables?: GetEventsCountQueryVariables) =>
+  variables === undefined ? ['GetEventsCount'] : ['GetEventsCount', variables]
+
+export const useInfiniteGetEventsCountQuery = <
+  TData = InfiniteData<GetEventsCountQuery>,
+  TError = unknown,
+>(
+  variables: GetEventsCountQueryVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetEventsCountQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<
+      GetEventsCountQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+) => {
+  return useInfiniteQuery<GetEventsCountQuery, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options
+      return {
+        queryKey:
+          optionsQueryKey ?? variables === undefined
+            ? ['GetEventsCount.infinite']
+            : ['GetEventsCount.infinite', variables],
+        queryFn: (metaData) =>
+          fetcher<GetEventsCountQuery, GetEventsCountQueryVariables>(
+            GetEventsCountDocument,
+            { ...variables, ...(metaData.pageParam ?? {}) },
+          )(),
+        ...restOptions,
+      }
+    })(),
+  )
+}
+
+useInfiniteGetEventsCountQuery.getKey = (
+  variables?: GetEventsCountQueryVariables,
+) =>
+  variables === undefined
+    ? ['GetEventsCount.infinite']
+    : ['GetEventsCount.infinite', variables]
+
+useGetEventsCountQuery.fetcher = (
+  variables?: GetEventsCountQueryVariables,
+  options?: RequestInit['headers'],
+) =>
+  fetcher<GetEventsCountQuery, GetEventsCountQueryVariables>(
+    GetEventsCountDocument,
+    variables,
+    options,
+  )
+
+export const GetEventsDataDocument = `
+    query GetEventsData($where: events_bool_exp) {
+  events_aggregate(where: $where) {
+    aggregate {
+      count
+      max {
+        block_timestamp
+        block_number
+      }
+      min {
+        block_timestamp
+        block_number
+      }
+      avg {
+        block_number
+      }
+    }
+  }
+}
+    `
+
+export const useGetEventsDataQuery = <
+  TData = GetEventsDataQuery,
+  TError = unknown,
+>(
+  variables?: GetEventsDataQueryVariables,
+  options?: Omit<
+    UseQueryOptions<GetEventsDataQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseQueryOptions<GetEventsDataQuery, TError, TData>['queryKey']
+  },
+) => {
+  return useQuery<GetEventsDataQuery, TError, TData>({
+    queryKey:
+      variables === undefined
+        ? ['GetEventsData']
+        : ['GetEventsData', variables],
+    queryFn: fetcher<GetEventsDataQuery, GetEventsDataQueryVariables>(
+      GetEventsDataDocument,
+      variables,
+    ),
+    ...options,
+  })
+}
+
+useGetEventsDataQuery.document = GetEventsDataDocument
+
+useGetEventsDataQuery.getKey = (variables?: GetEventsDataQueryVariables) =>
+  variables === undefined ? ['GetEventsData'] : ['GetEventsData', variables]
+
+export const useInfiniteGetEventsDataQuery = <
+  TData = InfiniteData<GetEventsDataQuery>,
+  TError = unknown,
+>(
+  variables: GetEventsDataQueryVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetEventsDataQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<
+      GetEventsDataQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+) => {
+  return useInfiniteQuery<GetEventsDataQuery, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options
+      return {
+        queryKey:
+          optionsQueryKey ?? variables === undefined
+            ? ['GetEventsData.infinite']
+            : ['GetEventsData.infinite', variables],
+        queryFn: (metaData) =>
+          fetcher<GetEventsDataQuery, GetEventsDataQueryVariables>(
+            GetEventsDataDocument,
+            { ...variables, ...(metaData.pageParam ?? {}) },
+          )(),
+        ...restOptions,
+      }
+    })(),
+  )
+}
+
+useInfiniteGetEventsDataQuery.getKey = (
+  variables?: GetEventsDataQueryVariables,
+) =>
+  variables === undefined
+    ? ['GetEventsData.infinite']
+    : ['GetEventsData.infinite', variables]
+
+useGetEventsDataQuery.fetcher = (
+  variables?: GetEventsDataQueryVariables,
+  options?: RequestInit['headers'],
+) =>
+  fetcher<GetEventsDataQuery, GetEventsDataQueryVariables>(
+    GetEventsDataDocument,
+    variables,
+    options,
+  )
+
+export const GetDebugEventsDocument = `
+    query GetDebugEvents($addresses: [String!]) {
+  debug_events: events {
+    id
+    atom {
+      vault {
+        positions(where: {account_id: {_in: $addresses}}) {
+          account_id
+          shares
+        }
+      }
+    }
+  }
+}
+    `
+
+export const useGetDebugEventsQuery = <
+  TData = GetDebugEventsQuery,
+  TError = unknown,
+>(
+  variables?: GetDebugEventsQueryVariables,
+  options?: Omit<
+    UseQueryOptions<GetDebugEventsQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseQueryOptions<GetDebugEventsQuery, TError, TData>['queryKey']
+  },
+) => {
+  return useQuery<GetDebugEventsQuery, TError, TData>({
+    queryKey:
+      variables === undefined
+        ? ['GetDebugEvents']
+        : ['GetDebugEvents', variables],
+    queryFn: fetcher<GetDebugEventsQuery, GetDebugEventsQueryVariables>(
+      GetDebugEventsDocument,
+      variables,
+    ),
+    ...options,
+  })
+}
+
+useGetDebugEventsQuery.document = GetDebugEventsDocument
+
+useGetDebugEventsQuery.getKey = (variables?: GetDebugEventsQueryVariables) =>
+  variables === undefined ? ['GetDebugEvents'] : ['GetDebugEvents', variables]
+
+export const useInfiniteGetDebugEventsQuery = <
+  TData = InfiniteData<GetDebugEventsQuery>,
+  TError = unknown,
+>(
+  variables: GetDebugEventsQueryVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetDebugEventsQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<
+      GetDebugEventsQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+) => {
+  return useInfiniteQuery<GetDebugEventsQuery, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options
+      return {
+        queryKey:
+          optionsQueryKey ?? variables === undefined
+            ? ['GetDebugEvents.infinite']
+            : ['GetDebugEvents.infinite', variables],
+        queryFn: (metaData) =>
+          fetcher<GetDebugEventsQuery, GetDebugEventsQueryVariables>(
+            GetDebugEventsDocument,
+            { ...variables, ...(metaData.pageParam ?? {}) },
+          )(),
+        ...restOptions,
+      }
+    })(),
+  )
+}
+
+useInfiniteGetDebugEventsQuery.getKey = (
+  variables?: GetDebugEventsQueryVariables,
+) =>
+  variables === undefined
+    ? ['GetDebugEvents.infinite']
+    : ['GetDebugEvents.infinite', variables]
+
+useGetDebugEventsQuery.fetcher = (
+  variables?: GetDebugEventsQueryVariables,
+  options?: RequestInit['headers'],
+) =>
+  fetcher<GetDebugEventsQuery, GetDebugEventsQueryVariables>(
+    GetDebugEventsDocument,
     variables,
     options,
   )
@@ -18254,13 +20871,18 @@ useGetListItemsQuery.fetcher = (
   )
 
 export const GetListDetailsDocument = `
-    query GetListDetails($globalWhere: triples_bool_exp, $userWhere: triples_bool_exp, $tagPredicateId: numeric) {
+    query GetListDetails($globalWhere: triples_bool_exp, $tagPredicateId: numeric, $limit: Int, $offset: Int, $orderBy: [triples_order_by!]) {
   globalTriplesAggregate: triples_aggregate(where: $globalWhere) {
     aggregate {
       count
     }
   }
-  globalTriples: triples(where: $globalWhere) {
+  globalTriples: triples(
+    where: $globalWhere
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
     id
     vault_id
     counter_vault_id
@@ -18314,6 +20936,7 @@ export const GetListDetailsDocument = `
       type
     }
     vault {
+      current_share_price
       positions_aggregate {
         aggregate {
           count
@@ -18323,66 +20946,8 @@ export const GetListDetailsDocument = `
         }
       }
     }
-  }
-  userTriplesAggregate: triples_aggregate(where: $userWhere) {
-    aggregate {
-      count
-    }
-  }
-  userTriples: triples(where: $userWhere) {
-    id
-    vault_id
-    counter_vault_id
-    subject {
-      id
-      vault_id
-      label
-      wallet_id
-      image
-      type
-      tags: as_subject_triples_aggregate(
-        where: {predicate_id: {_eq: $tagPredicateId}}
-      ) {
-        nodes {
-          object {
-            label
-            vault_id
-            taggedIdentities: as_object_triples_aggregate {
-              nodes {
-                subject {
-                  label
-                  vault_id
-                }
-                vault_id
-              }
-              aggregate {
-                count
-              }
-            }
-          }
-        }
-        aggregate {
-          count
-        }
-      }
-    }
-    object {
-      id
-      vault_id
-      label
-      wallet_id
-      image
-      type
-    }
-    predicate {
-      id
-      vault_id
-      label
-      wallet_id
-      image
-      type
-    }
-    vault {
+    counter_vault {
+      current_share_price
       positions_aggregate {
         aggregate {
           count
@@ -18474,6 +21039,600 @@ useGetListDetailsQuery.fetcher = (
 ) =>
   fetcher<GetListDetailsQuery, GetListDetailsQueryVariables>(
     GetListDetailsDocument,
+    variables,
+    options,
+  )
+
+export const GetListDetailsWithPositionDocument = `
+    query GetListDetailsWithPosition($globalWhere: triples_bool_exp, $tagPredicateId: numeric, $address: String, $limit: Int, $offset: Int, $orderBy: [triples_order_by!]) {
+  globalTriplesAggregate: triples_aggregate(where: $globalWhere) {
+    aggregate {
+      count
+    }
+  }
+  globalTriples: triples(
+    where: $globalWhere
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
+    id
+    vault_id
+    counter_vault_id
+    subject {
+      id
+      vault_id
+      label
+      wallet_id
+      image
+      type
+      tags: as_subject_triples_aggregate(
+        where: {predicate_id: {_eq: $tagPredicateId}}
+      ) {
+        nodes {
+          object {
+            label
+            vault_id
+            taggedIdentities: as_object_triples_aggregate {
+              nodes {
+                subject {
+                  label
+                  vault_id
+                }
+                vault_id
+              }
+              aggregate {
+                count
+              }
+            }
+          }
+        }
+        aggregate {
+          count
+        }
+      }
+    }
+    object {
+      id
+      vault_id
+      label
+      wallet_id
+      image
+      type
+    }
+    predicate {
+      id
+      vault_id
+      label
+      wallet_id
+      image
+      type
+    }
+    vault {
+      current_share_price
+      positions_aggregate {
+        aggregate {
+          count
+          sum {
+            shares
+          }
+        }
+      }
+      positions(where: {account_id: {_eq: $address}}) {
+        account {
+          id
+          label
+          image
+        }
+        shares
+      }
+    }
+    counter_vault {
+      current_share_price
+      positions_aggregate {
+        aggregate {
+          count
+          sum {
+            shares
+          }
+        }
+      }
+      positions(where: {account_id: {_eq: $address}}) {
+        account {
+          id
+          label
+          image
+        }
+        shares
+      }
+    }
+  }
+}
+    `
+
+export const useGetListDetailsWithPositionQuery = <
+  TData = GetListDetailsWithPositionQuery,
+  TError = unknown,
+>(
+  variables?: GetListDetailsWithPositionQueryVariables,
+  options?: Omit<
+    UseQueryOptions<GetListDetailsWithPositionQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseQueryOptions<
+      GetListDetailsWithPositionQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+) => {
+  return useQuery<GetListDetailsWithPositionQuery, TError, TData>({
+    queryKey:
+      variables === undefined
+        ? ['GetListDetailsWithPosition']
+        : ['GetListDetailsWithPosition', variables],
+    queryFn: fetcher<
+      GetListDetailsWithPositionQuery,
+      GetListDetailsWithPositionQueryVariables
+    >(GetListDetailsWithPositionDocument, variables),
+    ...options,
+  })
+}
+
+useGetListDetailsWithPositionQuery.document = GetListDetailsWithPositionDocument
+
+useGetListDetailsWithPositionQuery.getKey = (
+  variables?: GetListDetailsWithPositionQueryVariables,
+) =>
+  variables === undefined
+    ? ['GetListDetailsWithPosition']
+    : ['GetListDetailsWithPosition', variables]
+
+export const useInfiniteGetListDetailsWithPositionQuery = <
+  TData = InfiniteData<GetListDetailsWithPositionQuery>,
+  TError = unknown,
+>(
+  variables: GetListDetailsWithPositionQueryVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetListDetailsWithPositionQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<
+      GetListDetailsWithPositionQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+) => {
+  return useInfiniteQuery<GetListDetailsWithPositionQuery, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options
+      return {
+        queryKey:
+          optionsQueryKey ?? variables === undefined
+            ? ['GetListDetailsWithPosition.infinite']
+            : ['GetListDetailsWithPosition.infinite', variables],
+        queryFn: (metaData) =>
+          fetcher<
+            GetListDetailsWithPositionQuery,
+            GetListDetailsWithPositionQueryVariables
+          >(GetListDetailsWithPositionDocument, {
+            ...variables,
+            ...(metaData.pageParam ?? {}),
+          })(),
+        ...restOptions,
+      }
+    })(),
+  )
+}
+
+useInfiniteGetListDetailsWithPositionQuery.getKey = (
+  variables?: GetListDetailsWithPositionQueryVariables,
+) =>
+  variables === undefined
+    ? ['GetListDetailsWithPosition.infinite']
+    : ['GetListDetailsWithPosition.infinite', variables]
+
+useGetListDetailsWithPositionQuery.fetcher = (
+  variables?: GetListDetailsWithPositionQueryVariables,
+  options?: RequestInit['headers'],
+) =>
+  fetcher<
+    GetListDetailsWithPositionQuery,
+    GetListDetailsWithPositionQueryVariables
+  >(GetListDetailsWithPositionDocument, variables, options)
+
+export const GetListDetailsWithUserDocument = `
+    query GetListDetailsWithUser($globalWhere: triples_bool_exp, $userWhere: triples_bool_exp, $tagPredicateId: numeric, $address: String, $limit: Int, $offset: Int, $orderBy: [triples_order_by!]) {
+  globalTriplesAggregate: triples_aggregate(where: $globalWhere) {
+    aggregate {
+      count
+    }
+  }
+  globalTriples: triples(
+    where: $globalWhere
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
+    id
+    vault_id
+    counter_vault_id
+    subject {
+      id
+      vault_id
+      label
+      wallet_id
+      image
+      type
+      tags: as_subject_triples_aggregate(
+        where: {predicate_id: {_eq: $tagPredicateId}}
+      ) {
+        nodes {
+          object {
+            label
+            vault_id
+            taggedIdentities: as_object_triples_aggregate {
+              nodes {
+                subject {
+                  label
+                  vault_id
+                }
+                vault_id
+              }
+              aggregate {
+                count
+              }
+            }
+          }
+        }
+        aggregate {
+          count
+        }
+      }
+    }
+    object {
+      id
+      vault_id
+      label
+      wallet_id
+      image
+      type
+    }
+    predicate {
+      id
+      vault_id
+      label
+      wallet_id
+      image
+      type
+    }
+    vault {
+      current_share_price
+      positions_aggregate {
+        aggregate {
+          count
+          sum {
+            shares
+          }
+        }
+      }
+      positions(where: {account_id: {_eq: $address}}) {
+        account {
+          id
+          label
+          image
+        }
+        shares
+      }
+    }
+    counter_vault {
+      current_share_price
+      positions_aggregate {
+        aggregate {
+          count
+          sum {
+            shares
+          }
+        }
+      }
+      positions(where: {account_id: {_eq: $address}}) {
+        account {
+          id
+          label
+          image
+        }
+        shares
+      }
+    }
+  }
+  userTriplesAggregate: triples_aggregate(where: $userWhere) {
+    aggregate {
+      count
+    }
+  }
+  userTriples: triples(where: $userWhere) {
+    id
+    vault_id
+    counter_vault_id
+    subject {
+      id
+      vault_id
+      label
+      wallet_id
+      image
+      type
+      tags: as_subject_triples_aggregate(
+        where: {predicate_id: {_eq: $tagPredicateId}}
+      ) {
+        nodes {
+          object {
+            label
+            vault_id
+            taggedIdentities: as_object_triples_aggregate {
+              nodes {
+                subject {
+                  label
+                  vault_id
+                }
+                vault_id
+              }
+              aggregate {
+                count
+              }
+            }
+          }
+        }
+        aggregate {
+          count
+        }
+      }
+    }
+    object {
+      id
+      vault_id
+      label
+      wallet_id
+      image
+      type
+    }
+    predicate {
+      id
+      vault_id
+      label
+      wallet_id
+      image
+      type
+    }
+    vault {
+      current_share_price
+      positions_aggregate {
+        aggregate {
+          count
+          sum {
+            shares
+          }
+        }
+      }
+      positions(where: {account_id: {_eq: $address}}) {
+        account {
+          id
+          label
+          image
+        }
+        shares
+      }
+    }
+    counter_vault {
+      current_share_price
+      positions_aggregate {
+        aggregate {
+          count
+          sum {
+            shares
+          }
+        }
+      }
+      positions(where: {account_id: {_eq: $address}}) {
+        account {
+          id
+          label
+          image
+        }
+        shares
+      }
+    }
+  }
+}
+    `
+
+export const useGetListDetailsWithUserQuery = <
+  TData = GetListDetailsWithUserQuery,
+  TError = unknown,
+>(
+  variables?: GetListDetailsWithUserQueryVariables,
+  options?: Omit<
+    UseQueryOptions<GetListDetailsWithUserQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseQueryOptions<
+      GetListDetailsWithUserQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+) => {
+  return useQuery<GetListDetailsWithUserQuery, TError, TData>({
+    queryKey:
+      variables === undefined
+        ? ['GetListDetailsWithUser']
+        : ['GetListDetailsWithUser', variables],
+    queryFn: fetcher<
+      GetListDetailsWithUserQuery,
+      GetListDetailsWithUserQueryVariables
+    >(GetListDetailsWithUserDocument, variables),
+    ...options,
+  })
+}
+
+useGetListDetailsWithUserQuery.document = GetListDetailsWithUserDocument
+
+useGetListDetailsWithUserQuery.getKey = (
+  variables?: GetListDetailsWithUserQueryVariables,
+) =>
+  variables === undefined
+    ? ['GetListDetailsWithUser']
+    : ['GetListDetailsWithUser', variables]
+
+export const useInfiniteGetListDetailsWithUserQuery = <
+  TData = InfiniteData<GetListDetailsWithUserQuery>,
+  TError = unknown,
+>(
+  variables: GetListDetailsWithUserQueryVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetListDetailsWithUserQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<
+      GetListDetailsWithUserQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+) => {
+  return useInfiniteQuery<GetListDetailsWithUserQuery, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options
+      return {
+        queryKey:
+          optionsQueryKey ?? variables === undefined
+            ? ['GetListDetailsWithUser.infinite']
+            : ['GetListDetailsWithUser.infinite', variables],
+        queryFn: (metaData) =>
+          fetcher<
+            GetListDetailsWithUserQuery,
+            GetListDetailsWithUserQueryVariables
+          >(GetListDetailsWithUserDocument, {
+            ...variables,
+            ...(metaData.pageParam ?? {}),
+          })(),
+        ...restOptions,
+      }
+    })(),
+  )
+}
+
+useInfiniteGetListDetailsWithUserQuery.getKey = (
+  variables?: GetListDetailsWithUserQueryVariables,
+) =>
+  variables === undefined
+    ? ['GetListDetailsWithUser.infinite']
+    : ['GetListDetailsWithUser.infinite', variables]
+
+useGetListDetailsWithUserQuery.fetcher = (
+  variables?: GetListDetailsWithUserQueryVariables,
+  options?: RequestInit['headers'],
+) =>
+  fetcher<GetListDetailsWithUserQuery, GetListDetailsWithUserQueryVariables>(
+    GetListDetailsWithUserDocument,
+    variables,
+    options,
+  )
+
+export const GetFeeTransfersDocument = `
+    query GetFeeTransfers($address: String!, $cutoff_timestamp: bigint) {
+  before_cutoff: fee_transfers_aggregate(
+    where: {block_timestamp: {_lte: $cutoff_timestamp}, sender_id: {_eq: $address}}
+  ) {
+    aggregate {
+      sum {
+        amount
+      }
+    }
+  }
+  after_cutoff: fee_transfers_aggregate(
+    where: {block_timestamp: {_gt: $cutoff_timestamp}, sender_id: {_eq: $address}}
+  ) {
+    aggregate {
+      sum {
+        amount
+      }
+    }
+  }
+}
+    `
+
+export const useGetFeeTransfersQuery = <
+  TData = GetFeeTransfersQuery,
+  TError = unknown,
+>(
+  variables: GetFeeTransfersQueryVariables,
+  options?: Omit<
+    UseQueryOptions<GetFeeTransfersQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseQueryOptions<GetFeeTransfersQuery, TError, TData>['queryKey']
+  },
+) => {
+  return useQuery<GetFeeTransfersQuery, TError, TData>({
+    queryKey: ['GetFeeTransfers', variables],
+    queryFn: fetcher<GetFeeTransfersQuery, GetFeeTransfersQueryVariables>(
+      GetFeeTransfersDocument,
+      variables,
+    ),
+    ...options,
+  })
+}
+
+useGetFeeTransfersQuery.document = GetFeeTransfersDocument
+
+useGetFeeTransfersQuery.getKey = (variables: GetFeeTransfersQueryVariables) => [
+  'GetFeeTransfers',
+  variables,
+]
+
+export const useInfiniteGetFeeTransfersQuery = <
+  TData = InfiniteData<GetFeeTransfersQuery>,
+  TError = unknown,
+>(
+  variables: GetFeeTransfersQueryVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetFeeTransfersQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<
+      GetFeeTransfersQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+) => {
+  return useInfiniteQuery<GetFeeTransfersQuery, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options
+      return {
+        queryKey: optionsQueryKey ?? ['GetFeeTransfers.infinite', variables],
+        queryFn: (metaData) =>
+          fetcher<GetFeeTransfersQuery, GetFeeTransfersQueryVariables>(
+            GetFeeTransfersDocument,
+            { ...variables, ...(metaData.pageParam ?? {}) },
+          )(),
+        ...restOptions,
+      }
+    })(),
+  )
+}
+
+useInfiniteGetFeeTransfersQuery.getKey = (
+  variables: GetFeeTransfersQueryVariables,
+) => ['GetFeeTransfers.infinite', variables]
+
+useGetFeeTransfersQuery.fetcher = (
+  variables: GetFeeTransfersQueryVariables,
+  options?: RequestInit['headers'],
+) =>
+  fetcher<GetFeeTransfersQuery, GetFeeTransfersQueryVariables>(
+    GetFeeTransfersDocument,
     variables,
     options,
   )
@@ -19110,6 +22269,232 @@ useGetPositionsCountByTypeQuery.fetcher = (
 ) =>
   fetcher<GetPositionsCountByTypeQuery, GetPositionsCountByTypeQueryVariables>(
     GetPositionsCountByTypeDocument,
+    variables,
+    options,
+  )
+
+export const GetSignalsDocument = `
+    query GetSignals($limit: Int, $offset: Int, $orderBy: [signals_order_by!], $addresses: [String!]) {
+  total: events_aggregate {
+    aggregate {
+      count
+    }
+  }
+  signals(limit: $limit, offset: $offset, order_by: $orderBy) {
+    id
+    block_number
+    block_timestamp
+    transaction_hash
+    atom_id
+    triple_id
+    deposit_id
+    redemption_id
+    atom {
+      ...AtomMetadata
+      vault {
+        total_shares
+        position_count
+        positions(where: {account: {id: {_in: $addresses}}}) {
+          account_id
+          shares
+          account {
+            id
+            label
+            image
+          }
+        }
+      }
+    }
+    triple {
+      id
+      creator {
+        ...AccountMetadata
+      }
+      subject {
+        data
+        id
+        image
+        label
+        emoji
+        type
+        ...AtomValue
+        creator {
+          ...AccountMetadata
+        }
+      }
+      predicate {
+        data
+        id
+        image
+        label
+        emoji
+        type
+        ...AtomValue
+        creator {
+          ...AccountMetadata
+        }
+      }
+      object {
+        data
+        id
+        image
+        label
+        emoji
+        type
+        ...AtomValue
+        creator {
+          ...AccountMetadata
+        }
+      }
+      vault {
+        total_shares
+        position_count
+        positions(where: {account: {id: {_in: $addresses}}}) {
+          account_id
+          shares
+          account {
+            id
+            label
+            image
+          }
+        }
+      }
+      counter_vault {
+        total_shares
+        position_count
+        positions(where: {account: {id: {_in: $addresses}}}) {
+          account_id
+          shares
+          account {
+            id
+            label
+            image
+          }
+        }
+      }
+    }
+    deposit {
+      sender_id
+      sender {
+        id
+        label
+        image
+      }
+      receiver_id
+      receiver {
+        id
+        label
+        image
+      }
+      shares_for_receiver
+      sender_assets_after_total_fees
+      vault {
+        total_shares
+        position_count
+        positions(where: {account: {id: {_in: $addresses}}}) {
+          account_id
+          shares
+          account {
+            id
+            label
+            image
+          }
+        }
+      }
+    }
+    redemption {
+      sender_id
+      sender {
+        id
+        label
+        image
+      }
+      receiver_id
+      receiver {
+        id
+        label
+        image
+      }
+      assets_for_receiver
+      shares_redeemed_by_sender
+    }
+  }
+}
+    ${AtomMetadataFragmentDoc}
+${AtomValueFragmentDoc}
+${AccountMetadataFragmentDoc}`
+
+export const useGetSignalsQuery = <TData = GetSignalsQuery, TError = unknown>(
+  variables?: GetSignalsQueryVariables,
+  options?: Omit<
+    UseQueryOptions<GetSignalsQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseQueryOptions<GetSignalsQuery, TError, TData>['queryKey']
+  },
+) => {
+  return useQuery<GetSignalsQuery, TError, TData>({
+    queryKey:
+      variables === undefined ? ['GetSignals'] : ['GetSignals', variables],
+    queryFn: fetcher<GetSignalsQuery, GetSignalsQueryVariables>(
+      GetSignalsDocument,
+      variables,
+    ),
+    ...options,
+  })
+}
+
+useGetSignalsQuery.document = GetSignalsDocument
+
+useGetSignalsQuery.getKey = (variables?: GetSignalsQueryVariables) =>
+  variables === undefined ? ['GetSignals'] : ['GetSignals', variables]
+
+export const useInfiniteGetSignalsQuery = <
+  TData = InfiniteData<GetSignalsQuery>,
+  TError = unknown,
+>(
+  variables: GetSignalsQueryVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetSignalsQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<
+      GetSignalsQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+) => {
+  return useInfiniteQuery<GetSignalsQuery, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options
+      return {
+        queryKey:
+          optionsQueryKey ?? variables === undefined
+            ? ['GetSignals.infinite']
+            : ['GetSignals.infinite', variables],
+        queryFn: (metaData) =>
+          fetcher<GetSignalsQuery, GetSignalsQueryVariables>(
+            GetSignalsDocument,
+            { ...variables, ...(metaData.pageParam ?? {}) },
+          )(),
+        ...restOptions,
+      }
+    })(),
+  )
+}
+
+useInfiniteGetSignalsQuery.getKey = (variables?: GetSignalsQueryVariables) =>
+  variables === undefined
+    ? ['GetSignals.infinite']
+    : ['GetSignals.infinite', variables]
+
+useGetSignalsQuery.fetcher = (
+  variables?: GetSignalsQueryVariables,
+  options?: RequestInit['headers'],
+) =>
+  fetcher<GetSignalsQuery, GetSignalsQueryVariables>(
+    GetSignalsDocument,
     variables,
     options,
   )
@@ -25396,6 +28781,108 @@ export const VaultFieldsForTriple = {
     },
   ],
 } as unknown as DocumentNode
+export const PinThing = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'pinThing' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'name' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'description' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'image' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'url' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'pinThing' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'thing' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'description' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'image' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'image' },
+                      },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'name' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'name' },
+                      },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'url' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'url' },
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode
 export const GetAccounts = {
   kind: 'Document',
   definitions: [
@@ -30772,6 +34259,554 @@ export const GetAtom = {
     },
   ],
 } as unknown as DocumentNode
+export const GetAtomByData = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetAtomByData' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'data' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'atoms' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'data' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: '_eq' },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'data' },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'AtomMetadata' },
+                },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'AtomTxn' },
+                },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'AtomVaultDetails' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'creator' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'AccountMetadata' },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'AtomTriple' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AccountMetadata' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'accounts' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'atom_id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AtomValue' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'atoms' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'value' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'person' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'thing' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'organization' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AtomMetadata' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'atoms' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'data' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'emoji' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'wallet_id' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'creator' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+              ],
+            },
+          },
+          {
+            kind: 'FragmentSpread',
+            name: { kind: 'Name', value: 'AtomValue' },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AtomTxn' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'atoms' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'block_number' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'block_timestamp' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'transaction_hash' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'creator_id' } },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AtomVaultDetails' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'atoms' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'vault_id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'wallet_id' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'vault' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'position_count' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'total_shares' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'current_share_price' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'positions_aggregate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'aggregate' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'count' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'sum' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'shares' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'positions' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'account' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'label' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'shares' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AtomTriple' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'atoms' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'as_subject_triples' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'object' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'data' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'emoji' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'creator' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'AccountMetadata' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'predicate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'data' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'emoji' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'creator' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'AccountMetadata' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'as_predicate_triples' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'subject' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'data' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'emoji' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'creator' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'AccountMetadata' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'object' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'data' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'emoji' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'creator' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'AccountMetadata' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'as_object_triples' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'subject' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'data' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'emoji' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'creator' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'AccountMetadata' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'predicate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'data' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'emoji' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'creator' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'AccountMetadata' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode
 export const GetClaimsByAddress = {
   kind: 'Document',
   definitions: [
@@ -30919,6 +34954,2172 @@ export const GetClaimsByAddress = {
                       {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'counter_shares' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode
+export const GetEvents = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetEvents' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'limit' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'offset' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'orderBy' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: { kind: 'Name', value: 'events_order_by' },
+              },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'where' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'events_bool_exp' },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'addresses' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: { kind: 'Name', value: 'String' },
+              },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            alias: { kind: 'Name', value: 'total' },
+            name: { kind: 'Name', value: 'events_aggregate' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'where' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'aggregate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'events' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'limit' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'limit' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'offset' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'offset' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'order_by' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'orderBy' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'where' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'block_number' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'block_timestamp' },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'transaction_hash' },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'atom_id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'triple_id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'deposit_id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'redemption_id' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'atom' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'AtomMetadata' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'vault' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'total_shares' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'position_count' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'positions' },
+                              arguments: [
+                                {
+                                  kind: 'Argument',
+                                  name: { kind: 'Name', value: 'where' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: {
+                                          kind: 'Name',
+                                          value: 'account',
+                                        },
+                                        value: {
+                                          kind: 'ObjectValue',
+                                          fields: [
+                                            {
+                                              kind: 'ObjectField',
+                                              name: {
+                                                kind: 'Name',
+                                                value: 'id',
+                                              },
+                                              value: {
+                                                kind: 'ObjectValue',
+                                                fields: [
+                                                  {
+                                                    kind: 'ObjectField',
+                                                    name: {
+                                                      kind: 'Name',
+                                                      value: '_in',
+                                                    },
+                                                    value: {
+                                                      kind: 'Variable',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'addresses',
+                                                      },
+                                                    },
+                                                  },
+                                                ],
+                                              },
+                                            },
+                                          ],
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account_id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'shares' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: { kind: 'Name', value: 'id' },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'label',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'image',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'triple' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'creator' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'AccountMetadata' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'subject' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'data' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'image' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'label' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'emoji' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'type' },
+                            },
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'AtomValue' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'creator' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'FragmentSpread',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'AccountMetadata',
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'predicate' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'data' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'image' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'label' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'emoji' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'type' },
+                            },
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'AtomValue' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'creator' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'FragmentSpread',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'AccountMetadata',
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'object' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'data' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'image' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'label' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'emoji' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'type' },
+                            },
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'AtomValue' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'creator' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'FragmentSpread',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'AccountMetadata',
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'vault' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'total_shares' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'position_count' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'positions' },
+                              arguments: [
+                                {
+                                  kind: 'Argument',
+                                  name: { kind: 'Name', value: 'where' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: {
+                                          kind: 'Name',
+                                          value: 'account',
+                                        },
+                                        value: {
+                                          kind: 'ObjectValue',
+                                          fields: [
+                                            {
+                                              kind: 'ObjectField',
+                                              name: {
+                                                kind: 'Name',
+                                                value: 'id',
+                                              },
+                                              value: {
+                                                kind: 'ObjectValue',
+                                                fields: [
+                                                  {
+                                                    kind: 'ObjectField',
+                                                    name: {
+                                                      kind: 'Name',
+                                                      value: '_in',
+                                                    },
+                                                    value: {
+                                                      kind: 'Variable',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'addresses',
+                                                      },
+                                                    },
+                                                  },
+                                                ],
+                                              },
+                                            },
+                                          ],
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account_id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'shares' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: { kind: 'Name', value: 'id' },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'label',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'image',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'counter_vault' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'total_shares' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'position_count' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'positions' },
+                              arguments: [
+                                {
+                                  kind: 'Argument',
+                                  name: { kind: 'Name', value: 'where' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: {
+                                          kind: 'Name',
+                                          value: 'account',
+                                        },
+                                        value: {
+                                          kind: 'ObjectValue',
+                                          fields: [
+                                            {
+                                              kind: 'ObjectField',
+                                              name: {
+                                                kind: 'Name',
+                                                value: 'id',
+                                              },
+                                              value: {
+                                                kind: 'ObjectValue',
+                                                fields: [
+                                                  {
+                                                    kind: 'ObjectField',
+                                                    name: {
+                                                      kind: 'Name',
+                                                      value: '_in',
+                                                    },
+                                                    value: {
+                                                      kind: 'Variable',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'addresses',
+                                                      },
+                                                    },
+                                                  },
+                                                ],
+                                              },
+                                            },
+                                          ],
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account_id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'shares' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: { kind: 'Name', value: 'id' },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'label',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'image',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'deposit' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sender_id' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sender' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'shares_for_receiver' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: {
+                          kind: 'Name',
+                          value: 'sender_assets_after_total_fees',
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'vault' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'total_shares' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'position_count' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'positions' },
+                              arguments: [
+                                {
+                                  kind: 'Argument',
+                                  name: { kind: 'Name', value: 'where' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: {
+                                          kind: 'Name',
+                                          value: 'account',
+                                        },
+                                        value: {
+                                          kind: 'ObjectValue',
+                                          fields: [
+                                            {
+                                              kind: 'ObjectField',
+                                              name: {
+                                                kind: 'Name',
+                                                value: 'id',
+                                              },
+                                              value: {
+                                                kind: 'ObjectValue',
+                                                fields: [
+                                                  {
+                                                    kind: 'ObjectField',
+                                                    name: {
+                                                      kind: 'Name',
+                                                      value: '_in',
+                                                    },
+                                                    value: {
+                                                      kind: 'Variable',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'addresses',
+                                                      },
+                                                    },
+                                                  },
+                                                ],
+                                              },
+                                            },
+                                          ],
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account_id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'shares' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: { kind: 'Name', value: 'id' },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'label',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'image',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'redemption' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sender_id' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sender' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AccountMetadata' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'accounts' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'atom_id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AtomValue' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'atoms' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'value' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'person' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'thing' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'organization' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AtomMetadata' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'atoms' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'data' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'emoji' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'wallet_id' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'creator' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+              ],
+            },
+          },
+          {
+            kind: 'FragmentSpread',
+            name: { kind: 'Name', value: 'AtomValue' },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode
+export const GetEventsWithAggregates = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetEventsWithAggregates' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'limit' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'offset' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'orderBy' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: { kind: 'Name', value: 'events_order_by' },
+              },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'where' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'events_bool_exp' },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'addresses' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: { kind: 'Name', value: 'String' },
+              },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'events_aggregate' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'where' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'limit' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'limit' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'offset' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'offset' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'order_by' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'orderBy' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'aggregate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'max' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'block_timestamp' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'block_number' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'min' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'block_timestamp' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'block_number' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'EventDetails' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AccountMetadata' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'accounts' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'atom_id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AtomValue' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'atoms' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'value' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'person' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'thing' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'organization' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AtomMetadata' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'atoms' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'data' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'emoji' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'wallet_id' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'creator' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+              ],
+            },
+          },
+          {
+            kind: 'FragmentSpread',
+            name: { kind: 'Name', value: 'AtomValue' },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'DepositEventFragment' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'events' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'deposit' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'vault_id' } },
+                {
+                  kind: 'Field',
+                  name: {
+                    kind: 'Name',
+                    value: 'sender_assets_after_total_fees',
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'shares_for_receiver' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'receiver' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'sender' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'EventDetails' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'events' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'block_number' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'block_timestamp' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'transaction_hash' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'atom_id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'triple_id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'deposit_id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'redemption_id' } },
+          {
+            kind: 'FragmentSpread',
+            name: { kind: 'Name', value: 'DepositEventFragment' },
+          },
+          {
+            kind: 'FragmentSpread',
+            name: { kind: 'Name', value: 'RedemptionEventFragment' },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'atom' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'AtomMetadata' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'vault' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'total_shares' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'position_count' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'account_id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'shares' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'account' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'image' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'triple' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'TripleMetadata' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'vault' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'total_shares' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'position_count' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'account_id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'shares' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'account' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'image' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'counter_vault' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'total_shares' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'position_count' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'account_id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'shares' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'account' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'image' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PositionFields' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'positions' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'account' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'shares' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'vault' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'total_shares' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'current_share_price' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PositionAggregateFields' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'positions_aggregate' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'aggregate' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'sum' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'shares' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'RedemptionEventFragment' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'events' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'redemption' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'vault_id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'receiver_id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'shares_redeemed_by_sender' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'assets_for_receiver' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'TripleMetadata' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'triples' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'subject_id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'predicate_id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'object_id' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'subject' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'data' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'emoji' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'AtomValue' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'creator' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'AccountMetadata' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'predicate' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'data' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'emoji' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'AtomValue' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'creator' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'AccountMetadata' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'object' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'data' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'emoji' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'AtomValue' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'creator' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'AccountMetadata' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'vault' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'total_shares' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'current_share_price' },
+                },
+                {
+                  kind: 'Field',
+                  alias: { kind: 'Name', value: 'allPositions' },
+                  name: { kind: 'Name', value: 'positions_aggregate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: {
+                          kind: 'Name',
+                          value: 'PositionAggregateFields',
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'positions' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'PositionFields' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'counter_vault' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'total_shares' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'current_share_price' },
+                },
+                {
+                  kind: 'Field',
+                  alias: { kind: 'Name', value: 'allPositions' },
+                  name: { kind: 'Name', value: 'positions_aggregate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: {
+                          kind: 'Name',
+                          value: 'PositionAggregateFields',
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'positions' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'PositionFields' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode
+export const GetEventsCount = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetEventsCount' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'where' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'events_bool_exp' },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'events_aggregate' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'where' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'aggregate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode
+export const GetEventsData = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetEventsData' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'where' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'events_bool_exp' },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'events_aggregate' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'where' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'aggregate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'max' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'block_timestamp' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'block_number' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'min' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'block_timestamp' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'block_number' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'avg' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'block_number' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode
+export const GetDebugEvents = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetDebugEvents' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'addresses' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: { kind: 'Name', value: 'String' },
+              },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            alias: { kind: 'Name', value: 'debug_events' },
+            name: { kind: 'Name', value: 'events' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'atom' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'vault' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'positions' },
+                              arguments: [
+                                {
+                                  kind: 'Argument',
+                                  name: { kind: 'Name', value: 'where' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: {
+                                          kind: 'Name',
+                                          value: 'account_id',
+                                        },
+                                        value: {
+                                          kind: 'ObjectValue',
+                                          fields: [
+                                            {
+                                              kind: 'ObjectField',
+                                              name: {
+                                                kind: 'Name',
+                                                value: '_in',
+                                              },
+                                              value: {
+                                                kind: 'Variable',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'addresses',
+                                                },
+                                              },
+                                            },
+                                          ],
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account_id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'shares' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
                       },
                     ],
                   },
@@ -33993,20 +40194,42 @@ export const GetListDetails = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'userWhere' },
+            name: { kind: 'Name', value: 'tagPredicateId' },
           },
-          type: {
-            kind: 'NamedType',
-            name: { kind: 'Name', value: 'triples_bool_exp' },
-          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'numeric' } },
         },
         {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'tagPredicateId' },
+            name: { kind: 'Name', value: 'limit' },
           },
-          type: { kind: 'NamedType', name: { kind: 'Name', value: 'numeric' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'offset' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'orderBy' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: { kind: 'Name', value: 'triples_order_by' },
+              },
+            },
+          },
         },
       ],
       selectionSet: {
@@ -34053,6 +40276,30 @@ export const GetListDetails = {
                 value: {
                   kind: 'Variable',
                   name: { kind: 'Name', value: 'globalWhere' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'limit' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'limit' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'offset' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'offset' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'order_by' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'orderBy' },
                 },
               },
             ],
@@ -34306,6 +40553,10 @@ export const GetListDetails = {
                     selections: [
                       {
                         kind: 'Field',
+                        name: { kind: 'Name', value: 'current_share_price' },
+                      },
+                      {
+                        kind: 'Field',
                         name: { kind: 'Name', value: 'positions_aggregate' },
                         selectionSet: {
                           kind: 'SelectionSet',
@@ -34338,6 +40589,1312 @@ export const GetListDetails = {
                                   },
                                 ],
                               },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'counter_vault' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'current_share_price' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions_aggregate' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'aggregate' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'count' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'sum' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'shares',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode
+export const GetListDetailsWithPosition = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetListDetailsWithPosition' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'globalWhere' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'triples_bool_exp' },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'tagPredicateId' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'numeric' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'address' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'limit' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'offset' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'orderBy' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: { kind: 'Name', value: 'triples_order_by' },
+              },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            alias: { kind: 'Name', value: 'globalTriplesAggregate' },
+            name: { kind: 'Name', value: 'triples_aggregate' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'globalWhere' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'aggregate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            alias: { kind: 'Name', value: 'globalTriples' },
+            name: { kind: 'Name', value: 'triples' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'globalWhere' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'limit' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'limit' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'offset' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'offset' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'order_by' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'orderBy' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'vault_id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'counter_vault_id' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'subject' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'vault_id' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'wallet_id' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      {
+                        kind: 'Field',
+                        alias: { kind: 'Name', value: 'tags' },
+                        name: {
+                          kind: 'Name',
+                          value: 'as_subject_triples_aggregate',
+                        },
+                        arguments: [
+                          {
+                            kind: 'Argument',
+                            name: { kind: 'Name', value: 'where' },
+                            value: {
+                              kind: 'ObjectValue',
+                              fields: [
+                                {
+                                  kind: 'ObjectField',
+                                  name: { kind: 'Name', value: 'predicate_id' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: { kind: 'Name', value: '_eq' },
+                                        value: {
+                                          kind: 'Variable',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'tagPredicateId',
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'nodes' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'object' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'label',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'vault_id',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          alias: {
+                                            kind: 'Name',
+                                            value: 'taggedIdentities',
+                                          },
+                                          name: {
+                                            kind: 'Name',
+                                            value:
+                                              'as_object_triples_aggregate',
+                                          },
+                                          selectionSet: {
+                                            kind: 'SelectionSet',
+                                            selections: [
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'nodes',
+                                                },
+                                                selectionSet: {
+                                                  kind: 'SelectionSet',
+                                                  selections: [
+                                                    {
+                                                      kind: 'Field',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'subject',
+                                                      },
+                                                      selectionSet: {
+                                                        kind: 'SelectionSet',
+                                                        selections: [
+                                                          {
+                                                            kind: 'Field',
+                                                            name: {
+                                                              kind: 'Name',
+                                                              value: 'label',
+                                                            },
+                                                          },
+                                                          {
+                                                            kind: 'Field',
+                                                            name: {
+                                                              kind: 'Name',
+                                                              value: 'vault_id',
+                                                            },
+                                                          },
+                                                        ],
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: 'Field',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'vault_id',
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'aggregate',
+                                                },
+                                                selectionSet: {
+                                                  kind: 'SelectionSet',
+                                                  selections: [
+                                                    {
+                                                      kind: 'Field',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'count',
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'aggregate' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'count' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'object' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'vault_id' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'wallet_id' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'predicate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'vault_id' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'wallet_id' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'vault' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'current_share_price' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions_aggregate' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'aggregate' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'count' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'sum' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'shares',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions' },
+                        arguments: [
+                          {
+                            kind: 'Argument',
+                            name: { kind: 'Name', value: 'where' },
+                            value: {
+                              kind: 'ObjectValue',
+                              fields: [
+                                {
+                                  kind: 'ObjectField',
+                                  name: { kind: 'Name', value: 'account_id' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: { kind: 'Name', value: '_eq' },
+                                        value: {
+                                          kind: 'Variable',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'address',
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'account' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'image' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'shares' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'counter_vault' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'current_share_price' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions_aggregate' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'aggregate' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'count' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'sum' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'shares',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions' },
+                        arguments: [
+                          {
+                            kind: 'Argument',
+                            name: { kind: 'Name', value: 'where' },
+                            value: {
+                              kind: 'ObjectValue',
+                              fields: [
+                                {
+                                  kind: 'ObjectField',
+                                  name: { kind: 'Name', value: 'account_id' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: { kind: 'Name', value: '_eq' },
+                                        value: {
+                                          kind: 'Variable',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'address',
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'account' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'image' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'shares' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode
+export const GetListDetailsWithUser = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetListDetailsWithUser' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'globalWhere' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'triples_bool_exp' },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'userWhere' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'triples_bool_exp' },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'tagPredicateId' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'numeric' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'address' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'limit' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'offset' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'orderBy' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: { kind: 'Name', value: 'triples_order_by' },
+              },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            alias: { kind: 'Name', value: 'globalTriplesAggregate' },
+            name: { kind: 'Name', value: 'triples_aggregate' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'globalWhere' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'aggregate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            alias: { kind: 'Name', value: 'globalTriples' },
+            name: { kind: 'Name', value: 'triples' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'globalWhere' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'limit' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'limit' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'offset' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'offset' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'order_by' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'orderBy' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'vault_id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'counter_vault_id' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'subject' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'vault_id' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'wallet_id' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      {
+                        kind: 'Field',
+                        alias: { kind: 'Name', value: 'tags' },
+                        name: {
+                          kind: 'Name',
+                          value: 'as_subject_triples_aggregate',
+                        },
+                        arguments: [
+                          {
+                            kind: 'Argument',
+                            name: { kind: 'Name', value: 'where' },
+                            value: {
+                              kind: 'ObjectValue',
+                              fields: [
+                                {
+                                  kind: 'ObjectField',
+                                  name: { kind: 'Name', value: 'predicate_id' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: { kind: 'Name', value: '_eq' },
+                                        value: {
+                                          kind: 'Variable',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'tagPredicateId',
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'nodes' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'object' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'label',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'vault_id',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          alias: {
+                                            kind: 'Name',
+                                            value: 'taggedIdentities',
+                                          },
+                                          name: {
+                                            kind: 'Name',
+                                            value:
+                                              'as_object_triples_aggregate',
+                                          },
+                                          selectionSet: {
+                                            kind: 'SelectionSet',
+                                            selections: [
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'nodes',
+                                                },
+                                                selectionSet: {
+                                                  kind: 'SelectionSet',
+                                                  selections: [
+                                                    {
+                                                      kind: 'Field',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'subject',
+                                                      },
+                                                      selectionSet: {
+                                                        kind: 'SelectionSet',
+                                                        selections: [
+                                                          {
+                                                            kind: 'Field',
+                                                            name: {
+                                                              kind: 'Name',
+                                                              value: 'label',
+                                                            },
+                                                          },
+                                                          {
+                                                            kind: 'Field',
+                                                            name: {
+                                                              kind: 'Name',
+                                                              value: 'vault_id',
+                                                            },
+                                                          },
+                                                        ],
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: 'Field',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'vault_id',
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'aggregate',
+                                                },
+                                                selectionSet: {
+                                                  kind: 'SelectionSet',
+                                                  selections: [
+                                                    {
+                                                      kind: 'Field',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'count',
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'aggregate' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'count' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'object' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'vault_id' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'wallet_id' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'predicate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'vault_id' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'wallet_id' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'vault' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'current_share_price' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions_aggregate' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'aggregate' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'count' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'sum' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'shares',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions' },
+                        arguments: [
+                          {
+                            kind: 'Argument',
+                            name: { kind: 'Name', value: 'where' },
+                            value: {
+                              kind: 'ObjectValue',
+                              fields: [
+                                {
+                                  kind: 'ObjectField',
+                                  name: { kind: 'Name', value: 'account_id' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: { kind: 'Name', value: '_eq' },
+                                        value: {
+                                          kind: 'Variable',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'address',
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'account' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'image' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'shares' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'counter_vault' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'current_share_price' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions_aggregate' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'aggregate' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'count' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'sum' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'shares',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions' },
+                        arguments: [
+                          {
+                            kind: 'Argument',
+                            name: { kind: 'Name', value: 'where' },
+                            value: {
+                              kind: 'ObjectValue',
+                              fields: [
+                                {
+                                  kind: 'ObjectField',
+                                  name: { kind: 'Name', value: 'account_id' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: { kind: 'Name', value: '_eq' },
+                                        value: {
+                                          kind: 'Variable',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'address',
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'account' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'image' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'shares' },
                             },
                           ],
                         },
@@ -34642,6 +42199,10 @@ export const GetListDetails = {
                     selections: [
                       {
                         kind: 'Field',
+                        name: { kind: 'Name', value: 'current_share_price' },
+                      },
+                      {
+                        kind: 'Field',
                         name: { kind: 'Name', value: 'positions_aggregate' },
                         selectionSet: {
                           kind: 'SelectionSet',
@@ -34674,6 +42235,380 @@ export const GetListDetails = {
                                   },
                                 ],
                               },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions' },
+                        arguments: [
+                          {
+                            kind: 'Argument',
+                            name: { kind: 'Name', value: 'where' },
+                            value: {
+                              kind: 'ObjectValue',
+                              fields: [
+                                {
+                                  kind: 'ObjectField',
+                                  name: { kind: 'Name', value: 'account_id' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: { kind: 'Name', value: '_eq' },
+                                        value: {
+                                          kind: 'Variable',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'address',
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'account' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'image' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'shares' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'counter_vault' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'current_share_price' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions_aggregate' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'aggregate' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'count' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'sum' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'shares',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'positions' },
+                        arguments: [
+                          {
+                            kind: 'Argument',
+                            name: { kind: 'Name', value: 'where' },
+                            value: {
+                              kind: 'ObjectValue',
+                              fields: [
+                                {
+                                  kind: 'ObjectField',
+                                  name: { kind: 'Name', value: 'account_id' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: { kind: 'Name', value: '_eq' },
+                                        value: {
+                                          kind: 'Variable',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'address',
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'account' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'image' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'shares' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode
+export const GetFeeTransfers = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetFeeTransfers' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'address' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'cutoff_timestamp' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'bigint' } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            alias: { kind: 'Name', value: 'before_cutoff' },
+            name: { kind: 'Name', value: 'fee_transfers_aggregate' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'block_timestamp' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: '_lte' },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'cutoff_timestamp' },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'sender_id' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: '_eq' },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'address' },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'aggregate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sum' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'amount' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            alias: { kind: 'Name', value: 'after_cutoff' },
+            name: { kind: 'Name', value: 'fee_transfers_aggregate' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'block_timestamp' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: '_gt' },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'cutoff_timestamp' },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'sender_id' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: '_eq' },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'address' },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'aggregate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sum' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'amount' },
                             },
                           ],
                         },
@@ -37224,6 +45159,1047 @@ export const GetPositionsCountByType = {
                 },
               ],
             },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode
+export const GetSignals = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetSignals' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'limit' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'offset' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'orderBy' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: { kind: 'Name', value: 'signals_order_by' },
+              },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'addresses' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: { kind: 'Name', value: 'String' },
+              },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            alias: { kind: 'Name', value: 'total' },
+            name: { kind: 'Name', value: 'events_aggregate' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'aggregate' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'signals' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'limit' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'limit' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'offset' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'offset' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'order_by' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'orderBy' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'block_number' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'block_timestamp' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'transaction_hash' },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'atom_id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'triple_id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'deposit_id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'redemption_id' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'atom' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'AtomMetadata' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'vault' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'total_shares' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'position_count' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'positions' },
+                              arguments: [
+                                {
+                                  kind: 'Argument',
+                                  name: { kind: 'Name', value: 'where' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: {
+                                          kind: 'Name',
+                                          value: 'account',
+                                        },
+                                        value: {
+                                          kind: 'ObjectValue',
+                                          fields: [
+                                            {
+                                              kind: 'ObjectField',
+                                              name: {
+                                                kind: 'Name',
+                                                value: 'id',
+                                              },
+                                              value: {
+                                                kind: 'ObjectValue',
+                                                fields: [
+                                                  {
+                                                    kind: 'ObjectField',
+                                                    name: {
+                                                      kind: 'Name',
+                                                      value: '_in',
+                                                    },
+                                                    value: {
+                                                      kind: 'Variable',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'addresses',
+                                                      },
+                                                    },
+                                                  },
+                                                ],
+                                              },
+                                            },
+                                          ],
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account_id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'shares' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: { kind: 'Name', value: 'id' },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'label',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'image',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'triple' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'creator' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'AccountMetadata' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'subject' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'data' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'image' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'label' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'emoji' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'type' },
+                            },
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'AtomValue' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'creator' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'FragmentSpread',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'AccountMetadata',
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'predicate' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'data' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'image' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'label' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'emoji' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'type' },
+                            },
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'AtomValue' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'creator' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'FragmentSpread',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'AccountMetadata',
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'object' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'data' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'image' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'label' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'emoji' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'type' },
+                            },
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'AtomValue' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'creator' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'FragmentSpread',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'AccountMetadata',
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'vault' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'total_shares' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'position_count' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'positions' },
+                              arguments: [
+                                {
+                                  kind: 'Argument',
+                                  name: { kind: 'Name', value: 'where' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: {
+                                          kind: 'Name',
+                                          value: 'account',
+                                        },
+                                        value: {
+                                          kind: 'ObjectValue',
+                                          fields: [
+                                            {
+                                              kind: 'ObjectField',
+                                              name: {
+                                                kind: 'Name',
+                                                value: 'id',
+                                              },
+                                              value: {
+                                                kind: 'ObjectValue',
+                                                fields: [
+                                                  {
+                                                    kind: 'ObjectField',
+                                                    name: {
+                                                      kind: 'Name',
+                                                      value: '_in',
+                                                    },
+                                                    value: {
+                                                      kind: 'Variable',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'addresses',
+                                                      },
+                                                    },
+                                                  },
+                                                ],
+                                              },
+                                            },
+                                          ],
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account_id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'shares' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: { kind: 'Name', value: 'id' },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'label',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'image',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'counter_vault' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'total_shares' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'position_count' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'positions' },
+                              arguments: [
+                                {
+                                  kind: 'Argument',
+                                  name: { kind: 'Name', value: 'where' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: {
+                                          kind: 'Name',
+                                          value: 'account',
+                                        },
+                                        value: {
+                                          kind: 'ObjectValue',
+                                          fields: [
+                                            {
+                                              kind: 'ObjectField',
+                                              name: {
+                                                kind: 'Name',
+                                                value: 'id',
+                                              },
+                                              value: {
+                                                kind: 'ObjectValue',
+                                                fields: [
+                                                  {
+                                                    kind: 'ObjectField',
+                                                    name: {
+                                                      kind: 'Name',
+                                                      value: '_in',
+                                                    },
+                                                    value: {
+                                                      kind: 'Variable',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'addresses',
+                                                      },
+                                                    },
+                                                  },
+                                                ],
+                                              },
+                                            },
+                                          ],
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account_id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'shares' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: { kind: 'Name', value: 'id' },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'label',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'image',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'deposit' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sender_id' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sender' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'label' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'image' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'receiver_id' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'receiver' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'label' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'image' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'shares_for_receiver' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: {
+                          kind: 'Name',
+                          value: 'sender_assets_after_total_fees',
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'vault' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'total_shares' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'position_count' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'positions' },
+                              arguments: [
+                                {
+                                  kind: 'Argument',
+                                  name: { kind: 'Name', value: 'where' },
+                                  value: {
+                                    kind: 'ObjectValue',
+                                    fields: [
+                                      {
+                                        kind: 'ObjectField',
+                                        name: {
+                                          kind: 'Name',
+                                          value: 'account',
+                                        },
+                                        value: {
+                                          kind: 'ObjectValue',
+                                          fields: [
+                                            {
+                                              kind: 'ObjectField',
+                                              name: {
+                                                kind: 'Name',
+                                                value: 'id',
+                                              },
+                                              value: {
+                                                kind: 'ObjectValue',
+                                                fields: [
+                                                  {
+                                                    kind: 'ObjectField',
+                                                    name: {
+                                                      kind: 'Name',
+                                                      value: '_in',
+                                                    },
+                                                    value: {
+                                                      kind: 'Variable',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'addresses',
+                                                      },
+                                                    },
+                                                  },
+                                                ],
+                                              },
+                                            },
+                                          ],
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account_id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'shares' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'account' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: { kind: 'Name', value: 'id' },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'label',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'image',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'redemption' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sender_id' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sender' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'label' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'image' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'receiver_id' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'receiver' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'label' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'image' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'assets_for_receiver' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: {
+                          kind: 'Name',
+                          value: 'shares_redeemed_by_sender',
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AccountMetadata' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'accounts' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'atom_id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AtomValue' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'atoms' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'value' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'person' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'thing' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'organization' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AtomMetadata' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'atoms' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'data' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'emoji' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'wallet_id' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'creator' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+              ],
+            },
+          },
+          {
+            kind: 'FragmentSpread',
+            name: { kind: 'Name', value: 'AtomValue' },
           },
         ],
       },
